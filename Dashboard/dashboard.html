@@ -97,56 +97,62 @@
 			<div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats">
+                                <div class="align">
                                 <div class="card-header">
                                     <div class="icon icon-rose">
-                                       <span class="material-icons">attach_money</span>
+                                       <span class="material-icons">currency_rupee</span>
                                     </div>
                                 </div>
                                 <div class="card-content">
                                     <p class="category"><strong>Amount to be paid</strong></p>
-                                    <h3 class="card-title">$70,340</h3>
+                                    <h3 class="card-title">Rs. 70,340 /-</h3>
                                 </div>
+                            </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <a href="#">Current balance : $23,100</a>
-                                        <a href="#">Over due : $23,100</a>
+                                        <p>Current balance : Rs. 23,100 /-</p>
+                                        <p>Over due : Rs. 23,100 /-</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats">
+                                <div class="align">
                                 <div class="card-header">
                                     <div class="icon icon-success">
-                                       <span class="material-icons">attach_money</span>
+                                       <span class="material-icons">currency_rupee</span>
 
                                     </div>
                                 </div>
                                 <div class="card-content">
                                     <p class="category"><strong>Amount to be recieved</strong></p>
-                                    <h3 class="card-title">$70,340</h3>
+                                    <h3 class="card-title">Rs. 70,340 /-</h3>
                                 </div>
+                            </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <a href="#">Current balance : $23,100</a>
-                                        <a href="#">Over due : $23,100</a>
+                                        <p>Current balance : Rs. 23,100 /-</p>
+                                        <p>Over due : Rs. 23,100 /-</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats">
+                                <div class="align">
                                 <div class="card-header">
                                     <div class="icon icon-warning">
                                         <span class="material-icons">
-attach_money
+                                            currency_rupee
 </span>
 
                                     </div>
                                 </div>
                                 <div class="card-content">
                                     <p class="category"><strong>Your expenses</strong></p>
-                                    <h3 class="card-title">$23,100</h3>
+                                    <h3 class="card-title">Rs. 23,100 /-</h3>
+                                </div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
@@ -157,6 +163,7 @@ attach_money
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats">
+                                <div class="align">
                                 <div class="card-header">
                                     <div class="icon icon-info">
                                     
@@ -169,6 +176,7 @@ follow_the_signs
                                     <p class="category"><strong>Followers</strong></p>
                                     <h3 class="card-title">+245</h3>
                                 </div>
+                                </div>
                                 <div class="card-footer">
                                     <div class="stats">
                                         <i class="material-icons">update</i> Just Updated
@@ -178,6 +186,7 @@ follow_the_signs
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats">
+                                <div class="align">
                                 <div class="card-header">
                                     <div class="icon icon-success">
                                     
@@ -190,6 +199,7 @@ task
                                     <p class="category"><strong>Projects</strong></p>
                                     <h3 class="card-title">+245</h3>
                                 </div>
+                                </div>
                                 <div class="card-footer">
                                     <div class="stats">
                                         <i class="material-icons">add</i> Add your projects here
@@ -199,6 +209,7 @@ task
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats">
+                                <div class="align">
                                 <div class="card-header">
                                     <div class="icon icon-warning">
                                     
@@ -210,6 +221,7 @@ notes
                                 <div class="card-content">
                                     <p class="category"><strong>Records</strong></p>
                                     <h3 class="card-title">+245</h3>
+                                </div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
@@ -251,10 +263,10 @@ notes
   
      <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-   <script src="js/jquery-3.3.1.slim.min.js"></script>
-   <script src="js/popper.min.js"></script>
-   <script src="js/bootstrap.min.js"></script>
-   <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
   
   
   <script type="text/javascript">
@@ -295,6 +307,24 @@ notes
                 $('#sidebar,.body-overlay').toggleClass('show-nav');
             });
 			
+        });
+        $(document).ready(function() {
+            // Get all the <li> elements
+            var liElements = document.getElementsByTagName('li');
+
+            // Loop through all the <li> elements
+            for (var i = 0; i < liElements.length; i++) {
+                // Add a click event listener to each <li> element
+                liElements[i].addEventListener('click', function() {
+                    // Remove the "active" class from all <li> elements
+                    for (var j = 0; j < liElements.length; j++) {
+                        liElements[j].classList.remove('active');
+                    }
+
+                    // Add the "active" class to the clicked <li> element
+                    this.classList.add('active');
+                });
+            }
         });
 </script>
 <script
