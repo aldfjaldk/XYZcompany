@@ -44,11 +44,11 @@
             <li  class="active">
                 <a href="../Dashboard/dashboard.html" class="dashboard"><i class="material-icons">dashboard</i><span>Dashboard</span></a>
             </li>
-            <li  class="active">
-                <a href="../Items/itemspage.html" class="dashboard"><i class="material-icons">dashboard</i><span>Items</span></a>
+            <li  class="">
+                <a href="../Items/itemspage.html"><i class="material-icons">category</i><span>Items</span></a>
             </li>
-            <li  class="active">
-                <a href="../Banking/ba.html" class="dashboard"><i class="material-icons">dashboard</i><span>Banking</span></a>
+            <li  class="">
+                <a href="../Banking/ba.html"><i class="material-icons">account_balance</i><span>Banking</span></a>
             </li>
             <li class="dropdown">
                 <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -71,7 +71,7 @@
             </li>
             <li class="dropdown">
                 <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                <i class="material-icons">cases</i><span>Purchases</span></a>
+                <i class="material-icons">shopping_cart</i><span>Purchases</span></a>
                 <ul class="collapse list-unstyled menu" id="homeSubmenu2">
                     <li><a href="../Vendors and Expenses/vendors.html">Vendors</a></li>
                     <li><a href="../Vendors and Expenses/expenses.html">Expenses</a></li>
@@ -82,7 +82,7 @@
             </li>
              <li class="dropdown">
                 <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                <i class="material-icons">apartment</i><span>Accountant</span></a>
+                <i class="material-icons">account_balance_wallet</i><span>Accountant</span></a>
                 <ul class="collapse list-unstyled menu" id="pageSubmenu3">
                     <li><a href="../Manual Journal/manualjournal.html">Manual Journals</a></li>
                     <li><a href="../Currency Converter/currency convertor page.html">Currency Converter</a></li>
@@ -94,7 +94,7 @@
             </li>
               <li class="dropdown">
                 <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                <i class="material-icons">apartment</i><span>Payroll</span></a>
+                <i class="material-icons">credit_card</i><span>Payroll</span></a>
                 <ul class="collapse list-unstyled menu" id="pageSubmenu4">
                     <li><a href="../Manual Journal/manualjournal.html">Dashboard</a></li>
                     <li><a href="../Payroll/employees.html">Employees</a></li>
@@ -153,6 +153,24 @@
              });
              
          });
+         $(document).ready(function() {
+            // Get all the <li> elements
+            var liElements = document.getElementsByTagName('li');
+
+            // Loop through all the <li> elements
+            for (var i = 0; i < liElements.length; i++) {
+                // Add a click event listener to each <li> element
+                liElements[i].addEventListener('click', function() {
+                    // Remove the "active" class from all <li> elements
+                    for (var j = 0; j < liElements.length; j++) {
+                        liElements[j].classList.remove('active');
+                    }
+
+                    // Add the "active" class to the clicked <li> element
+                    this.classList.add('active');
+                });
+            }
+        });
  </script>
 </body>
 </html>
