@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Payrun</title>
+    <style>
+        .main{
+            margin-left: 18%;
+        }
+        #block{
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        #block p{
+            font-size: 18px;
+        }
+        h3{
+            display: block;
+            width: 200px;
+            float: left;
+            margin-right: 700px;
+        }
+        .btn1{
+            font-size: 18px;
+            margin-top: 25px;
+            background-color:#408dfb;
+            color: white;
+            border:none;
+            height: 40px;
+            width: 250px;
+            border-radius: 23px;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar"></div>
+    <div id="header"></div>
+    <section class="main">
+        <h3>Regular Payroll</h3>
+        <button class="btn1" onclick="window.location.href='payrunapproved.html'">Submit and Approve</button><br>
+        <div id="block">
+            <p>Payroll Cost : 800000</p>
+            <p>Period : June 2023</p>
+            <p>Pay Day : 30 June 2023</p>
+            <p>Taxes : 0.00</p>
+        </div>
+        <h4>Employee Summary</h4>
+        <table class="table table-striped" id="data-table">
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="select-all-checkbox"></th>
+                <th>Employee Name</th>
+                <th>Gross Pay</th>
+                <th>Taxes</th>
+                <th>Net Pay</th>
+                <th><i class="fas fa-search"></i></th>  
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" class="entry-checkbox"></td>
+                <td>Siddharth jain</td>
+                <td>10000</td>
+                <td>100</td>
+                <td>9900</td>
+                <td></td>  
+              </tr>
+            </tbody>
+        </table>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script>
+    var selectAllCheckbox = $('#select-all-checkbox');
+
+selectAllCheckbox.change(function () {
+  var isChecked = selectAllCheckbox.is(':checked');
+  $('.entry-checkbox').prop('checked', isChecked);
+});
+
+$('.entry-checkbox').change(function () {
+  var allCheckboxes = $('.entry-checkbox');
+  selectAllCheckbox.prop('checked', allCheckboxes.length === allCheckboxes.filter(':checked').length);
+});
+
+  </script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous">
+    </script>
+    <script> 
+        $(function(){
+          $("#header").load("../Components/header.html"); 
+          $("#footer").load("../Components/footer.html"); 
+          $("#sidebar").load("../Components/sidebar.html");
+        });
+    </script>
+</body>
+</html>

@@ -7,62 +7,45 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <title>Payrun</title>
+    <title>Payrun History</title>
     <style>
-      #block{
-        display: flex;
-        flex-flow: row wrap;
-        border-left: 3px solid black;
-        padding: 20px;
-        border-radius: 5px;
-      }
-      h6{
-        width: 250px;
-      }
-      h5{
-        width: 250px;
-      }
-      break{
-        flex-basis: 100%;
-        width: 0px; 
-        height: 0px; 
-        overflow: hidden;
-      }
-      .a1{
-        font-size: 18px;
-        margin-top: 20px;
-      }
-      h4{
-        margin-bottom: 20px;
-      }
+      
     </style>
 </head>
 <body>
     <div id="sidebar"></div>
     <div id="header"></div>
     <div class="container" style="margin-left: 18%;">
-        <h4>Pay Runs</h4>
+        <h3>Pay Runs</h3>
         <ul class="nav nav-tabs">
-          <li class="nav-item"><a class="nav-link active"  href="">Run Payroll</a></li>
-          <li class="nav-item"><a class="nav-link" href="payrunhistory.html">Payroll History</a></li>
+          <li class="nav-item"><a class="nav-link"  href="payrun.html">Run Payroll</a></li>
+          <li class="nav-item"><a class="nav-link active" href="payrunhistory.html">Payroll History</a></li>
         </ul>
         <div class="tab-content">
-          <p class="a1">Process Pay Run for June 2023</p>
-          <div id="block">
-             <h6>Employees' Net Pay</h6>
-             <h6>Payment Date</h6>
-             <h6>No. Of Employees</h6>
-             <break></break>
-             <h5>Yet to process</h5>
-             <h5>30/06/2023</h5>
-             <h5>47</h5>
-             <break></break>
-             <button onclick="window.location.href='payruncreate.html'">Create Payrun</button>
-          </div>
+            <table class="table table-striped" id="data-table">
+                <thead>
+                  <tr>
+                    <th>Payday</th>
+                    <th>Period</th>
+                    <th>Payroll Cost</th>
+                    <th>Employees Paid</th>
+                    <th><i class="fas fa-search"></i></th>  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <!-- Get employee details from employee page database -->
+                    <td>30/06/2023</td>
+                    <td>June 2023</td>
+                    <td>8000000</td>
+                    <td>47</td>
+                    <td></td>  
+                  </tr>
+                </tbody>
+            </table>
         </div>        
     </div>
-  
-
+    
     <script
     src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
