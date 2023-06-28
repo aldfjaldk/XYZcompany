@@ -24,7 +24,6 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use("/api/v1/auth", authRoute)
 app.use(express.static(join(__dirname, '..', 'Home')));
-app.use(express.static(join(__dirname, '..', 'Components')));
 // app.use(express.static("../Login"));
 
 app.get("/", function (req, res) {
