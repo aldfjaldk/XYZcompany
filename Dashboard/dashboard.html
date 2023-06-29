@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,9 +10,9 @@
         <title>Bluebuck Dashboard
 		</title>
 	    <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="../Sidebar css/bootstrap.min.css">
 	    <!----css3---->
-        <link rel="stylesheet" href="css/custom.css">
+        <link rel="stylesheet" href="../Sidebar css/custom.css">
 		<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
         <link rel=
         "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
@@ -35,26 +37,134 @@
 	<!--google material icon-->
         <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
       rel="stylesheet">
-
-      <style>
-        .dashboard{
-            background-color: rgba(200, 200, 200, 0.2);
-        }
-      </style>
   </head>
   <body>
-    <div id="header"></div>
-<div class="wrapper">
-    <div id="sidebar"></div>
+  
 
+
+    
+<div class="wrapper">
+    
+    
 <div class="body-overlay"></div>
+
+
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            
+            <div class="sidebar-header">
+                <h3><img src="./img/logo.png" class="img-fluid"/><span>Blue Buck</span></h3>
+            </div>
+            <ul class="list-unstyled components">
+		      <div class="small-screen navbar-display">
+                <li class="">
+                    <a href="#"><i class="material-icons">home</i><span>Home</span></a>
+                </li>
+                <li  class="active">
+                    <a href="#" class="dashboard"><i class="material-icons">dashboard</i><span>Dashboard</span></a>
+                </li>
+                <li class="dropdown d-lg-none d-md-block d-xl-none d-sm-block">
+                    <a href="#homeSubmenu0" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					<i class="material-icons">notifications</i><span> 4 notification</span></a>
+                    <ul class="collapse list-unstyled menu" id="homeSubmenu0">
+                                    <li>
+                                    <a href="#">You have 5 new messages</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">You're now friend with Mike</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Wish Mary on her birthday!</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">5 warnings in Server Console</a>
+                                    </li>
+                    </ul>
+                </li>
+				
+				 <li  class="d-lg-none d-md-block d-xl-none d-sm-block">
+                    <a href="#"><i class="material-icons">person</i><span>user</span></a>
+                </li>
+				
+				<li  class="d-lg-none d-md-block d-xl-none d-sm-block">
+                    <a href="#"><i class="material-icons">settings</i><span>setting</span></a>
+                </li>
+				</div>
+			
+			
+                <li class="dropdown">
+                    <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					<i class="material-icons">cases</i><span>Products</span></a>
+                    <ul class="collapse list-unstyled menu" id="homeSubmenu1">
+                        <li>
+                            <a href="#">Sales</a>
+                        </li>
+                        <li>
+                            <a href="#">Marketing</a>
+                        </li>
+                        <li>
+                            <a href="#">Explore all products</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li  class="">
+                    <a href="#"><i class="material-icons">group</i><span>Customers</span></a>
+                </li>
+				
+				 <li class="dropdown">
+                    <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					<i class="material-icons">apartment</i><span>Company</span></a>
+                    <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                        <li>
+                            <a href="#">About us</a>
+                        </li>
+                        <li>
+                            <a href="#">Events</a>
+                        </li>
+                        <li>
+                            <a href="#">Careers</a>
+                        </li>
+                    </ul>
+                </li>
+				
+				<li  class="">
+                    <a href="#"><i class="material-icons">description</i><span>Blog</span></a>
+                </li>
+
+                <li  class="">
+                    <a href="#"><i class="material-icons">diversity_3</i><span>Community</span></a>
+                </li>
+
+                <li  class="">
+                    <a href="#"><i class="material-icons">handshake</i><span>Partner with us</span></a>
+                </li>
+
+                <li  class="">
+                    <a href="#"><i class="material-icons">help</i><span>Support</span></a>
+                </li>
+
+                <li  class="">
+                    <a href="#"><i class="material-icons">call</i><span>Contact us</span></a>
+                </li>
+               
+               
+            </ul>
+
+           
+        </nav>
+		
+		
+
         <!-- Page Content  -->
         <div id="content">
 		
 		<div class="top-navbar">
+            <div id  = "header"></div>
             <nav class="navbar navbar-expand-lg">
+                
                 <div class="container-fluid">
-
+                    
                     <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
                         <span class="material-icons">arrow_back_ios</span>
                     </button>
@@ -100,62 +210,56 @@
 			<div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats">
-                                <div class="align">
                                 <div class="card-header">
                                     <div class="icon icon-rose">
-                                       <span class="material-icons">currency_rupee</span>
+                                       <span class="material-icons">attach_money</span>
                                     </div>
                                 </div>
                                 <div class="card-content">
                                     <p class="category"><strong>Amount to be paid</strong></p>
-                                    <h3 class="card-title">Rs. 70,340 /-</h3>
+                                    <h3 class="card-title">$70,340</h3>
                                 </div>
-                            </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <p>Current balance : Rs. 23,100 /-</p>
-                                        <p>Over due : Rs. 23,100 /-</p>
+                                        <a href="#">Current balance : $23,100</a>
+                                        <a href="#">Over due : $23,100</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats">
-                                <div class="align">
                                 <div class="card-header">
                                     <div class="icon icon-success">
-                                       <span class="material-icons">currency_rupee</span>
+                                       <span class="material-icons">attach_money</span>
 
                                     </div>
                                 </div>
                                 <div class="card-content">
                                     <p class="category"><strong>Amount to be recieved</strong></p>
-                                    <h3 class="card-title">Rs. 70,340 /-</h3>
+                                    <h3 class="card-title">$70,340</h3>
                                 </div>
-                            </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <p>Current balance : Rs. 23,100 /-</p>
-                                        <p>Over due : Rs. 23,100 /-</p>
+                                        <a href="#">Current balance : $23,100</a>
+                                        <a href="#">Over due : $23,100</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats">
-                                <div class="align">
                                 <div class="card-header">
                                     <div class="icon icon-warning">
                                         <span class="material-icons">
-                                            currency_rupee
+attach_money
 </span>
 
                                     </div>
                                 </div>
                                 <div class="card-content">
                                     <p class="category"><strong>Your expenses</strong></p>
-                                    <h3 class="card-title">Rs. 23,100 /-</h3>
-                                </div>
+                                    <h3 class="card-title">$23,100</h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
@@ -166,7 +270,6 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats">
-                                <div class="align">
                                 <div class="card-header">
                                     <div class="icon icon-info">
                                     
@@ -179,7 +282,6 @@ follow_the_signs
                                     <p class="category"><strong>Followers</strong></p>
                                     <h3 class="card-title">+245</h3>
                                 </div>
-                                </div>
                                 <div class="card-footer">
                                     <div class="stats">
                                         <i class="material-icons">update</i> Just Updated
@@ -189,7 +291,6 @@ follow_the_signs
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats">
-                                <div class="align">
                                 <div class="card-header">
                                     <div class="icon icon-success">
                                     
@@ -202,7 +303,6 @@ task
                                     <p class="category"><strong>Projects</strong></p>
                                     <h3 class="card-title">+245</h3>
                                 </div>
-                                </div>
                                 <div class="card-footer">
                                     <div class="stats">
                                         <i class="material-icons">add</i> Add your projects here
@@ -212,7 +312,6 @@ task
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats">
-                                <div class="align">
                                 <div class="card-header">
                                     <div class="icon icon-warning">
                                     
@@ -224,7 +323,6 @@ notes
                                 <div class="card-content">
                                     <p class="category"><strong>Records</strong></p>
                                     <h3 class="card-title">+245</h3>
-                                </div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
@@ -253,7 +351,7 @@ notes
 					</div>
 					
 				
-                    <div id="footer"></div>
+                    <div id = "footer"></div>
         </div>
     </div>
 
@@ -266,10 +364,10 @@ notes
   
      <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery-3.3.1.min.js"></script>
+   <script src="../Sidebar js/jquery-3.3.1.slim.min.js"></script>
+   <script src="../Sidebar js/popper.min.js"></script>
+   <script src="../Sidebar js/bootstrap.min.js"></script>
+   <script src="../Sidebar js/jquery-3.3.1.min.js"></script>
   
   
   <script type="text/javascript">
@@ -311,36 +409,24 @@ notes
             });
 			
         });
-        $(document).ready(function() {
-            // Get all the <li> elements
-            var liElements = document.getElementsByTagName('li');
 
-            // Loop through all the <li> elements
-            for (var i = 0; i < liElements.length; i++) {
-                // Add a click event listener to each <li> element
-                liElements[i].addEventListener('click', function() {
-                    // Remove the "active" class from all <li> elements
-                    for (var j = 0; j < liElements.length; j++) {
-                        liElements[j].classList.remove('active');
-                    }
 
-                    // Add the "active" class to the clicked <li> element
-                    this.classList.add('active');
-                });
-            }
-        });
+     
+           
+       
 </script>
-<script
-    src="https://code.jquery.com/jquery-3.3.1.js"
-    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-    crossorigin="anonymous">
+  
+  
+<script> 
+    $(function(){
+      $("#header").load("../Components/header.html"); 
+      $("#footer").load("../Components/footer.html"); 
+    });
 </script>
-    <script> 
-        $(function(){
-          $("#header").load("../Components/header.html"); 
-          $("#footer").load("../Components/footer.html"); 
-          $("#sidebar").load("../Components/sidebar.html");
-        });
-    </script>
+
+
   </body>
+  
   </html>
+
+
