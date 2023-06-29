@@ -51,107 +51,69 @@
 
         <!-- Sidebar  -->
         <nav id="sidebar">
-            
             <div class="sidebar-header">
-                <h3><img src="./img/logo.png" class="img-fluid"/><span>Blue Buck</span></h3>
+                <img src="../Images/logo.jpeg" class="img-fluid"/>
             </div>
             <ul class="list-unstyled components">
-		      <div class="small-screen navbar-display">
-                <li class="">
-                    <a href="#"><i class="material-icons">home</i><span>Home</span></a>
+              <div class="small-screen navbar-display">
+                <li  class="dashboard">
+                    <a href="../Dashboard/dashboard.html" class="dashboard"><i class="material-icons">dashboard</i><span>Dashboard</span></a>
                 </li>
-                <li  class="active">
-                    <a href="#" class="dashboard"><i class="material-icons">dashboard</i><span>Dashboard</span></a>
+                <li  class="items">
+                    <a href="../Items/itemspage.html"><i class="material-icons">category</i><span>Items</span></a>
                 </li>
-                <li class="dropdown d-lg-none d-md-block d-xl-none d-sm-block">
-                    <a href="#homeSubmenu0" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					<i class="material-icons">notifications</i><span> 4 notification</span></a>
-                    <ul class="collapse list-unstyled menu" id="homeSubmenu0">
-                                    <li>
-                                    <a href="#">You have 5 new messages</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">You're now friend with Mike</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Wish Mary on her birthday!</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">5 warnings in Server Console</a>
-                                    </li>
-                    </ul>
-                </li>
-				
-				 <li  class="d-lg-none d-md-block d-xl-none d-sm-block">
-                    <a href="#"><i class="material-icons">person</i><span>user</span></a>
-                </li>
-				
-				<li  class="d-lg-none d-md-block d-xl-none d-sm-block">
-                    <a href="#"><i class="material-icons">settings</i><span>setting</span></a>
-                </li>
-				</div>
-			
-			
                 <li class="dropdown">
                     <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					<i class="material-icons">cases</i><span>Products</span></a>
+                    <i class="material-icons">cases</i><span>Sales</span></a>
                     <ul class="collapse list-unstyled menu" id="homeSubmenu1">
                         <li>
-                            <a href="#">Sales</a>
+                            <a class="customers" href="../Customers/customerPage.html">Customers</a>
                         </li>
                         <li>
-                            <a href="#">Marketing</a>
+                            <a class="salesorders" href="../Sales Order/salesorder.html">Sales Order</a>
                         </li>
                         <li>
-                            <a href="#">Explore all products</a>
+                            <a class="invoice" href="../Invoices/invoice.html">Invoices</a>
                         </li>
+                        <li>
+                            <a class="dc" href="../Delivery Challan/deliveryChallanPage.html">Delivery challans</a>
+                        </li>
+                        <li><a class="pr" href="../Payments Received/PaymentRecieved.html">Payments Received</a></li>
                     </ul>
                 </li>
-                
-                <li  class="">
-                    <a href="#"><i class="material-icons">group</i><span>Customers</span></a>
+                <li class="dropdown">
+                    <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="material-icons">shopping_cart</i><span>Purchases</span></a>
+                    <ul class="collapse list-unstyled menu" id="homeSubmenu2">
+                        <li><a class="vendors" href="../Vendors and Expenses/vendors.html">Vendors</a></li>
+                        <li><a href="../Vendors and Expenses/expenses.html">Expenses</a></li>
+                        <li><a href="../Payments Made/paymentsmade.html">Payments Made</a></li>
+                        <li><a href="../Payments Made/newpayments.html">Bills</a></li>
+                    </ul>
                 </li>
-				
-				 <li class="dropdown">
+                 <li class="dropdown">
                     <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					<i class="material-icons">apartment</i><span>Company</span></a>
+                    <i class="material-icons">account_balance_wallet</i><span>Accountant</span></a>
                     <ul class="collapse list-unstyled menu" id="pageSubmenu3">
-                        <li>
-                            <a href="#">About us</a>
-                        </li>
-                        <li>
-                            <a href="#">Events</a>
-                        </li>
-                        <li>
-                            <a href="#">Careers</a>
-                        </li>
+                        <li><a href="../Manual Journal/manualJournalPage.html">Manual Journals</a></li>
+                        <li><a href="../Currency Converter/currency convertor page.html">Currency Converter</a></li>
+                        <li><a href="../Budgets/budget.html">Budgets</a></li>
                     </ul>
                 </li>
-				
-				<li  class="">
-                    <a href="#"><i class="material-icons">description</i><span>Blog</span></a>
-                </li>
-
                 <li  class="">
-                    <a href="#"><i class="material-icons">diversity_3</i><span>Community</span></a>
+                    <a href="../Reports/reportpage.html"><i class="material-icons">help</i><span>Reports</span></a>
                 </li>
-
-                <li  class="">
-                    <a href="#"><i class="material-icons">handshake</i><span>Partner with us</span></a>
+                  <li class="dropdown">
+                    <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="material-icons">credit_card</i><span>Payroll</span></a>
+                    <ul class="collapse list-unstyled menu" id="pageSubmenu4">
+                        <li><a href="../Payroll/payrolldashboard.html">Dashboard</a></li>
+                        <li><a href="../Payroll/employees.html">Employees</a></li>
+                        <li><a href="../Payroll/payrun.html">Pay Runs</a></li>
+                        <li><a href="../Payroll/settings.html">Settings</a></li>
+                    </ul>
                 </li>
-
-                <li  class="">
-                    <a href="#"><i class="material-icons">help</i><span>Support</span></a>
-                </li>
-
-                <li  class="">
-                    <a href="#"><i class="material-icons">call</i><span>Contact us</span></a>
-                </li>
-               
-               
             </ul>
-
-           
         </nav>
 		
 		
