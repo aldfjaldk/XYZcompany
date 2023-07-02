@@ -1,39 +1,228 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Budget Page</title>
-    <link rel="stylesheet" href="css\budget.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget Page</title>
+  <link rel="stylesheet" href="css/budget.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    section {
+      margin-left: 19%;
+    }
+
+  </style>
 </head>
 <body>
-    <div id="sidebar"></div>
-    <div id="header"></div>
-    
+  <div id="sidebar"></div>
+  <div id="header"></div>
+  <section>
+    <div class="hero" style="display: flex; justify-content: center;">
+      <div class="hero-content mt-4" style="text-align: center;">
+        <h1>Take control of your finances</h1>
+        <p>Track your income and expenses with ease</p>
+        <a href="budgetform.html" class="btn btn-primary">Click Here to make your budget</a>
+      </div>
+    </div>
+    <h2>Existing Budgets</h2>
+    <hr>
+    <div id="budgetList" style="display: block"></div>
+  </section>
+    <nav aria-label="Budget Pagination" id="paginationNav">
+      <ul class="pagination justify-content-center mt-3">
+        <li class="page-item disabled" id="previousPage">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+        <li class="page-item active" id="currentPage">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item" id="nextPage">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </section>
 
-    <section class="hero" style="margin-left: 18%;">
-        <div class="hero-content">
-            <h1>Take control of your finances</h1>
-            <p>Track your income and expenses with ease</p>
-            <a href="budgetform.html" class="btn">Click Here to make your budget</a>
-        </div>
-    </section>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script>
+    $(function() {
+      // Load header, footer, and sidebar
+      $("#header").load("../Components/header.html");
+      $("#footer").load("../Components/footer.html");
+      $("#sidebar").load("../Components/sidebar.html");
 
-    
-    <script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous">
-</script>
-  <script> 
-      $(function(){
-        $("#header").load("../Components/header.html"); 
-        $("#footer").load("../Components/footer.html"); 
-        $("#sidebar").load("../Components/sidebar.html");
+      // Data for pagination
+      var currentPage = 1;
+      var pageSize = 5; //change this according to how many budgets you want on the page
+      var budgets = [];
+
+      // Function to display the budget cards for the current page
+      function displayBudgets() {
+        var budgetList = $("#budgetList");
+        budgetList.empty();
+
+        var startIndex = (currentPage - 1) * pageSize;
+        var endIndex = startIndex + pageSize;
+
+        for (var i = startIndex; i < endIndex && i < budgets.length; i++) {
+          var budget = budgets[i];
+          var budgetCard = $("<div>").addClass("card").css("margin-top", "50px").css("width","90%").attr("data-budget-id", budget._id);
+
+
+          // ...
+            var cardHeader = $("<div>")
+              .addClass("card-header")
+              .css("border", "2px solid #56AFFF")
+              .html(`
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="card-title">${budget.name}</h5>
+                  <button type="button" class="btn btn-link p-0" data-toggle="collapse" data-target="#collapseCard${i}">
+                    <i class="fas fa-chevron-down"></i>
+                  </button>
+                </div>
+                <h6 style="text-transform: none">${budget.email}</h6>`); // Use inline style to preserve capitalization
+
+// ...
+
+          var cardBody = $("<div>")
+            .addClass("card-body collapse")
+            .css("border", "2px solid #56AFFF")
+            .attr("id", `collapseCard${i}`)
+            .html(`
+              <p class="card-text"><strong>Amount:</strong> $${budget.amount}</p>
+              <p class="card-text"><strong>Period:</strong> ${budget.period}</p>
+              <p class="card-text"><strong>Description:</strong> ${budget.description}</p>`);
+
+          if (budget.expense) {
+            var expenseList = $("<ul>").addClass("list-group list-group-flush").html(`<p class="card-text"><strong>Expenses:</strong></p>`);
+
+            for (var key in budget.expense) {
+              if (budget.expense.hasOwnProperty(key)) {
+                var expenseItem = $("<li>")
+                  .addClass("list-group-item d-flex justify-content-between align-items-center")
+                  .html(`
+                    <span class="badge badge-success">${key}</span>
+                    <span class="badge badge-success">$${budget.expense[key]}</span>`);
+                expenseList.append(expenseItem);
+              }
+            }
+
+            cardBody.append(expenseList);
+          }
+
+          var cardFooter = $("<div>")
+            .addClass("card-footer text-right")
+            .css({
+              "background-color": "#EEEEEE",
+              "border": "2px solid #56AFFF",
+              "margin": "0"
+            });
+          var deleteButton = $("<button>")
+            .attr("type", "button")
+            .addClass("btn btn-danger")
+            .text("Delete");
+
+          cardFooter.append(deleteButton);
+
+          budgetCard.append(cardHeader);
+          budgetCard.append(cardBody);
+          budgetCard.append(cardFooter);
+
+          budgetList.append(budgetCard);
+        }
+
+        // Enable the collapse functionality
+        $(".card-header .btn").click(function() {
+          var target = $(this).attr("data-target");
+          var icon = $(this).find("i");
+
+          $(target).collapse("toggle");
+
+          if ($(target).hasClass("show")) {
+            icon.removeClass("fa-chevron-up");
+            icon.addClass("fa-chevron-down");
+          } else {
+            icon.removeClass("fa-chevron-down");
+            icon.addClass("fa-chevron-up");
+          }
+        });
+
+        // Update pagination links
+        var previousPage = $("#previousPage");
+        var nextPage = $("#nextPage");
+
+        previousPage.toggleClass("disabled", currentPage === 1);
+        nextPage.toggleClass("disabled", currentPage === Math.ceil(budgets.length / pageSize));
+
+        // Update current page indicator
+        $("#currentPage").find(".page-link").text(currentPage);
+      }
+
+      // AJAX request to fetch budgets
+      $.ajax({
+        url: "http://localhost:8000/Budgets/budget.html",
+        type: "GET",
+        success: function(response) {
+          budgets = response;
+          // Display the budgets for the current page
+          currentPage = 1;
+
+          displayBudgets();
+        },
+        error: function(error) {
+          console.log("Error:", error);
+        }
       });
+
+      
+  // Event handler for delete button click
+  $(document).on("click", ".btn-danger", function() {
+    var card = $(this).closest(".card");
+    var budgetId = card.attr("data-budget-id");
+    console.log("DELETED");
+
+    // AJAX request to delete the budget document
+    $.ajax({
+      url: "http://localhost:8000/api/v1/budgets/" + budgetId,
+      type: "DELETE",
+      success: function(response) {
+        console.log("Budget deleted successfully");
+
+        // Remove the card from the DOM
+        card.remove();
+      },
+      error: function(error) {
+        console.log("Error:", error);
+      }
+    });
+  });
+
+    
+
+      // Event handler for previous page navigation
+      $("#previousPage").click(function(e) {
+        e.preventDefault();
+
+        if (currentPage > 1) {
+          currentPage--;
+          displayBudgets();
+        }
+      });
+
+      // Event handler for next page navigation
+      $("#nextPage").click(function(e) {
+        e.preventDefault();
+
+        if (currentPage < Math.ceil(budgets.length / pageSize)) {
+          currentPage++;
+          displayBudgets();
+        }
+      });
+    });
   </script>
 </body>
 </html>
-
