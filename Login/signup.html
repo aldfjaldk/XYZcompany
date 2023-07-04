@@ -12,17 +12,17 @@
 <body>
     <main>
         <div class="intro_container">
-            <form>
+            <form id="mainForm">
                 <h2> Signup for Blue Buck</h2>
-                <input placeholder="Name"> <br>
-                <input placeholder="Business Email"> <br>
-                <input placeholder="Country"> <br>
-                <input placeholder="Company Name"> <br>
-                <input placeholder="Job Level"> <br>
-                <input placeholder="Function Role"> <br>
-                <input placeholder="password"> <br>
-                <input placeholder="confirm password"> <br>
-                <button> Submit</button><br>
+                <input id="inputName" placeholder="Name"> <br>
+                <input id="inputEmail" placeholder="Business Email"> <br>
+                <input id="inputCountry" placeholder="Country"> <br>
+                <input id="inputCompany" placeholder="Company Name"> <br>
+                <input id="inputJob" placeholder="Job Level"> <br>
+                <input id="inputRole" placeholder="Function Role"> <br>
+                <input id="inputPassword" placeholder="password"> <br>
+                <input id="inputConfirm" placeholder="confirm password"> <br>
+                <button type="submit"> Submit</button><br>
                 <a href="./login.html">Already have an account? Login</a>
             </form>
         </div>
@@ -32,7 +32,8 @@
     src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous">
-</script>
+    </script>
+    <script src="./signupBack.js"></script>
     <script> 
         $(function(){
           $("#header").load("../Components/header.html"); 

@@ -14,27 +14,22 @@ const userSchema = new mongoose.Schema({
     company:{
         type:String,
         required:true
-
     },
     country:{
         type:String,
         required:true
-
     },
     job:{
         type:String,
         required:true
-
     },
     password:{
         type:String,
         required:true
-
     },
     confirm:{
         type:String,
         required:true
-
     },
     phone:{
         type:String,
@@ -44,13 +39,13 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true 
     },
-
     answer: {
         type: String,
         required: true,
-      },
+    },
     role:{
-        type:Number,
+        type: String,
+        required: true,
         default:0
     }
     

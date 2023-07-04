@@ -2,10 +2,9 @@
 <html>
 <head>
   <title>Budget Form</title>
-  <link rel="stylesheet" type="text/css" href="css\budgetform.css">
   <style>
-    .main{
-      margin-left: 18%;
+    .main {
+      margin-left: 19%;
     }
     .budget{
       background-color: rgba(200, 200, 200, 0.2);
@@ -18,52 +17,214 @@
   <div id="header"></div>
 
   <section class="main">
-  <h1>Budget Form</h1>
+    <h4>Budget Form</h4>
+    <hr>
+    <form class="budget-form" id="budget-form" action="http://localhost:8000/budget-submit-form" method="post">
+      <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-6">
+          <input type="text" name="name" class="form-control" id="name" required>
+        </div>
+      </div>
 
-  <form class="budget-form">
-    <div class="form-group">
-      <label for="item">Budget Name</label>
-      <input type="text" id="item" name="item" required>
-    </div>
-    <div class="form-group">
-      <label for="amount">Budget Amount</label>
-      <input type="number" id="amount" name="amount" required>
-    </div>
-    <div class="form-group">
-      <label for="category">Category</label>
-      <select id="category" name="category" required>
-        <option value="">Select a category</option>
-        <option value="food">Food</option>
-        <option value="transportation">Transportation</option>
-        <option value="utilities">Utilities</option>
-        <option value="entertainment">Entertainment</option>
-        
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="description">Description</label>
-      <textarea id="description" name="description" required></textarea>
-    </div>
-    <div class="form-group">
-      <input type="submit" value="Submit">
-    </div>
-  </form>
-  <div>
-    <a href="budget.html" class="btn">Go back</a>
+      <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-6">
+          <input type="email" name="email" class="form-control" id="email" required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="period" class="col-sm-2 col-form-label">Budget Period</label>
+        <div class="col-sm-6">
+          <select class="form-control" id="period" name="period" required>
+            <option value="Monthly">Monthly</option>
+            <option value="Quarterly">Quarterly</option>
+            <option value="Half-yearly">Half-yearly</option>
+            <option value="Yearly">Yearly</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="amount" class="col-sm-2 col-form-label">Amount</label>
+        <div class="col-sm-6">
+          <input type="number" id="amount" name="amount" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="expense" class="col-sm-2 col-form-label">Expenses</label>
+        <div class="col-sm-6">
+          <div class="card border p-2 rounded">
+            <div class="d-flex rounded flex-wrap" id="exp" required>
+              <div class="form-check ml-3">
+                <input class="form-check-input" type="checkbox" id="exp1" value="Housing">
+                <label class="form-check-label" for="exp1">Housing</label>
+              </div>
+              <div class="form-check ml-3">
+                <input class="form-check-input" type="checkbox" id="exp2" value="Transportation">
+                <label class="form-check-label" for="exp2">Transportation</label>
+              </div>
+              <div class="form-check ml-3">
+                <input class="form-check-input" type="checkbox" id="exp3" value="Food">
+                <label class="form-check-label" for="exp3">Food</label>
+              </div>
+              <div class="form-check ml-3">
+                <input class="form-check-input" type="checkbox" id="exp4" value="Utilities">
+                <label class="form-check-label" for="exp4">Utilities</label>
+              </div>
+              <div class="form-check ml-3">
+                <input class="form-check-input" type="checkbox" id="exp5" value="Health">
+                <label class="form-check-label" for="exp5">Health</label>
+              </div>
+              <div class="form-check ml-3">
+                <input class="form-check-input" type="checkbox" id="exp6" value="Education">
+                <label class="form-check-label" for="exp6">Education</label>
+              </div>
+              <div class="form-check ml-3">
+                <input class="form-check-input" type="checkbox" id="exp7" value="Entertainment">
+                <label class="form-check-label" for="exp7">Entertainment</label>
+              </div>
+              <div class="form-check ml-3">
+                <input class="form-check-input" type="checkbox" id="exp8" value="Savings">
+                <label class="form-check-label" for="exp8">Savings</label>
+              </div>
+              <div class="form-check ml-3">
+                <input class="form-check-input" type="checkbox" id="exp8" value="Others">
+                <label class="form-check-label" for="exp9">Others</label>
+              </div>
+            </div>
+            <div class="mt-2 ml-5"><strong>Select at least one expense</strong></div>
+            <button class="btn btn-primary mt-3 col-sm-3" id="addExpensesBtn">Add Expenses</button>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="container mt-3">
+        <div class="row">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-6">
+            <table class="table table-bordered border-dark">
+              <thead>
+                <tr>
+                  <th scope="col" class="col-sm-1">S No.</th>
+                  <th scope="col" class="col-sm-2">Expense</th>
+                  <th scope="col" class="col-sm-2">Amount</th>
+                </tr>
+              </thead>
+              <tbody id="expenseTableBody">
+                <!-- Table rows will be dynamically generated here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-6">
+          <textarea class="form-control" name="description" id="description"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary col-sm-1" >Save</button>
+        <a href="budget.html" class="btn btn-secondary col-sm-1">Go back</a>
+      </div>
+    </form>
   </section>
 
+  
 
-    <script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous">
-</script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script> 
-      $(function(){
-        $("#header").load("../Components/header.html"); 
-        $("#footer").load("../Components/footer.html"); 
-        $("#sidebar").load("../Components/sidebar.html");
+    $(function() {
+      $("#header").load("../Components/header.html");
+      $("#footer").load("../Components/footer.html");
+      $("#sidebar").load("../Components/sidebar.html");
+
+      $("#budget-form").submit(function(event) {
+        event.preventDefault();
+
+        // Create an object to store the form data
+        const formData = {
+          name: $("#name").val(),
+          email: $("#email").val(),
+          period: $("#period").val(),
+          amount: $("#amount").val(),
+          expenses: [], // Initialize expenses as an empty array
+          description: $("#description").val()
+        };
+
+        // Get the selected expenses
+        const selectedExpenses = $(".card .form-check-input:checked");
+
+        // Loop over the selected expenses and add them to the expenses object
+        selectedExpenses.each(function(index) {
+          const expense = $(this).val();
+          const amount = $(this).closest(".form-check").next().find(".amount-input").val();
+
+          const expenseObj = {
+            expense: expense,
+            amount: amount
+          };
+
+          formData.expenses.push(expenseObj);
+        });
+
+        // Send the form data to the server
+        $.ajax({
+          url: "http://localhost:8000/budget-submit-form",
+          type: "POST",
+          data: JSON.stringify(formData),
+          contentType: "application/json",
+          success: function(response) {
+            console.log(response);
+            // Handle success response
+          },
+          error: function(error) {
+            console.error(error);
+            // Handle error response
+          }
+        });
       });
+
+      $("#addExpensesBtn").click(function(event) {
+  event.preventDefault();
+  // Clear previous expense form elements
+  $("#expenseTableBody").empty();
+
+  // Get the selected expenses
+  const selectedExpenses = $(".card .form-check-input:checked");
+
+  // Create form elements for selected expenses
+  selectedExpenses.each(function(index) {
+    const serialNumber = index + 1;
+    const expenseValue = $(this).val();
+
+    const tr = $("<tr>");
+    const tdSerial = $("<td>").text(serialNumber);
+    const tdExpense = $("<td>").text(expenseValue);
+    const tdAmount = $("<td>").append(
+      $("<input>")
+        .attr({
+          type: "number",
+          class: "form-control amount-input",
+          name: "expenses[" + expenseValue + "]", // Use expenseValue as the key
+          required: true
+        })
+    );
+
+    tr.append(tdSerial, tdExpense, tdAmount);
+    $("#expenseTableBody").append(tr);
+  });
+});
+      // Event listener for the save button click
+      $("button[type='submit']").click(function(event) {
+        event.preventDefault();
+        $("#budget-form").submit(); // Trigger the form submission manually
+      });
+    });
   </script>
-</body>
 </html>

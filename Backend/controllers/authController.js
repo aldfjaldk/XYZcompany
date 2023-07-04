@@ -12,7 +12,6 @@ export const registerController =async(req,res)=>{
         if(!email){
             return res.send({message:'Email is required'})
         }
-       
         if(!company){
             return res.send({message:'company name is required'})
         }
@@ -43,8 +42,7 @@ export const registerController =async(req,res)=>{
         if(existingUser){
             return res.status(200).send({
                 success:false,
-                success:true,
-                message:'Already Register please login',
+                message:'Already Registerd, please login',
             })
         }
        // register user
@@ -54,7 +52,7 @@ export const registerController =async(req,res)=>{
        const user = await new userModel({name,email,company,country,job,password:hashedPassword,confirm:hashedPassword,phone,address,answer}).save()
      res.status(201).send({
         success: true,
-        message:"User Register Successfully",
+        message:"User Registered   Successfully",
         user,
      })
 
