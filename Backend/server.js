@@ -7,6 +7,7 @@ import authRoute from "./Routes/authRoute.js"
 import cors from "cors";
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import Dashboard from "./models/dashboardModel.js";
 import Budget from "./models/budget.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -33,6 +34,48 @@ app.get("/hi", (req, res) => {
   res.send("<h1>Seems like this is working.</h1>")
   console.log("hi url is working.");
 })
+
+app.post("/api/dashboard", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const incomeSize = 7;
+
+    const randomIncome = Array.from({ length: incomeSize }, () => Math.floor(Math.random() * 1000));
+    const randomExpense = Array.from({ length: incomeSize }, () => Math.floor(Math.random() * 500));
+
+    const income = randomIncome;
+    const expenseArr = randomExpense.map((expense, index) => Math.min(expense, income[index]));
+
+    const dashboardData = {
+      email: email,
+      income: income,
+      amountToPay: 500,
+      amountToReceive: 500,
+      currentBalance: 500,
+      overDue: 100,
+      expenses: 200,
+      followers: 300,
+      projects: 400,
+      records: 500,
+      expenseArr: expenseArr
+    };
+
+    const existingDashboard = await Dashboard.findOne({ email });
+
+    if (existingDashboard) {
+      const updatedDashboard = await Dashboard.findOneAndUpdate({ email }, dashboardData, { new: true });
+      res.json(updatedDashboard);
+    } else {
+      const newDashboard = new Dashboard(dashboardData);
+      const savedDashboard = await newDashboard.save();
+      res.json(savedDashboard);
+    }
+  } catch (error) {
+    console.error('Error updating or fetching dashboard data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 app.get('/Budgets/budget.html', async (req, res) => {
   try {
