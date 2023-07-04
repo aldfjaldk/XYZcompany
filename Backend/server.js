@@ -123,9 +123,6 @@ app.post("/budget-submit-form", async (req, res) => {
     // Save the budget document to the database
     await budget.save();
 
-    // Redirect to budget.html
-    res.redirect("http://localhost:5500/Budgets/budget.html");
-
   } catch (error) {
     console.error(error);
     console.log("Form submission failed");
