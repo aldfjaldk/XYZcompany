@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const dashboardSchema = new mongoose.Schema({
   email: String,
-  income: [Number], // Modified to an array of numbers
+  income: [Number],
   amountToPay: Number,
   amountToReceive: Number,
   currentBalance: Number,
@@ -11,7 +11,7 @@ const dashboardSchema = new mongoose.Schema({
   followers: Number,
   projects: Number,
   records: Number,
-  expenseArr: [Number] // New field: an array of numbers for expenses
+  expenseArr: [Number]
 });
 
 const Dashboard = mongoose.model('dashboard', dashboardSchema);
