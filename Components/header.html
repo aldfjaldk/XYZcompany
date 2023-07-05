@@ -62,7 +62,7 @@
                 <a class="nav-link" href="#" style="color: #888;">Help & Support</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../index.html" style="color: #888;">Log Out</a>
+                <a id="logout-button" class="nav-link" href="../index.html" style="color: #888;">Log Out</a>
               </li>
               
             </ul>
@@ -74,5 +74,8 @@
         </div>
       </nav>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.min.js">
+<script>
+  document.getElementById("logout-button").addEventListener("click", ()=>{localStorage.setItem("email", "")})
+</script>
 </body>
 </html>
