@@ -27,12 +27,6 @@
         </div>
       </div>
 
-      <div class="form-group row">
-        <label for="email" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm-6">
-          <input type="email" name="email" class="form-control" id="email" required>
-        </div>
-      </div>
 
       <div class="form-group row">
         <label for="period" class="col-sm-2 col-form-label">Budget Period</label>
@@ -52,6 +46,13 @@
           <input type="number" id="amount" name="amount" class="form-control" required>
         </div>
       </div>
+      <div class="form-group row" hidden>
+        <label for="EmailInput" class="col-sm-2 col-form-label">user_email</label>
+        <div class="col-sm-6">
+          <input type="text" id="EmailInput" name="user" class="form-control" required>
+        </div>
+      </div>
+      
 
       <div class="form-group row">
         <label for="expense" class="col-sm-2 col-form-label">Expenses</label>
@@ -102,6 +103,7 @@
         </div>
       </div>
 
+
       <div class="container mt-3">
         <div class="row">
           <div class="col-sm-2"></div>
@@ -139,86 +141,44 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script> 
+    var email = localStorage.getItem("email");
+    document.getElementById("EmailInput").value = email;
+
     $(function() {
       $("#header").load("../Components/header.html");
       $("#footer").load("../Components/footer.html");
       $("#sidebar").load("../Components/sidebar.html");
 
-      $("#budget-form").submit(function(event) {
-        event.preventDefault();
-
-        // Create an object to store the form data
-        const formData = {
-          name: $("#name").val(),
-          email: $("#email").val(),
-          period: $("#period").val(),
-          amount: $("#amount").val(),
-          expenses: [], // Initialize expenses as an empty array
-          description: $("#description").val()
-        };
-
-        // Get the selected expenses
-        const selectedExpenses = $(".card .form-check-input:checked");
-
-        // Loop over the selected expenses and add them to the expenses object
-        selectedExpenses.each(function(index) {
-          const expense = $(this).val();
-          const amount = $(this).closest(".form-check").next().find(".amount-input").val();
-
-          const expenseObj = {
-            expense: expense,
-            amount: amount
-          };
-
-          formData.expenses.push(expenseObj);
-        });
-
-        // Send the form data to the server
-        $.ajax({
-          url: "http://localhost:8000/budget-submit-form",
-          type: "POST",
-          data: JSON.stringify(formData),
-          contentType: "application/json",
-          success: function(response) {
-            console.log(response);
-            // Handle success response
-          },
-          error: function(error) {
-            console.error(error);
-            // Handle error response
-          }
-        });
-      });
 
       $("#addExpensesBtn").click(function(event) {
-  event.preventDefault();
-  // Clear previous expense form elements
-  $("#expenseTableBody").empty();
+          event.preventDefault();
+          // Clear previous expense form elements
+          $("#expenseTableBody").empty();
 
-  // Get the selected expenses
-  const selectedExpenses = $(".card .form-check-input:checked");
+          // Get the selected expenses
+          const selectedExpenses = $(".card .form-check-input:checked");
 
-  // Create form elements for selected expenses
-  selectedExpenses.each(function(index) {
-    const serialNumber = index + 1;
-    const expenseValue = $(this).val();
+          // Create form elements for selected expenses
+          selectedExpenses.each(function(index) {
+            const serialNumber = index + 1;
+            const expenseValue = $(this).val();
 
-    const tr = $("<tr>");
-    const tdSerial = $("<td>").text(serialNumber);
-    const tdExpense = $("<td>").text(expenseValue);
-    const tdAmount = $("<td>").append(
-      $("<input>")
-        .attr({
-          type: "number",
-          class: "form-control amount-input",
-          name: "expenses[" + expenseValue + "]", // Use expenseValue as the key
-          required: true
-        })
-    );
+            const tr = $("<tr>");
+            const tdSerial = $("<td>").text(serialNumber);
+            const tdExpense = $("<td>").text(expenseValue);
+            const tdAmount = $("<td>").append(
+              $("<input>")
+                .attr({
+                  type: "number",
+                  class: "form-control amount-input",
+                  name: "expenses[" + expenseValue + "]", // Use expenseValue as the key
+                  required: true
+                })
+            );
 
-    tr.append(tdSerial, tdExpense, tdAmount);
-    $("#expenseTableBody").append(tr);
-  });
+            tr.append(tdSerial, tdExpense, tdAmount);
+            $("#expenseTableBody").append(tr);
+            });
 });
       // Event listener for the save button click
       $("button[type='submit']").click(function(event) {
