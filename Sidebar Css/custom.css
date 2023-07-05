@@ -214,6 +214,7 @@ a:focus {
     position:relative;
     font-weight: 400;
     display: block;
+    color: #555e58;
 }
 
 #sidebar ul li a span{
