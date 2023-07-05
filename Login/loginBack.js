@@ -28,6 +28,9 @@ async function postJSON(data) {
             localStorage.setItem("email", data.email) //store the currently logged in user's email to the local storage.
             window.location.href = "../Dashboard/dashboard.html"
         }
+        else {
+            alert("Email-password combination not found in our database. Please re-try")
+        }
     }
     catch(error) {
         console.error("Error: ", error);
