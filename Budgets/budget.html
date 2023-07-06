@@ -70,7 +70,8 @@
 
         for (var i = startIndex; i < endIndex && i < budgets.length; i++) {
           var budget = budgets[i];
-          var budgetCard = $("<div>").addClass("card").css("margin-top", "50px").css("width","90%").attr("data-budget-id", budget._id);
+          if(budget.user == localStorage.getItem("email")){
+          var budgetCard = $("<div>").addClass("card").css("margin-top", "50px").css("margin-left", "20px").css("width","90%").attr("data-budget-id", budget._id);
 
 
           // ...
@@ -78,41 +79,78 @@
               .addClass("card-header")
               .css("border", "2px solid #56AFFF")
               .html(`
-                <div class="d-flex justify-content-between align-items-center">
-                  <h5 class="card-title">${budget.name}</h5>
+                <div class="pb-3 d-flex justify-content-between align-items-center">
+                  <h5 class="card-title" style="text-transform: none;">${budget.name}</h5>
                   <button type="button" class="btn btn-link p-0" data-toggle="collapse" data-target="#collapseCard${i}">
                     <i class="fas fa-chevron-down"></i>
                   </button>
-                </div>
-                <h6 style="text-transform: none">${budget.email}</h6>`); // Use inline style to preserve capitalization
+                </div>`); 
+                  var cardBody = $("<div>")
+                    .addClass("card-body collapse")
+                    .css({
+                      border: "2px solid #56AFFF",
+                      padding: "10px"
+                    })
+                    .attr("id", `collapseCard${i}`)
+                    .html(`
+                      <style>
+                        td{
+                          padding: 12px;
+                          word-break: break-word;
+                        }
+                        #bor{
+                          border-top: 1px solid #ccc;
+                        }
+                        strong {
+                          display: block;
+                        }
+                        .row {
+                          display: flex;
+                          flex-wrap: wrap;
+                        }
+                      </style>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <table>
+                            <tr>
+                              <td><strong>Amount:</strong></td>
+                              <td>$${budget.amount}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Period:</strong></td>
+                              <td>${budget.period}</td>
+                            </tr>
+                            <tr id = "bor">
+                              <td><strong style="white-space: nowrap;">Description:</strong></td>
+                              <td>${budget.description}hfasfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-sm-5">
+                          ${budget.expense ? `
+                            <ul class="list-group list-group-flush">
+                              <h6 style="padding: 15px 0px 0px 8px;" class="card-text"><strong>Expenses:</strong></h6>
+                              <!-- List items for expenses here -->
+                            </ul>
+                          ` : ''}
+                        </div>
+                      </div>
+                    `);
 
-// ...
+                    if (budget.expense) {
+                    var expenseList = cardBody.find(".list-group");
 
-          var cardBody = $("<div>")
-            .addClass("card-body collapse")
-            .css("border", "2px solid #56AFFF")
-            .attr("id", `collapseCard${i}`)
-            .html(`
-              <p class="card-text"><strong>Amount:</strong> $${budget.amount}</p>
-              <p class="card-text"><strong>Period:</strong> ${budget.period}</p>
-              <p class="card-text"><strong>Description:</strong> ${budget.description}</p>`);
-
-          if (budget.expense) {
-            var expenseList = $("<ul>").addClass("list-group list-group-flush").html(`<p class="card-text"><strong>Expenses:</strong></p>`);
-
-            for (var key in budget.expense) {
-              if (budget.expense.hasOwnProperty(key)) {
-                var expenseItem = $("<li>")
-                  .addClass("list-group-item d-flex justify-content-between align-items-center")
-                  .html(`
-                    <span class="badge badge-success">${key}</span>
-                    <span class="badge badge-success">$${budget.expense[key]}</span>`);
-                expenseList.append(expenseItem);
-              }
-            }
-
-            cardBody.append(expenseList);
-          }
+                    for (var key in budget.expense) {
+                      if (budget.expense.hasOwnProperty(key)) {
+                        var expenseItem = $("<li>")
+                          .addClass("list-group-item d-flex justify-content-between align-items-center")
+                          .html(`
+                            <span class="badge badge-success">${key}</span>
+                            <span class="badge badge-success">$${budget.expense[key]}</span>`);
+                        expenseList.append(expenseItem);
+                      }
+                    }
+                  }
 
           var cardFooter = $("<div>")
             .addClass("card-footer text-right")
@@ -134,6 +172,7 @@
 
           budgetList.append(budgetCard);
         }
+      }
 
         // Enable the collapse functionality
         $(".card-header .btn").click(function() {

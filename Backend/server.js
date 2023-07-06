@@ -89,33 +89,35 @@ app.get('/Budgets/budget.html', async (req, res) => {
 
 app.post("/budget-submit-form", async (req, res) => {
   try {
-    const { name, email, period, description, amount, expenses } = req.body;
+    console.log(req.body);
+    const { name, period, description, amount, expenses ,user} = req.body;
 
     // Check if all required fields are present
-    if (!name || !email || !period || !amount || !description || !expenses) {
+    if (!name || !period || !amount || !description || !expenses) {
       const errorMessage = "All fields are required";
       console.error(errorMessage);
       return;
     }
 
-    // Find existing budget document based on email
-    let budget = await Budget.findOne({ email });
+    // Find existing budget document based on name
+    let budget = await Budget.findOne({name});
 
     if (budget) {
       // Update existing budget document
-      budget.name = name;
       budget.period = period;
       budget.description = description;
       budget.amount = amount;
+      budget.User = user;
       budget.expense = expenses;
+      
     } else {
       // Create new budget document
       budget = new Budget({
         name,
-        email,
         period,
         description,
         amount,
+        user,
         expense: expenses,
       });
     }
