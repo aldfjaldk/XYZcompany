@@ -100,14 +100,14 @@ app.post("/budget-submit-form", async (req, res) => {
     }
 
     // Find existing budget document based on name
-    let budget = await Budget.findOne({name});
+    let budget = await Budget.findOne({name, user});
 
     if (budget) {
       // Update existing budget document
       budget.period = period;
       budget.description = description;
       budget.amount = amount;
-      budget.User = user;
+      
       budget.expense = expenses;
       
     } else {
