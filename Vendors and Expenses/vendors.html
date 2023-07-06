@@ -122,7 +122,7 @@
     <table>
       <thead>
         <tr>
-          <th scope="col"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
+          
           <th scope="col"><b>NAME</b></th>
           <th scope="col"><b>COMPANY NAME</b></th>
           <th scope="col"><b>EMAIL</b></th>
@@ -131,56 +131,7 @@
         </tr>
         
       </thead>
-      <tbody >
-        <tr class="body">
-          <th scope="row"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
-          <td>Registered Vendor</td>
-          <td>Price, Schiller and Murazik</td>
-          <td>RegisteredVendor_7@zylker.com</td>
-          <td>..</td>
-          <td>Rs928</td>
-        </tr>
-        <tr>
-          <th scope="row"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
-          <td>Overseas Vendor</td>
-          <td>Langworth - Purdy</td>
-          <td>OverseasVendor4@zylker.com</td>
-          <td>..</td>
-          <td>Rs376</td>
-        </tr>
-        <tr>
-          <th scope="row"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
-          <td>SEZ Vendor</td>
-          <td>Wunsch, Dicki and Kuvalis</td>
-          <td>SEZVendor45@zylker.com</td>
-          <td>..</td>
-          <td>Rs779</td>
-        </tr>
-        <tr>
-          <th scope="row"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
-          <td>Deemed Export Vendor</td>
-          <td>Fadel Group</td>
-          <td>DeemedExportVendor_100@zylker.com</td>
-          <td>..</td>
-          <td>Rs346</td>
-        </tr>
-        <tr>
-          <th scope="row"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
-          <td>Unregistered Vendor</td>
-          <td>Koepp-Beer</td>
-          <td>UnregisteredVendor97@zylker.com</td>
-          <td>..</td>
-          <td>Rs603</td>
-        </tr>
-        <tr>
-          <th scope="row"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
-          <td>Composition Reg Vendor</td>
-          <td>Berge LLC</td>
-          <td>CompositionRegVendor42@zylker.com</td>
-          <td>..</td>
-          <td>Rs669</td>
-        </tr>
-
+      <tbody id="vendorTableBody">      
       </tbody>
     </table>
   </section>
@@ -202,6 +153,7 @@
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous">
 </script>
+<script src="./displayvendors.js"></script>
   <script> 
       $(function(){
         $("#header").load("../Components/header.html"); 

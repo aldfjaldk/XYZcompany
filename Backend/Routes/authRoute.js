@@ -4,7 +4,8 @@ import {
     loginController,
     testController,
     forgotPasswordController,
-
+    vendorController,
+    handleVendorData
 } from "../controllers/authController.js"
 import  {requireSignIn,isAdmin} from "../middlewares/authmiddleware.js"
 
@@ -15,11 +16,12 @@ const router= express.Router();
 router.post("/register",registerController);
 //LOGIN||POST
 router.post("/login",loginController);
-
+router.post("/addVendor", vendorController);
 //Forgot Password || POST
 router.post("/forgot-password", forgotPasswordController);
 
 //test routes
+router.get("/displayvendor",handleVendorData);
 router.get('/test', requireSignIn,isAdmin,testController);
 //protected route user
 router.get("/user-auth",requireSignIn,(req,res)=>{

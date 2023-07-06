@@ -1,6 +1,7 @@
 import { hashPassword ,comparePassword} from "../helper/authhelper.js";
 import userModel from "../models/userModel.js";
 import JWT from "jsonwebtoken";
+import vendorsModel from "../models/vendorsModel.js";
 export const registerController =async(req,res)=>{
 
     try{
@@ -176,3 +177,75 @@ export const forgotPasswordController = async (req, res) => {
       });
     }
   };
+
+  
+  export const vendorController =async(req,res)=>{
+
+    try{
+        const {vendorname,email,company,phone,payables}=req.body
+
+        if(!vendorname){
+            return res.send({message:'Name is required'})
+        }
+        if(!email){
+            return res.send({message:'Email is required'})
+        }
+        if(!company){
+            return res.send({message:'company name is required'})
+        }
+        if(!phone){
+            return res.send({message:'phone is required'})
+        }
+        if(!payables){
+            return res.send({message:'payables required'})
+        }
+        
+        const newVendor = {
+          vendorname,
+          email,
+          company,
+          phone,
+          payables
+      };
+
+      const createdVendor = await vendorsModel.create(newVendor); // Save the new vendor
+
+      console.log("Vendor added:", createdVendor);
+
+      res.status(201).send({
+          success: true,
+          message: "Vendor added successfully",
+          vendor: createdVendor
+      });
+
+    }catch(error){
+        console.log(error)
+        res.status(500).send({
+            success:false,
+            message:'Error',
+            error,
+        })
+
+    }
+
+
+    };
+
+    export const handleVendorData = async (req, res) => {
+      try {
+        const vendors = await vendorsModel.find();
+    
+        res.status(200).send({
+          success: true,
+          message: 'Vendors fetched successfully',
+          vendors,
+        });
+      } catch (error) {
+        console.log(error);
+        res.status(500).send({
+          success: false,
+          message: 'Error',
+          error,
+        });
+      }
+    };

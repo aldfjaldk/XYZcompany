@@ -47,7 +47,7 @@
     <div id="sidebar"></div>
     <div id="header"></div>
     <section class="main">
-    <form>
+    <form id="mainForm">
     <div class="form">
     <div class="row ">
         <div class="col-lg-3">
@@ -64,34 +64,38 @@
         <div class="row">
         <div class="col-lg-6">
           <label class="form-label">Company</label>
-          <input type="text" class="form-control" required>
+          <input id="company" type="text" class="form-control" required>
           
         </div>
     </div>
         <div class="row">
         <div class="col-lg-6">
           <label class="form-label">Vendor Display Name</label>
-          <select class="form-select" required>
-            <option selected disabled value="">Select</option>
-            <option>...</option>
-          </select>
+          <input id="vendorname" type="text" class="form-control" required>
          
         </div>
     </div>
     <div class="row">
         <div class="col-lg-6">
           <label class="form-label">Vendor Email</label>
-          <input type="text" class="form-control" required>
+          <input id="email" type="text" class="form-control" required>
           
         </div>
     </div>
     <div class="row">
         <div class="col-lg-6">
           <label class="form-label">Vendor Phone</label>
-          <input type="text" class="form-control" required>
+          <input id="phone" type="text" class="form-control" required>
          
         </div>
     </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <label class="form-label">Payables</label>
+        <input id="payables" type="text" class="form-control" required>
+       
+      </div>
+  </div>
     <div class="row">
         <div class="col-lg-6">
           <label class="form-label">Website</label>
@@ -105,22 +109,7 @@
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" >Other Details</button>
         </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" >Address</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact Persons</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Custom Fields</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Reporting Tags</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Remarks</button>
-          </li>
-      </ul>
+    </ul>
     </div>
     <div class="form">
       <div class="row">
@@ -156,20 +145,14 @@
           <div class="row">
           <div class="col-lg-6">
             <label class="form-label">Source Of Supply</label>
-            <select class="form-select" required>
-              <option selected disabled value="">Select</option>
-              <option>...</option>
-            </select>
+            <input type="text" class="form-control" required>
            
           </div>
         </div>
           <div class="row">
           <div class="col-lg-6">
             <label class="form-label">Currency</label>
-            <select class="form-select" required>
-              <option selected disabled value="">Select</option>
-              <option>...</option>
-            </select>
+            <input type="text" class="form-control" required>
             
           </div>
       </div>
@@ -198,10 +181,7 @@
       <div class="row">
           <div class="col-lg-6">
             <label class="form-label">TDS</label>
-            <select class="form-select" required>
-              <option selected disabled value="">Select</option>
-              <option>...</option>
-            </select>
+            <input type="text" class="form-control" required>
            
           </div>
       </div>
@@ -240,9 +220,9 @@
 </div>
 
       <div class="bottom">
-      <nav class="navbar navbar bg-light shadow">
+      <nav class="navbar navbar shadow">
         <div class="container-fluid justify-content-start">
-          <button type="submit" class="btn btn-primary me-2" type="button">Submit</button>
+          <button type="submit" class="btn btn-outline-primary me-2" type="button">Submit</button>
           <button class="btn btn-sm btn-outline-secondary" type="button">Cancel</button>
         </div>
       </nav>
@@ -265,6 +245,7 @@
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous">
 </script>
+<script src="./vendorsBack.js"></script>
   <script> 
       $(function(){
         $("#header").load("../Components/header.html"); 
