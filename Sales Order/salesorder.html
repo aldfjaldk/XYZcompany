@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>All Sales Order</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <style>
-      body {
-          text-align: center;
-      }
-      .salesorders{
-        background-color: rgba(200, 200, 200, 0.2);
-      }
-    </style>
+  <title>All Sales Order</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    body {
+      text-align: center;
+    }
+
+    .salesorders {
+      background-color: rgba(200, 200, 200, 0.2);
+    }
+  </style>
 </head>
 
 <body>
-    <div id="sidebar"></div>
-    <div id="header"></div>
+  <div id="sidebar"></div>
+  <div id="header" style="margin-left:17%;"></div>
 
-    <div style="padding-top: 250px; position:absolute;margin-left: 33%;">
-        <h3>Start Managing Your Sales Activities!</h3>
-        <h4>Create, customize and send professional Sales Orders.</h4>
-        <button class="button" onclick="window.location.href='newsalesorder.html'">Create Sales Order</button>
-    </div>
-    
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.js"
-    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  <div style="padding-top: 250px; position:absolute; margin-left: 40%; text-align: center;">
+    <h3>Start Managing Your Sales Activities!</h3>
+    <h4>Create, customize and send professional Sales Orders.</h4>
+    <button class="button" onclick="window.location.href='newsalesorder.html'">Create Sales Order</button>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous">
-  </script>
-    <script> 
-        $(function(){
-          $("#header").load("../Components/header.html"); 
-          $("#footer").load("../Components/footer.html"); 
-          $("#sidebar").load("../Components/sidebar.html");
-        });
     </script>
+  <script>
+    $(function () {
+      $("#header").load("../Components/header.html");
+      $("#footer").load("../Components/footer.html");
+      $("#sidebar").load("../Components/sidebar.html");
+    });
+  </script>
 </body>

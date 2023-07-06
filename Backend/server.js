@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
 // const bodyParser = require("body-parser");
+// router.use(bodyParser.json());
 // const ejs = require("ejs");
 // const _ =require("lodash");
 
