@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>New Sales Order</title>
     <meta charset="UTF-8">
@@ -13,171 +14,108 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <style>
-        .salesorders{
+        .salesorders {
             background-color: rgba(200, 200, 200, 0.2);
         }
     </style>
+    <script defer src="newsalesorderfunctions.js"></script>
 </head>
 
 <body>
     <div id="sidebar"></div>
-    <div id="header"></div>
-    <div class="container" style="padding-top: 30px; margin-left: 17%;">
-        <h1 style="text-align: left;">&#128722 New Sales Order</h1>
-        <div class="form-group">
-            <label for="customerName">Customer Name:</label>
-            <input placeholder="XYZ" type="text" id="customerName" name="customerName">
-        </div>
-      
-        <div class="form-group">
-            <label for="salesOrder">Sales Order:</label>
-            <input placeholder="S0-00001" type="text" id="salesOrder" name="salesOrder">
-        </div>
-      
-        <div class="form-group">
-            <label for="referenceNumber">Reference Number:</label>
-            <input placeholder="#00001" type="text" id="referenceNumber" name="referenceNumber">
-        </div>
-      
-        <div class="form-group">
-            <label for="salesOrderDate">Sales Order Date:</label>
-            <input type="date" id="salesOrderDate" name="salesOrderDate">
-        </div>
-      
-        <div class="form-group">
-            <label for="expectedShipmentDate">Expected Shipment Date:</label>
-            <input type="date" id="expectedShipmentDate" name="expectedShipmentDate">
-        </div>
-      
-        <div class="form-group">
-            <label for="paymentTerms">Payment Terms:</label>
-            <input type="text" id="paymentTerms" name="paymentTerms">
-        </div>
-      
-        <div class="form-group">
-            <label for="deliveryMethod">Delivery Method:</label>
-            <input placeholder="Type the delivery method" type="text" id="deliveryMethod" name="deliveryMethod">
-        </div>
-      
-        <div class="item-details">
-            <h3>Item Details</h3>
-        
-            <div class="item-row">
-                <input type="text" placeholder="Item" name="item">
-                <input type="number" placeholder="Quantity" name="quantity" onchange="calculateAmount(this)">
-                <input type="number" step="1" placeholder="Rate (INR)" name="rate" onchange="calculateAmount(this)">
-                <input type="number" step="0.01" placeholder="Discount (%)" name="discount" onchange="calculateAmount(this)">
-                <input type="number" step="0.1" placeholder="Amount (INR)" name="amount" disabled>
+    <div id="header" style="margin-left: 17%;"></div>
+    <form id="newOrder">
+        <div class="container" style="padding-top: 30px; margin-left: 18%;">
+            <h1 style="text-align: left;">&#128722 New Sales Order</h1>
+            <div class="form-group">
+                <label for="customerName">Customer Name:</label>
+                <input placeholder="XYZ" type="text" id="customerName" name="customerName">
             </div>
-        
-            <!-- Add more item rows dynamically -->
-        
-            <div class="add-another">
-                <button class="button" onclick="addAnotherRow()">Add Another Item</button>
-            </div>
-        
-            <div style="padding-top: 20px;">
-                <label>Grand Total (INR):</label>
-                <span id="grandTotal">0.00</span>
-            </div>
-        </div>
-      
-        <div class="form-group" style="padding-top: 10px;">
-            <label for="customerNotes">Customer Notes:</label>
-            <textarea placeholder="Enter any notes to be displayed in your transaction" id="customerNotes" name="customerNotes"></textarea>
-        </div>
 
-        <div class="form-group" style="padding-top: 10px;">
-            <label for="salesOrderAttachment">Sales Order Attachment:</label>
-            <input type="file" id="salesOrderAttachment" name="salesOrderAttachment">
+            <div class="form-group">
+                <label for="salesOrder">Sales Order:</label>
+                <input placeholder="S0-00001" type="text" id="salesOrder" name="salesOrder">
+            </div>
+
+            <div class="form-group">
+                <label for="referenceNumber">Reference Number:</label>
+                <input placeholder="#00001" type="text" id="referenceNumber" name="referenceNumber">
+            </div>
+
+            <div class="form-group">
+                <label for="salesOrderDate">Sales Order Date:</label>
+                <input type="date" id="salesOrderDate" name="salesOrderDate">
+            </div>
+
+            <div class="form-group">
+                <label for="expectedShipmentDate">Expected Shipment Date:</label>
+                <input type="date" id="expectedShipmentDate" name="expectedShipmentDate">
+            </div>
+
+            <div class="form-group">
+                <label for="paymentTerms">Payment Terms:</label>
+                <input type="text" id="paymentTerms" name="paymentTerms">
+            </div>
+
+            <div class="form-group">
+                <label for="deliveryMethod">Delivery Method:</label>
+                <input placeholder="Type the delivery method" type="text" id="deliveryMethod" name="deliveryMethod">
+            </div>
+
+            <div class="item-details">
+                <h3>Item Details</h3>
+
+                <div class="item-row">
+                    <input type="text" placeholder="Item" id="item" name="item">
+                    <input type="number" placeholder="Quantity" id="quantity" name="quantity"
+                        onchange="calculateAmount(this)">
+                    <input type="number" step="1" placeholder="Rate (INR)" id="rate" name="rate"
+                        onchange="calculateAmount(this)">
+                    <input type="number" step="0.01" placeholder="Discount (%)" id="discount" name="discount"
+                        onchange="calculateAmount(this)">
+                    <input type="number" step="0.1" placeholder="Amount (INR)" id="amount" name="amount" disabled>
+                </div>
+
+                <!-- Add more item rows dynamically -->
+
+                <div class="add-another">
+                    <button type="button" class="button" onclick="addAnotherRow()">Add Another Item</button>
+                </div>
+
+                <div style="padding-top: 20px;">
+                    <label>Grand Total (INR):</label>
+                    <span id="grandTotal">0.00</span>
+                </div>
+            </div>
+
+            <div class="form-group" style="padding-top: 10px;">
+                <label for="customerNotes">Customer Notes:</label>
+                <textarea placeholder="Enter any notes to be displayed in your transaction" id="customerNotes"
+                    name="customerNotes"></textarea>
+            </div>
+
+            <div class="form-group" style="padding-top: 10px;">
+                <label for="salesOrderAttachment">Sales Order Attachment:</label>
+                <input type="file" id="salesOrderAttachment" name="salesOrderAttachment">
+            </div>
+
+            <div class="form-group" style="padding-top: 10px; display: inline;">
+                <button type="submit" class="button" onclick="saveDraft()">Save Draft</button>
+                <button type="button" class="button" id="EmailButton" onclick="saveAndSend()">Save and Send</button>
+            </div>
         </div>
-        
-        <div class="form-group" style="padding-top: 10px;">
-            <button class="button" onclick="saveDraft()">Save Draft</button>
-            <button class="button" onclick="saveAndPrint()">Save and Print</button>
-        </div>
-    </div>
-    </div>
-    
+    </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+        </script>
+    <script src="newsalesorderback.js"></script>
     <script>
-        // JavaScript code for handling functionalities
-        function addAnotherRow() {
-            var itemDetails = document.querySelector('.item-details');
-          
-            var newRow = document.createElement('div');
-            newRow.classList.add('item-row');
-          
-            newRow.innerHTML = `
-                <input type="text" placeholder="Item" name="item">
-                <input type="number" placeholder="Quantity" name="quantity" onchange="calculateAmount(this)">
-                <input type="number" step="1" placeholder="Rate (INR)" name="rate" onchange="calculateAmount(this)">
-                <input type="number" step="0.01" placeholder="Discount (%)" name="discount" onchange="calculateAmount(this)">
-                <input type="number" step="0.1" placeholder="Amount (INR)" name="amount" disabled>
-            `;
-          
-            itemDetails.insertBefore(newRow, itemDetails.lastElementChild);
-        }
-        
-        // Calculate and update the amount and grand total
-        function calculateAmount(input) {
-            var itemRow = input.parentNode;
-            var quantity = parseFloat(itemRow.querySelector('input[name="quantity"]').value) || 0;
-            var rate = parseFloat(itemRow.querySelector('input[name="rate"]').value) || 0;
-            var discount = parseFloat(itemRow.querySelector('input[name="discount"]').value) || 0;
-            
-            var amount = (quantity * rate * (1 - discount/100)).toFixed(2);
-            itemRow.querySelector('input[name="amount"]').value = amount;
-            
-            calculateGrandTotal();
-        }
-        
-        // Calculate and update the grand total
-        function calculateGrandTotal() {
-            var amountInputs = document.querySelectorAll('.item-row input[name="amount"]');
-            var grandTotal = 0;
-          
-            amountInputs.forEach(function (input) {
-                grandTotal += parseFloat(input.value) || 0;
-            });
-          
-            var grandTotalElement = document.getElementById('grandTotal');
-            grandTotalElement.innerText = grandTotal.toFixed(2);
-        }
-        
-        // Add event listeners to calculate the amount and grand total whenever the input values change
-        var quantityInputs = document.querySelectorAll('.item-row input[name="quantity"]');
-        var rateInputs = document.querySelectorAll('.item-row input[name="rate"]');
-        var discountInputs = document.querySelectorAll('.item-row input[name="discount"]');
-        
-        quantityInputs.forEach(function (input) {
-            input.addEventListener('input', function() {
-                calculateAmount(this);
-            });
-        });
-        
-        rateInputs.forEach(function (input) {
-            input.addEventListener('input', function() {
-                calculateAmount(this);
-            });
-        });
-        
-        discountInputs.forEach(function (input) {
-            input.addEventListener('input', function() {
-                calculateAmount(this);
-            });
-        });
-    </script>
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.js"
-    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-    crossorigin="anonymous">
-  </script>
-    <script> 
-        $(function(){
-          $("#header").load("../Components/header.html"); 
-          $("#footer").load("../Components/footer.html"); 
-          $("#sidebar").load("../Components/sidebar.html");
+        $(function () {
+            $("#header").load("../Components/header.html");
+            $("#footer").load("../Components/footer.html");
+            $("#sidebar").load("../Components/sidebar.html");
         });
     </script>
 </body>
+
 </html>
