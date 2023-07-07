@@ -1,35 +1,37 @@
 import express from "express";
-import { 
+import {
     registerController,
     loginController,
     testController,
     forgotPasswordController,
     vendorController,
-    handleVendorData
+    handleVendorData,
+    newSalesOrderController
 } from "../controllers/authController.js"
-import  {requireSignIn,isAdmin} from "../middlewares/authmiddleware.js"
+import { requireSignIn, isAdmin } from "../middlewares/authmiddleware.js"
 
 //route object
-const router= express.Router();
+const router = express.Router();
 //routing
 //register ||method Post
-router.post("/register",registerController);
+router.post("/register", registerController);
 //LOGIN||POST
-router.post("/login",loginController);
+router.post("/login", loginController);
 router.post("/addVendor", vendorController);
 //Forgot Password || POST
 router.post("/forgot-password", forgotPasswordController);
-
+////New Sales Order 
+router.post("/new-sales-order", newSalesOrderController);
 //test routes
-router.get("/displayvendor",handleVendorData);
-router.get('/test', requireSignIn,isAdmin,testController);
+router.get("/displayvendor", handleVendorData);
+router.get('/test', requireSignIn, isAdmin, testController);
 //protected route user
-router.get("/user-auth",requireSignIn,(req,res)=>{
-    res.status(200).send({ok:true});
+router.get("/user-auth", requireSignIn, (req, res) => {
+    res.status(200).send({ ok: true });
 })
 //protected route admin
-router.get("/admin-auth",requireSignIn,isAdmin,(req,res)=>{
-    res.status(200).send({ok:true});
+router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
+    res.status(200).send({ ok: true });
 
 })
 export default router;

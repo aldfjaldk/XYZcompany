@@ -1,28 +1,33 @@
-
 .special_font {
     font-family: 'Libre Caslon Display', serif;
     font-size: 2rem;
 }
+
 .resume {
     margin: 25px;
 }
+
 .explore {
     display: inline-block;
 }
+
 .explore a:hover {
     text-decoration: rgba(0, 0, 0, 0.3) underline;
 }
+
 .header_content {
     padding-left: 8%;
     padding-top: 15px;
     font-size: 18px;
     position: fixed;
 }
-.explore a{
+
+.explore a {
     margin-left: 25px;
     text-decoration: none;
     color: rgba(0, 0, 0, 0.5);
 }
+
 .intro_container {
     padding-left: 13rem;
     padding-top: 10rem;
@@ -30,23 +35,27 @@
     display: inline-block;
     max-width: 30%;
 }
+
 .intro_container .name {
     font-size: 8rem;
     /* word-spacing: 2rem; */
 }
-.intro_content{
+
+.intro_content {
     color: rgba(0, 0, 0, 0.70);
     margin-top: 51px;
     word-spacing: 1px;
     line-height: 130%;
     height: 600%;
 }
-.qualifications{
+
+.qualifications {
     height: 100px;
     /* background-color: yellow; */
 }
 
-.intro_container form input, button {
+.intro_container form input,
+button {
     width: 300px;
     height: 30px;
     border-radius: 5px;
@@ -61,53 +70,57 @@
 }
 
 .intro_container form button:hover {
-    background-color: rgba(0, 0, 0, 0.15);;
-    cursor:pointer;
+    background-color: rgba(0, 0, 0, 0.15);
+    ;
+    cursor: pointer;
 }
 
 .intro_container form div p {
     display: inline;
 }
 
-.payment_details{
+.payment_details {
     padding-left: 10rem;
     padding-right: 10rem;
     padding-top: 7rem;
     text-align: center;
 }
+
 h1 {
     text-align: center;
-  }
-  
-  .unpaid{
+}
+
+.unpaid {
     margin-bottom: 20px;
     text-align: center;
     padding-top: 10px;
-  }
-  .options {
+}
+
+.options {
     margin-bottom: 20px;
-  }
-  
-  .refresh {
+}
+
+.refresh {
     float: right;
-  }
-  
-  table {
+}
+
+table {
     width: 100%;
     border-collapse: collapse;
-  }
-  
-  th, td {
+}
+
+th,
+td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ccc;
-  }
-  
-  .sort {
+}
+
+.sort {
     cursor: pointer;
-  }
-  
-  body {
+}
+
+body {
     font-family: 'Montserrat', sans-serif;
     padding: 20px;
     background-color: #f5f5f5;
@@ -165,7 +178,7 @@ textarea {
 .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #dc3545;
+    background-color: #143C96;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -173,7 +186,7 @@ textarea {
 }
 
 .button:hover {
-    background-color: #b33b47;
+    background-color: #18357b;
 }
 
 .button1 {
