@@ -17,9 +17,9 @@ data = {
 }
 
 async function postJSON(data) {
-    console.log("worked")
+    console.log("frontend posted the data successfully to the backend")
     try {
-        const response = await fetch("https://localhost:8000/api/v1/auth/new-sales-order", {
+        const response = await fetch("http://localhost:8000/api/v1/auth/new-sales-order", {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
@@ -29,8 +29,9 @@ async function postJSON(data) {
         const result = await response.json();
         console.log("Success: ", result);
         if (result.success) {
-            localStorage.setItem("name", data.handleName)
-            window.location.href = "../Dashboard/dashboard.html"
+            alert("data sent to backend successfully.")
+            // localStorage.setItem("name", data.handleName) //no need for this line for your work
+            // window.location.href = "../Dashboard/dashboard.html" //no need of this line to re-direct
         }
         else {
             alert("try again");
@@ -109,4 +110,3 @@ document.getElementById("rate").addEventListener("change", handleRate);
 document.getElementById("discount").addEventListener("change", handleDiscount);
 document.getElementById("amount").addEventListener("change", handleAmount);
 document.getElementById("newOrder").addEventListener("submit", handleSubmission);
-

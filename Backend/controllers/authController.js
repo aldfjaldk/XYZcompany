@@ -130,7 +130,8 @@ export const loginController = async (req, res) => {
 };
 //new-sales-order controller
 export const newSalesOrderController = async (req, res) => {
-  console.log("successfully")
+  console.log("Backend received the new-sales-order request")
+  res.status(200);
 };
 
 // test controller
