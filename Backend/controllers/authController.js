@@ -2,6 +2,7 @@ import { hashPassword, comparePassword } from "../helper/authhelper.js";
 import userModel from "../models/userModel.js";
 import JWT from "jsonwebtoken";
 import vendorsModel from "../models/vendorsModel.js";
+import itemsModel from "../models/itemsModel.js";
 export const registerController = async (req, res) => {
 
   try {
@@ -256,4 +257,80 @@ export const handleVendorData = async (req, res) => {
     });
   }
 };
+
+export const itemController = async (req, res) => {
+
+  try {
+    const { fullname, description, rate, stock, hsncode, sku } = req.body
+
+    if (!fullname) {
+      return res.send({ message: 'Item name is required' })
+    }
+    if (!description) {
+      return res.send({ message: 'Description is required' })
+    }
+    if (!rate) {
+      return res.send({ message: 'rate is required' })
+    }
+    if (!stock) {
+      return res.send({ message: 'stock on hand is required' })
+    }
+    if (!hsncode) {
+      return res.send({ message: 'HSN Code is required' })
+    }
+    if (!sku) {
+      return res.send({ message: 'SKU is required' })
+    }
+
+    const newItem = {
+      fullname,
+      description,
+      rate,
+      stock,
+      hsncode,
+      sku
+    };
+
+    const createdItem = await itemsModel.create(newItem); // Save the new item
+
+    console.log("Item added:", createdItem);
+
+    res.status(201).send({
+      success: true,
+      message: "Item added successfully",
+      item: createdItem
+    });
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    })
+
+  }
+
+
+};
+
+export const handleItemData = async (req, res) => {
+  try {
+    const items = await itemsModel.find();
+
+    res.status(200).send({
+      success: true,
+      message: 'Items fetched successfully',
+      items,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
+
 

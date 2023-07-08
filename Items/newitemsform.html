@@ -45,7 +45,7 @@
   <div id="body">
     <div class="container mt-4">
         <h2>New Item</h2>
-        <form>
+        <form id="mainForm">
           <div class="form-group row">
             <label for="type" class="col-sm-2 col-form-label">Type</label>
             <div class="col-sm-10">
@@ -61,24 +61,26 @@
           </div>
           <div class="form-group row">
             <label for="salutation" class="col-sm-2 col-form-label">Name</label>
-            <div class="col-md-2">
-              <select class="form-control" id="salutation">
-                <option value="mr">Mr.</option>
-                <option value="mrs">Mrs.</option>
-                <option value="miss">Miss</option>
-              </select>
-            </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" id="first-name" placeholder="First Name">
-            </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" id="last-name" placeholder="Last Name">
-            </div>
+            <div class="col-sm-4"> <!-- Use the entire width of the row for the input box -->
+              <input type="text" class="form-control" id="fullname" placeholder="">
+            </div>            
           </div>
           <div class="form-group row">
             <label for="sku" class="col-md-2 col-form-label">SKU</label>
             <div class="col-md-3">
               <input type="text" class="form-control" id="sku" placeholder="">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="stock" class="col-md-2 col-form-label">Stock on Hand</label>
+            <div class="col-md-3">
+              <input type="text" class="form-control" id="stock" placeholder="">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="rate" class="col-md-2 col-form-label">Rate</label>
+            <div class="col-md-3">
+              <input type="text" class="form-control" id="rate" placeholder="">
             </div>
           </div>
           <div class="form-group row">
@@ -107,7 +109,7 @@
           <div class="form-group row">
             <label for="hsn-code" class="col-sm-2 col-form-label">HSN Code/SAC</label>
             <div class="col-md-3">
-              <input type="hsn-code" class="form-control" id="hsn-code" placeholder="">
+              <input type="hsn-code" class="form-control" id="hsncode" placeholder="">
             </div>
           </div>
           <div class="form-group row">
