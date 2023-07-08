@@ -7,6 +7,8 @@ import {
     vendorController,
     handleVendorData,
     newSalesOrderController,
+    customerController,
+    handleCustomerData,
     itemController,
     handleItemData
 } from "../controllers/authController.js"
@@ -21,12 +23,14 @@ router.post("/register", registerController);
 router.post("/login", loginController);
 router.post("/addVendor", vendorController);
 router.post("/addItem", itemController);
+router.post("/addCustomer", customerController);
 //Forgot Password || POST
 router.post("/forgot-password", forgotPasswordController);
 ////New Sales Order 
 router.post("/new-sales-order", newSalesOrderController);
 //test routes
 router.get("/displayvendor", handleVendorData);
+router.get("/displaycustomer", handleCustomerData);
 router.get("/displayitem", handleItemData);
 router.get('/test', requireSignIn, isAdmin, testController);
 //protected route user
