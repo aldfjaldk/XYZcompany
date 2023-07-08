@@ -6,7 +6,9 @@ import {
     forgotPasswordController,
     vendorController,
     handleVendorData,
-    newSalesOrderController
+    newSalesOrderController,
+    itemController,
+    handleItemData
 } from "../controllers/authController.js"
 import { requireSignIn, isAdmin } from "../middlewares/authmiddleware.js"
 
@@ -18,12 +20,14 @@ router.post("/register", registerController);
 //LOGIN||POST
 router.post("/login", loginController);
 router.post("/addVendor", vendorController);
+router.post("/addItem", itemController);
 //Forgot Password || POST
 router.post("/forgot-password", forgotPasswordController);
 ////New Sales Order 
 router.post("/new-sales-order", newSalesOrderController);
 //test routes
 router.get("/displayvendor", handleVendorData);
+router.get("/displayitem", handleItemData);
 router.get('/test', requireSignIn, isAdmin, testController);
 //protected route user
 router.get("/user-auth", requireSignIn, (req, res) => {
