@@ -2,6 +2,7 @@ import { hashPassword, comparePassword } from "../helper/authhelper.js";
 import userModel from "../models/userModel.js";
 import JWT from "jsonwebtoken";
 import vendorsModel from "../models/vendorsModel.js";
+import customersModel from "../models/customersModel.js";
 export const registerController = async (req, res) => {
 
   try {
@@ -257,3 +258,73 @@ export const handleVendorData = async (req, res) => {
   }
 };
 
+export const customerController = async (req, res) => {
+
+  try {
+    const { firstname, customeremail, companyname, workphone, receivables } = req.body
+
+    if (!firstname) {
+      return res.send({ message: 'Name is required' })
+    }
+    if (!customeremail) {
+      return res.send({ message: 'Email is required' })
+    }
+    if (!companyname) {
+      return res.send({ message: 'company name is required' })
+    }
+    if (!workphone) {
+      return res.send({ message: 'phone is required' })
+    }
+    if (!receivables) {
+      return res.send({ message: 'payables required' })
+    }
+
+    const newVendor = {
+      
+      firstname,
+      customeremail,   
+      companyname,   
+      workphone ,
+      receivables
+      };
+
+    const createdCustomer = await customersModelsModel.create(newCustomer); // Save the new customer
+
+    console.log("Customer added:", createdCustomer);
+
+    res.status(201).send({
+      success: true,
+      message: "Customer added successfully",
+      customer: createdCustomer
+    });
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    })
+
+  }
+};
+
+
+export const handleCustomerData = async (req, res) => {
+  try {
+    const customers = await customersModel.find();
+
+    res.status(200).send({
+      success: true,
+      message: 'Customers fetched successfully',
+      customers,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
