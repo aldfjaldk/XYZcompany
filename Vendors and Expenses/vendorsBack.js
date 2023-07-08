@@ -1,4 +1,5 @@
 data = {
+    useremail: "...",
     vendorname: "...",
     email: "...",   
     company: "....",   
@@ -21,7 +22,8 @@ async function postJSON(data) {
         console.log("Success: ", result);
         if (result.success) {
             console.log("data added", data);
-            //window.location.href = "vendors.html"
+
+            window.location.href = "vendors.html"
         }
         else {
             alert("try again");
@@ -34,6 +36,8 @@ async function postJSON(data) {
 
 function handleSubmission (event) {
     event.preventDefault();
+    useremail=localStorage.getItem("email");
+    //document.getElementById("inputEmail").value=useremail;
     console.log("This is the data collected: ", data);
     postJSON(data)
 }

@@ -9,6 +9,8 @@ async function getVendors() {
         let tableData = "";
 
         (data.vendors).map((vendor) => {
+            var checkemail=localStorage.getItem("email");
+            if(checkemail===vendor.useremail){
             //console.log(tableData);
             tableData += `
                 <tr>
@@ -19,7 +21,7 @@ async function getVendors() {
                     <td>${vendor.payables}</td>
                 </tr>
             `;
-        });
+    }});
 
         document.getElementById('vendorTableBody').innerHTML = tableData;
     } catch (error) {
