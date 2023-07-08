@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
 const vendorSchema = new mongoose.Schema({
+    useremail:{
+        type:String,
+        required:true,
+    },
     vendorname: {
         type:String,
         required:true,
