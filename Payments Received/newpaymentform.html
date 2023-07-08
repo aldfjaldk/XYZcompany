@@ -23,66 +23,71 @@
     <div id="sidebar"></div>
     <div id="header"></div>
     <div class="container" style="padding-top: 30px; margin-left: 19%;">
-        <h1 style="text-align: left;">New Payment Form</h1>
-        <div class="form-group">
-            <label for="customerName">Customer Name:</label>
-            <input placeholder="XYZ" type="text" id="customerName" name="customerName" onchange="enableInputs()">
-        </div>
-      
-        <div class="form-group">
-            <label for="salesOrder">Amount:</label>
-            <input placeholder="S0-00001" type="number" id="amount" name="00000" disabled>
-        </div>
-      
-        <div class="form-group">
-            <label for="expectedShipmentDate">Payment Date:</label>
-            <input type="date" id="expectedShipmentDate" name="expectedShipmentDate" disabled>
-        </div>
-      
-        <div class="form-group">
-            <label for="paymentTerms">Payment #:</label>
-            <input type="text" id="paymentTerms" name="paymentTerms" disabled>
-        </div>
-      
-        <div class="form-group">
-            <label for="paymentMode">Payment Mode:</label>
-            <select id="paymentMode" name="paymentMode" disabled>
-                <option value="">Select Payment Mode</option>
-                <option value="Cash">Cash</option>
-                <option value="UPI">UPI</option>
-                <option value="NEFT">NEFT</option>
-            </select>
-        </div>
-      
-        <div class="form-group">
-            <label for="paymentTerms">Deposit To:</label>
-            <input type="text" id="paymentTerms" name="paymentTerms" disabled>
-        </div>
-      
-        <div class="form-group">
-            <label for="deliveryMethod">Reference:</label>
-            <input placeholder="Type the delivery method" type="text" id="deliveryMethod" name="deliveryMethod" disabled>
-        </div>
+        <form id="mainform">
+           
+            <h1 style="text-align: left;">New Payment Form</h1>
+            <div class="form-group">
+                <label for="customerName">Customer Name:</label>
+                <input placeholder="XYZ" type="text" id="customerName" name="customerName" onchange="enableInputs()">
+            </div>
+        
+            <div class="form-group">
+                <label for="salesOrder">Amount:</label>
+                <input placeholder="S0-00001" type="number" id="amount" name="00000" disabled>
+            </div>
+        
+            <div class="form-group">
+                <label for="paymentdate">Payment Date:</label>
+                <input type="date" id="paymentdate" name="paymentdate" disabled>
+            </div>
+        
+            <div class="form-group">
+                <label for="paymentTerms">Payment #:</label>
+                <input type="text" id="paymentTerms" name="paymentTerms" disabled>
+            </div>
+        
+            <div class="form-group">
+                <label for="paymentMode">Payment Mode:</label>
+                <select id="paymentMode" name="paymentMode" disabled>
+                    <option value="">Select Payment Mode</option>
+                    <option value="Cash">Cash</option>
+                    <option value="UPI">UPI</option>
+                    <option value="NEFT">NEFT</option>
+                </select>
+            </div>
+        
+            <div class="form-group">
+                <label for="deliveryMethod">Reference:</label>
+                <input placeholder="Type the delivery method" type="text" id="deliveryMethod" name="deliveryMethod" disabled>
+            </div>
 
-        <div class="form-group" style="padding-top: 10px; display: inline-flex;">
-            <label for="taxDeducted">Tax Deducted?</label>
-            <input type="radio" id="taxDeductedYes" name="taxDeducted" value="yes" disabled>
-            <label for="taxDeductedYes">Yes,TDS(Income Tax)</label>
-            <input type="radio" id="taxDeductedNo" name="taxDeducted" value="no" disabled>
-            <label for="taxDeductedNo">No Tax Deducted</label>
-        </div>
+            <div class="form-group" style="padding-top: 10px; display: inline-flex;">
+                <label for="taxDeducted">Tax Deducted?</label>
+                <input type="radio" id="taxDeductedYes" name="taxDeducted" value="yes" disabled>
+                <label for="taxDeductedYes">Yes,TDS(Income Tax)</label>
+                <input type="radio" id="taxDeductedNo" name="taxDeducted" value="no" disabled>
+                <label for="taxDeductedNo">No Tax Deducted</label>
+            </div>
 
-        <div class="form-group" style="padding-top: 10px;">
-            <label for="customerNotes">Notes(Internal use. Not visible for the customer):</label>
-            <textarea placeholder="Enter any notes to be displayed in your transaction" id="customerNotes" name="customerNotes" disabled></textarea>
-        </div>
+            <div class="form-group" style="padding-top: 10px;">
+                <label for="customerNotes">Notes(Internal use. Not visible for the customer):</label>
+                <textarea placeholder="Enter any notes to be displayed in your transaction" id="customerNotes" name="customerNotes" disabled></textarea>
+            </div>
 
-        <div class="form-group" style="padding-top: 10px;">
-            <label for="salesOrderAttachment">Attach file(s):</label>
-            <input type="file" id="salesOrderAttachment" name="salesOrderAttachment" disabled>
-        </div>
+            <div class="form-group" style="padding-top: 10px;">
+                <label for="salesOrderAttachment">Attach file(s):</label>
+                <input type="file" id="salesOrderAttachment" name="salesOrderAttachment" disabled>
+            </div>
+
+            <div class="form-group" >
+                <input type="submit" value = "Submit">
+
+            </div>
+
+        </form>
+
     </div>
-    </div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script>
         $(function(){
