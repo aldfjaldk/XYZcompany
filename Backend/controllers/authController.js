@@ -190,7 +190,7 @@ export const forgotPasswordController = async (req, res) => {
 export const vendorController = async (req, res) => {
 
   try {
-    const { vendorname, email, company, phone, payables } = req.body
+    const { useremail, vendorname, email, company, phone, payables } = req.body
 
     if (!vendorname) {
       return res.send({ message: 'Name is required' })
@@ -209,6 +209,7 @@ export const vendorController = async (req, res) => {
     }
 
     const newVendor = {
+      useremail,
       vendorname,
       email,
       company,
@@ -257,6 +258,7 @@ export const handleVendorData = async (req, res) => {
     });
   }
 };
+
 
 export const itemController = async (req, res) => {
 
@@ -333,4 +335,69 @@ export const handleItemData = async (req, res) => {
   }
 };
 
+
+
+export const addpaymentController =async(req,res)=>{
+
+      try{
+          const {customerName,amount,paymentdate,paymentTerms,paymentMode,deliveryMethod,taxDeducted,customerNotes,salesOrderAttachment}=req.body
+  
+          if(!customerName){
+              return res.send({message:'Name is required'})
+          }
+          if(!amount){
+              return res.send({message:'Amount is required'})
+          }
+          if(!paymentdate){
+              return res.send({message:'Date of payment is required'})
+          }
+          if(!paymentTerms){
+              return res.send({message:'It is required'})
+          }
+          if(!deliveryMethod){
+              return res.send({message:'Method of delivery is required'})
+          }
+          if(!taxDeducted){
+              return res.send({message:'Mention the amount of tax deducted, if so'})
+          }
+          if(!customerNotes){
+              return res.send({message:'Please give some extra note '})
+          }
+          if(!salesOrderAttachment){
+              return res.send({message:'attach the sales order file'})
+          }
+  
+          const newpayment = {
+            customerNme,
+            amount,
+            paymentdate,
+            paymentTerms,
+            deliveryMethod,
+            taxDeducted,
+            customerNotes,
+            salesOrderAttachment
+        };
+  
+        const createdPayemnt = await addpaymentmodel.create(newpayment); // Save the new payment
+  
+        console.log("Payment added:", createdPayemnt);
+  
+        res.status(201).send({
+            success: true,
+            message: "New payment added successfully",
+            newpayment: createdVendor
+        });
+  
+      }catch(error){
+          console.log(error)
+          res.status(500).send({
+              success:false,
+              message:'Error',
+              error,
+          })
+  
+      }
+  
+  
+      };
 
