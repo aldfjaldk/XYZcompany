@@ -4,6 +4,7 @@ import JWT from "jsonwebtoken";
 import vendorsModel from "../models/vendorsModel.js";
 import itemsModel from "../models/itemsModel.js";
 import customersModel from "../models/customersModel.js";
+import employeesModel from "../models/employeesModel.js";
 export const registerController = async (req, res) => {
 
   try {
@@ -182,79 +183,6 @@ export const forgotPasswordController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Something went wrong",
-      error,
-    });
-  }
-};
-
-
-export const vendorController = async (req, res) => {
-
-  try {
-    const { useremail, vendorname, email, company, phone, payables } = req.body
-
-    if (!vendorname) {
-      return res.send({ message: 'Name is required' })
-    }
-    if (!email) {
-      return res.send({ message: 'Email is required' })
-    }
-    if (!company) {
-      return res.send({ message: 'company name is required' })
-    }
-    if (!phone) {
-      return res.send({ message: 'phone is required' })
-    }
-    if (!payables) {
-      return res.send({ message: 'payables required' })
-    }
-
-    const newVendor = {
-      useremail,
-      vendorname,
-      email,
-      company,
-      phone,
-      payables
-    };
-
-    const createdVendor = await vendorsModel.create(newVendor); // Save the new vendor
-
-    console.log("Vendor added:", createdVendor);
-
-    res.status(201).send({
-      success: true,
-      message: "Vendor added successfully",
-      vendor: createdVendor
-    });
-
-  } catch (error) {
-    console.log(error)
-    res.status(500).send({
-      success: false,
-      message: 'Error',
-      error,
-    })
-
-  }
-
-
-};
-
-export const handleVendorData = async (req, res) => {
-  try {
-    const vendors = await vendorsModel.find();
-
-    res.status(200).send({
-      success: true,
-      message: 'Vendors fetched successfully',
-      vendors,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      success: false,
-      message: 'Error',
       error,
     });
   }
@@ -472,3 +400,182 @@ export const addpaymentController =async(req,res)=>{
           });
         }
       };
+
+export const vendorController = async (req, res) => {
+
+  try {
+    const { useremail, vendorname, email, company, phone, payables } = req.body
+
+    if (!vendorname) {
+      return res.send({ message: 'Name is required' })
+    }
+    if (!email) {
+      return res.send({ message: 'Email is required' })
+    }
+    if (!company) {
+      return res.send({ message: 'company name is required' })
+    }
+    if (!phone) {
+      return res.send({ message: 'phone is required' })
+    }
+    if (!payables) {
+      return res.send({ message: 'payables required' })
+    }
+
+    const newVendor = {
+      useremail,
+      vendorname,
+      email,
+      company,
+      phone,
+      payables
+    };
+
+    const createdVendor = await vendorsModel.create(newVendor); // Save the new vendor
+
+    console.log("Vendor added:", createdVendor);
+
+    res.status(201).send({
+      success: true,
+      message: "Vendor added successfully",
+      vendor: createdVendor
+    });
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    })
+
+  }
+
+
+};
+
+export const handleVendorData = async (req, res) => {
+  try {
+    const vendors = await vendorsModel.find();
+
+    res.status(200).send({
+      success: true,
+      message: 'Vendors fetched successfully',
+      vendors,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
+
+export const employeeController = async (req, res) => {
+
+  try {
+    const { name, id, gender, doj, email, dob, phone, department, designation, basic, rent, conveyance, fixed, ctc } = req.body
+
+    if (!name) {
+      return res.send({ message: 'Name is required' })
+    }
+    if (!id) {
+      return res.send({ message: 'Id is required' })
+    }
+    if (!gender) {
+      return res.send({ message: 'Gender is required' })
+    }
+    if (!doj) {
+      return res.send({ message: 'Date of joining is required' })
+    }
+    if (!email) {
+      return res.send({ message: 'Email is required' })
+    }
+    if (!dob) {
+      return res.send({ message: 'Date of birth required' })
+    }
+    if (!phone) {
+      return res.send({ message: 'Phone number is required' })
+    }
+    if (!department) {
+      return res.send({ message: 'Department is required' })
+    }
+    if (!designation) {
+      return res.send({ message: 'Designation is required' })
+    }
+    if (!basic) {
+      return res.send({ message: 'Basic pay is required' })
+    }
+    if (!rent) {
+      return res.send({ message: 'House Rent is required' })
+    }
+    if (!conveyance) {
+      return res.send({ message: 'Conveyance is required' })
+    }
+    if (!fixed) {
+      return res.send({ message: 'Fixed Allowance is required' })
+    }
+    if (!ctc) {
+      return res.send({ message: 'CTC is required' })
+    }
+
+    const newEmployee = {
+      name,
+      id,
+      gender,
+      doj,
+      email,
+      dob,
+      phone,
+      department,
+      designation,
+      basic,
+      rent,
+      conveyance,
+      fixed,
+      ctc
+    };
+
+    const createdEmployee = await employeesModel.create(newEmployee); // Save the new vendor
+
+    console.log("Employee added:", createdEmployee);
+
+    res.status(201).send({
+      success: true,
+      message: "Employee added successfully",
+      employee: createdEmployee
+    });
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    })
+
+  }
+
+
+};
+
+export const handleEmployeeData = async (req, res) => {
+  try {
+    const employees = await employeesModel.find();
+
+    res.status(200).send({
+      success: true,
+      message: 'Employees fetched successfully',
+      employees,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};

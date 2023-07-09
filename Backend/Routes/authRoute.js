@@ -5,6 +5,7 @@ import {
     testController,
     forgotPasswordController,
     vendorController,
+    employeeController,
     handleVendorData,
     newSalesOrderController,
     customerController,
@@ -22,6 +23,7 @@ router.post("/register", registerController);
 //LOGIN||POST
 router.post("/login", loginController);
 router.post("/addVendor", vendorController);
+router.post("/addEmployee",employeeController);
 router.post("/addItem", itemController);
 router.post("/addCustomer", customerController);
 //Forgot Password || POST

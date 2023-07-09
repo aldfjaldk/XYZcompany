@@ -16,23 +16,23 @@
 
         <section class="form">
             <h1 class="heading1">Add Employee</h1>
-            <form action="addemployee.php">
+            <form id="mainForm">
                 <div class="tab">
-                    Employee Name:<input class="input" name="name">
-                    Employee ID:<input class="input" name="id">
-                    Gender:<select class="input" name="gender">
+                    Employee Name:<input class="input" name="name" id="name">
+                    Employee ID:<input class="input" name="id" id="id">
+                    Gender:<select class="input" name="gender" id="gender">
                         <option>Select</option>>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
-                    Date of Joining:<input class="input" type="date" name="doj">
-                    Email:<input class="input" type="email" name="email">
-                    Date of Birth:<input class="input" type="date" name="dob">
-                    Mobile Number:<input class="input" type="number" name="number">
+                    Date of Joining:<input class="input" type="date" name="doj" id="doj">
+                    Email:<input class="input" type="email" name="email" id="email">
+                    Date of Birth:<input class="input" type="date" name="dob" id="dob">
+                    Mobile Number:<input class="input" type="number" name="number" id="number">
                 </div>
 
                 <div class="tab">
-                    Department:<select class="input" name="department">
+                    Department:<select class="input" name="department" id="department">
                         <option>Select</option>>
                         <option value="finance">Finance</option>
                         <option value="sales">Sales</option>
@@ -40,7 +40,7 @@
                         <option value="marketing">Marketing</option>
                         <option value="management">Management</option>
                     </select>
-                    Designation:<select class="input" name="designation">
+                    Designation:<select class="input" name="designation" id="designation">
                         <option>Select</option>>
                         <option value="mnanager">Manager</option>
                         <option value="projectengineer">Project Engineer</option>
@@ -51,10 +51,10 @@
                 </div>
 
                 <div class="tab">
-                        Basic : <input onblur="findTotal()" name="qty" class="input">
-                        House Rent Allowance : <input onblur="findTotal()" name="qty" class="input">
-                        Conveyance Allowance : <input onblur="findTotal()" name="qty" class="input">
-                        Fixed allowance : <input onblur="findTotal()" name="qty" class="input">
+                        Basic : <input onblur="findTotal()" id="basic" name="qty" class="input">
+                        House Rent Allowance : <input onblur="findTotal()" id="rent" name="qty" class="input">
+                        Conveyance Allowance : <input onblur="findTotal()" id="conveyance" name="qty" class="input">
+                        Fixed allowance : <input onblur="findTotal()" id="fixed" name="qty" class="input">
                         Cost To Company : <input name="ctc" id="ctc" class="input">
                 </div>
 
@@ -131,6 +131,7 @@
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous">
   </script>
+  <script src="./employeesBack.js"></script>
     <script> 
         $(function(){
           $("#header").load("../Components/header.html"); 
