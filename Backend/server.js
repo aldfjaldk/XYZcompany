@@ -150,6 +150,119 @@ app.delete("/api/v1/budgets/:id", async (req, res) => {
   }
 });
 
+app.post("/api/salesReport" , async(req , res) => {
+  try{
+    // const { email } = req.body; 
+
+    const salesData = [] ;
+
+    const obj1 ={
+      name :  "Tiger Nixon",
+      invoiceCount : "System Architect",
+      sales : "Edinburgh",
+      salesWithTax : "61"
+    } ; 
+
+    const obj2 ={
+      name : "Garrett Winters",
+      invoiceCount : "Accountant",
+      sales : "Tokyo",
+      salesWithTax :"63" 
+    } ; 
+
+    const obj3 ={
+      name :  "Ashton Cox",
+      invoiceCount :"Junior Technical Author" ,
+      sales :"San Francisco" ,
+      salesWithTax : "66",
+    } ; 
+
+    const obj4 ={
+      name :  "Colleen Hurst",
+      invoiceCount : "Javascript Developer",
+      sales : "San Francisco",
+      salesWithTax : "39"
+    } ; 
+
+    const obj5 ={
+      name : "Sonya Frost",
+      invoiceCount : "Software Engineer",
+      sales : "Edinburgh",
+      salesWithTax :"23" 
+    } ; 
+
+    const obj6 ={
+      name :  "Yuri Berry",
+      invoiceCount :"Chief Marketing Officer (CMO)" ,
+      sales :"New York" ,
+      salesWithTax : "40",
+    } ; 
+
+    salesData.push(obj1 , obj2 , obj3 , obj4 , obj5 , obj6);
+    res.json(salesData);    
+  }catch (error) {
+    console.error('Error updating or fetching sales data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.post("/api/purchasesReport" , async(req , res) => {
+  try{
+    // const { email } = req.body;
+
+    const purchasesData = [] ;
+
+    const obj1 ={
+      name :  "Tiger Nixon",
+      invoiceCount : "System Architect",
+      purchases : "Edinburgh",
+      purchasesWithTax : "61"
+    } ; 
+
+    const obj2 ={
+      name : "Garrett Winters",
+      invoiceCount : "Accountant",
+      purchases : "Tokyo",
+      purchasesWithTax :"63" 
+    } ; 
+
+    const obj3 ={
+      name :  "Ashton Cox",
+      invoiceCount :"Junior Technical Author" ,
+      purchases :"San Francisco" ,
+      purchasesWithTax : "66",
+    } ; 
+
+    const obj4 ={
+      name :  "Colleen Hurst",
+      invoiceCount : "Javascript Developer",
+      purchases : "San Francisco",
+      purchasesWithTax : "39"
+    } ; 
+
+    const obj5 ={
+      name : "Sonya Frost",
+      invoiceCount : "Software Engineer",
+      purchases : "Edinburgh",
+      purchasesWithTax :"23" 
+    } ; 
+
+    const obj6 ={
+      name :  "Yuri Berry",
+      invoiceCount :"Chief Marketing Officer (CMO)" ,
+      purchases :"New York" ,
+      purchasesWithTax : "40",
+    } ; 
+
+    purchasesData.push(obj1 , obj2 , obj3 , obj4 , obj5 , obj6);
+    res.json(purchasesData);  
+  
+  }catch (error) {
+    console.error('Error updating or fetching purchases data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, function () {
   console.log(`Server started ${process.env.mode} on port ${PORT}`);
