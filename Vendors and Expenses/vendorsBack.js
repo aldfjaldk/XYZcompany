@@ -36,7 +36,7 @@ async function postJSON(data) {
 
 function handleSubmission (event) {
     event.preventDefault();
-    useremail=localStorage.getItem("email");
+    data.useremail=localStorage.getItem("email");
     //document.getElementById("inputEmail").value=useremail;
     console.log("This is the data collected: ", data);
     postJSON(data)
