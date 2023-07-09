@@ -579,3 +579,71 @@ export const handleEmployeeData = async (req, res) => {
     });
   }
 };
+
+export const currencyController = async (req, res) => {
+
+  try {
+    const {date, amount_to_convert, gain_or_loss, notes} = req.body
+
+    if (!date) {
+      return res.send({ message: 'Date is required' })
+    }
+    if (!amount_to_convert) {
+      return res.send({ message: 'Amount_to_convert is required' })
+    }
+    if (!gain_or_loss) {
+      return res.send({ message: 'Gain_or_loss is required' })
+    }
+    if (!notes) {
+      return res.send({ message: 'Notes is required' })
+    }
+   
+
+    const newVendor = {
+      
+      date,
+      amount_to_convert,   
+      gain_or_loss,   
+      notes ,
+      };
+
+    const createdCurrency = await currencysModelsModel.create(newCurrency); 
+
+    console.log("Currency added:", createdCurrency);
+
+    res.status(201).send({
+      success: true,
+      message: "Currency added successfully",
+      customer: createdCurrency
+    });
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    })
+
+  }
+};
+
+
+export const handleCurrencyData = async (req, res) => {
+  try {
+    const currencys = await currencysModel.find();
+
+    res.status(200).send({
+      success: true,
+      message: 'Currencys fetched successfully',
+      Currencysr,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
