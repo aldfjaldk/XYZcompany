@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import Dashboard from "./models/dashboardModel.js";
 import Budget from "./models/budget.js";
+import Payment from "./models/newpayment.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -152,4 +153,43 @@ app.delete("/api/v1/budgets/:id", async (req, res) => {
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, function () {
   console.log(`Server started ${process.env.mode} on port ${PORT}`);
+});
+
+app.get('/Payments Recieved/PaymentRecieved.html', async (req,res)=> {
+  try{
+    const paymnet=await Payment.find();
+    res.status(200).json(payment);
+  } catch (error){
+    console.log(error);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.post("/payment-form",async (req,res)=>{
+  try{
+    console.log(req.body);
+    const{customerName,amount,paymentdate,paymentMode,deliveryMethod,taxdeducted,customerNotes,transactionid}=req.body;
+    let payment=await Payment.findOne({customerName,amount});
+
+    payemnt=new Payment({
+      customerName,
+      amount,
+      paymentdate,
+      paymentMode,
+      deliveryMethod,
+      taxdeducted,
+      customerNotes,
+      transactionid
+    });
+    await payment.submit();
+  } catch(error){
+    console.error(error);
+    console.log("Submission Failed");
+    console.log("Server Error");
+
+    return res
+      .status(500)
+      .json({success: false,error: "Server Error"});
+  }
+
 });
