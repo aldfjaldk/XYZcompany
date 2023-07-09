@@ -1,271 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reports</title>
-   
-  </head>
+    <title>Budget Page</title>
+    <link rel="stylesheet" href="css\budget.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
-    }
-
-    h1 {
-      text-align: center;
-      margin: 20px 0;
-      color: #333;
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-gap: 1rem;
-      padding: 20px;
-    }
-
-    .box {
-      border: 1px solid #ccc;
-      background-color: #fff;
-      padding: 20px;
-    }
-
-    .header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .logo {
-      width: 20px;
-      height: 20px;
-      margin-right: 10px;
-    }
-
-    .logo-text {
-      font-weight: bold;
-    }
-
-    .box li {
-      margin-bottom: 10px;
-    }
-
-    .box a {
-      text-decoration: none;
-      color: #333;
-    }
-
-    .search-bar {
-      margin-bottom: 20px;
-    }
-
-    .search-bar input[type="text"] {
-      padding: 5px;
-      width: 200px;
-      border-radius: 200px;
-    }
-
-    footer {
-      background-color: #f5f5f5;
-      padding: 10px;
-      text-align: center;
-    }
-    .main{
-      margin-left: 18%;
-    }
-    .reports{
-      background-color: rgba(200, 200, 200, 0.2);
+      .budget{
+        background-color: rgba(200, 200, 200, 0.2);
+      }
+      section {
+      margin-left: 19%;
     }
     </style>
 </head>
 <body>
   <div id="sidebar"></div>
   <div id="header"></div>
-  <section class="main">
-    <h1>Blue Buck Report</h1>
-
-    <div class="search-bar">
-      <input type="text" id="search" placeholder="Search">
-    </div>
-
-    <div class="container">
-      <div class="box">
-        <div class="header">
-          <img src="a1.jpg" alt="Logo" class="logo">
-          <p class="logo-text">Business Overview</p>
-        </div>
-        
-          <li><a href="#">Profit and Loss</a></li>
-          <li><a href="#">Balance sheet</a></li>
-          <li><a href="#">Movement of Equity</a></li>
-          <li><a href="#">Cash Flow Statement</a></li>
-       
+  <section>
+    <div class="hero" style="display: flex; justify-content: center;">
+      <div class="hero-content mt-4" style="text-align: center;">
+        <h1>Take control of your finances</h1>
+        <p>Track your income and expenses with ease</p>
+        <a href="sales.html" class="btn btn-primary">Show Balance Sheet</a>
       </div>
-
-      <div class="box">
-        <div class="header">
-          <img src="a2.jpg" alt="Logo" class="logo">
-          <p class="logo-text">Sales</p>
-        </div>
-        
-          <li><a href="#">Sales by Customer</a></li>
-          <li><a href="#">Sales by item</a></li>
-          <li><a href="#">Sales by sales person</a></li>
-        
-      </div>
-
-      <div class="box">
-        <div class="header">
-          <img src="a3.jpg" alt="Logo" class="logo">
-          <p class="logo-text">Recivables</p>
-        </div>
-       
-          <li><a href="#">Invoice Details</a></li>
-          <li><a href="#">Customer Balances</a></li>
-          <li><a href="#">Recivables Details</a></li>
-        
-      </div>
-
-      <div class="box">
-        <div class="header">
-          <img src="a4.jpg" alt="Logo" class="logo">
-          <p class="logo-text">Payments Received</p>
-        </div>
-       
-          <li><a href="#">Payments Received</a></li>
-          <li><a href="#">Time to Get Paid</a></li>
-          <li><a href="#">Credit Note Details</a></li>
-          <li><a href="#">Refund History</a></li>
-     
-      </div>
-      <div class="box"><div class="header">
-        <img src="a5.jpg" alt=" " class="logo">
-        <p class="logo-text"> Recurring Invoices  </p>
-      </div>
-        <li><a href="#">Recurring Invoices Details</a></li>
-    </div>
-
-    <div class="box"><div class="header">
-        <img src="a6.jpg" alt=" " class="logo">
-        <p class="logo-text"> Payables  </p>
-      </div>
-        <li><a href="#">Refund History</a> </li>
-        <li><a href="#">Bills Details</a></li>
-        <li><a href="#">Payables Details</a></li>
-    </div>
-    <div class="box"><div class="header">
-        <img src="a7.jpg" alt=" " class="logo">
-        <p class="logo-text">Purchaces and Expenses  </p>
-      </div>
-        <li><a href="#">Purchases by Vendor</a></li>
-        <li><a href="#">Purchases by Item</a></li>
-        <li><a href="#">Expense Details</a></li>
-    </div>
-    <div class="box"><div class="header">
-        <img src="a8.jpg" alt=" " class="logo">
-        <p class="logo-text">  Taxes </p>
-      </div>
-        <li><a href="#">Tax Summary</a></li>
-        <li><a href="#">TDS summary</a></li>
-        <li><a href="#">Form No. 27EQ</a></li>
-    </div>
-    <div class="box"><div class="header">
-        <img src="a9.jpg" alt=" " class="logo">
-        <p class="logo-text"> Banking </p>
-      </div>
-        <li><a href="#">Reconciliation Status</a></li>
-    </div>
-    <div class="box"><div class="header">
-        <img src="a10.jpg" alt=" " class="logo">
-        <p class="logo-text"> Projects and Timesheet </p>
-      </div>
-        <li><a href="#">Project summary</a></li>
-        <li><a href="#">Project Details</a></li>
-        <li><a href="#">Timesheet Details</a></li>
-    </div>
-    <div class="box"><div class="header">
-        <img src="a11.jpg" alt=" " class="logo">
-        <p class="logo-text">  Accontant  </p>
-      </div>
-        <li><a href="#">Tax Summary</a></li>
-        <li><a href="#">TDS summary</a></li>
-        <li><a href="#">Form No. 27EQ</a></li>
-    </div>
-    <div class="box"><div class="header">
-        <img src="a12.jpg" alt=" " class="logo">
-        <p class="logo-text">Budgets </p>
-      </div>
-        <li><a href="#">Budgets Vs Actual</a> </li>
-    </div>
-    <div class="box"><div class="header">
-        <img src="a13.jpg" alt=" " class="logo">
-        <p class="logo-text">  Currency </p>
-      </div>
-        <li><a href="#">Realised Gain or loss</a></li>
-        <li><a href="#">Unrelaised Gain or Loss</a></li>
-    </div>
-    <div class="box"><div class="header">
-        <img src="a14.jpg" alt=" " class="logo">
-        <p class="logo-text">Activity    </p>
-      </div>
-        <li><a href="#">System Mails</a></li>
-        <li><a href="#">Client Reviews</a></li>
-        <li><a href="#">Activity Logs</a></li>
-        <li><a href="#">API Usage</a></li>
-    </div>
-
     </div>
   </section>
 
-    <script>
-    function searchReports() {
-      const input = document.getElementById("search");
-      const filter = input.value.toUpperCase();
-      const boxes = document.getElementsByClassName("box");
-
-      for (let i = 0; i < boxes.length; i++) {
-        const box = boxes[i];
-        const links = box.getElementsByTagName("a");
-        let found = false;
-
-        for (let j = 0; j < links.length; j++) {
-          const link = links[j];
-          const text = link.textContent || link.innerText;
-
-          if (text.toUpperCase().indexOf(filter) > -1) {
-            found = true;
-            break;
-          }
-        }
-
-        if (found) {
-          box.style.display = "";
-        } else {
-          box.style.display = "none";
-          console.log("oops, not found")
-        }
-      }
-    }
-
-    const searchInput = document.getElementById("search");
-    searchInput.addEventListener("keyup", searchReports);
-    </script>
-
-<script
-src="https://code.jquery.com/jquery-3.3.1.js"
-integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-crossorigin="anonymous">
-</script>
-<script> 
-    $(function(){
-      $("#header").load("../Components/header.html"); 
-      $("#footer").load("../Components/footer.html"); 
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script>
+    $(function() {
+      // Load header, footer, and sidebar
+      $("#header").load("../Components/header.html");
+      $("#footer").load("../Components/footer.html");
       $("#sidebar").load("../Components/sidebar.html");
-    });
-</script>
+    }
+    );
+  </script>
 </body>
 </html>
