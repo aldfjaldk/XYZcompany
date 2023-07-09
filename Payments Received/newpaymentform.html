@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>New Sales Order</title>
+    <title>New Payemnt form</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +13,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <style>
-        .pr{
-            background-color: rgba(200, 200, 200, 0.2);
+        .main {
+            margin-left:20%;
+        }
+        .budget{
+            background-color:rgba(200, 200, 200, 0.2)
         }
     </style>
 </head>
@@ -22,30 +25,26 @@
 <body>
     <div id="sidebar"></div>
     <div id="header"></div>
-    <div class="container" style="padding-top: 30px; margin-left: 19%;">
-        <form id="mainform">
-           
-            <h1 style="text-align: left;">New Payment Form</h1>
+
+    <section class="main" style="padding-top: 30px; margin-left: 19%;">
+        <h3 style="text-align: left;">New Payment Form</h3>
+        <hr>
+        <form class="payment-form" id="payment-form" acton="http://localhost:8000/paymnt-form" method="post">
             <div class="form-group">
                 <label for="customerName">Customer Name:</label>
-                <input placeholder="XYZ" type="text" id="customerName" name="customerName" onchange="enableInputs()">
+                <input placeholder="Enter your name " type="text" id="customerName" name="customerName" onchange="enableInputs()">
             </div>
-        
+
             <div class="form-group">
-                <label for="salesOrder">Amount:</label>
-                <input placeholder="S0-00001" type="number" id="amount" name="00000" disabled>
+                <label for="amount">Amount:</label>
+                <input placeholder="000000" type="number" id="amount" name="amount" disabled>
             </div>
-        
+
             <div class="form-group">
                 <label for="paymentdate">Payment Date:</label>
                 <input type="date" id="paymentdate" name="paymentdate" disabled>
             </div>
-        
-            <div class="form-group">
-                <label for="paymentTerms">Payment #:</label>
-                <input type="text" id="paymentTerms" name="paymentTerms" disabled>
-            </div>
-        
+
             <div class="form-group">
                 <label for="paymentMode">Payment Mode:</label>
                 <select id="paymentMode" name="paymentMode" disabled>
@@ -55,18 +54,15 @@
                     <option value="NEFT">NEFT</option>
                 </select>
             </div>
-        
+
             <div class="form-group">
                 <label for="deliveryMethod">Reference:</label>
                 <input placeholder="Type the delivery method" type="text" id="deliveryMethod" name="deliveryMethod" disabled>
             </div>
 
-            <div class="form-group" style="padding-top: 10px; display: inline-flex;">
-                <label for="taxDeducted">Tax Deducted?</label>
-                <input type="radio" id="taxDeductedYes" name="taxDeducted" value="yes" disabled>
-                <label for="taxDeductedYes">Yes,TDS(Income Tax)</label>
-                <input type="radio" id="taxDeductedNo" name="taxDeducted" value="no" disabled>
-                <label for="taxDeductedNo">No Tax Deducted</label>
+            <div class="form-group" >
+                <label for="taxdeducted">Tax Deducted?</label>
+                <input placeholder="Enter amount of tax deducted (00 if no tax deducted) "type="number" id="taxdeducted" name="taxdeducted" disabled>
             </div>
 
             <div class="form-group" style="padding-top: 10px;">
@@ -75,29 +71,35 @@
             </div>
 
             <div class="form-group" style="padding-top: 10px;">
-                <label for="salesOrderAttachment">Attach file(s):</label>
-                <input type="file" id="salesOrderAttachment" name="salesOrderAttachment" disabled>
+                <label for="transactionid">Transaction Id :</label>
+                <input type="text" id="transactionid" name="transactionid" disabled>
             </div>
 
-            <div class="form-group" >
-                <input type="submit" value = "Submit">
-
+            <div class="form-group">
+                <input type="submit" value="submit">
+                <a href="PaymentRecieved.html" class="btn btn-secondary col-sm-1">Go back</a>
             </div>
-
         </form>
+    </section>
 
-    </div>
+     
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script>
+        var email =localstorage.getITem("email");
+        document.getElementById("EmailInput").value=email;
+
         $(function(){
           $("#header").load("../Components/header.html"); 
           $("#footer").load("../Components/footer.html"); 
           $("#sidebar").load("../Components/sidebar.html");
+
         });
+
 
         function enableInputs() {
             var customerName = document.getElementById("customerName").value;
+            var buttons = document.getElementById("button");
             var inputs = document.getElementsByTagName("input");
             var selects = document.getElementsByTagName("select");
             var textareas = document.getElementsByTagName("textarea");
@@ -112,6 +114,10 @@
 
             for (var k = 0; k < textareas.length; k++) {
                 textareas[k].disabled = customerName === "";
+            }
+
+            for(var l= 0; l < buttons.length; l++) {
+                buttons[k].disabled = customerName === "";
             }
         }
     </script>
