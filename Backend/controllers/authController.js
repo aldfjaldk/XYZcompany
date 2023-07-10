@@ -5,6 +5,7 @@ import vendorsModel from "../models/vendorsModel.js";
 import itemsModel from "../models/itemsModel.js";
 import customersModel from "../models/customersModel.js";
 import employeesModel from "../models/employeesModel.js";
+import deliveryChallansModel from "../models/deliveryChallansModel.js";
 export const registerController = async (req, res) => {
 
   try {
@@ -646,4 +647,82 @@ export const handleCurrencyData = async (req, res) => {
       error,
     });
   }
+};
+
+export const deliveryChallanController = async (req, res) => {
+
+    try {
+      const { customerName, deliveryChallan, referenceNumber, deliveryChallanDate, challanType, warehouseName, subTotal} = req.body
+  
+      if (!customerName) {
+        return res.send({ message: 'Name is required' })
+      }
+      if (!deliveryChallan) {
+        return res.send({ message: 'Email is required' })
+      }
+      if (!referenceNumber) {
+        return res.send({ message: 'company name is required' })
+      }
+      if (!deliveryChallanDate) {
+        return res.send({ message: 'phone is required' })
+      }
+      if (!challanType) {
+        return res.send({ message: 'payables required' })
+      }
+      if (!warehouseName) {
+        return res.send({ message: 'payables required' })
+      }
+      if (!subTotal ) {
+        return res.send({ message: 'payables required' })
+      }
+  
+      const newDeliveryChallan = {
+        
+        customerName, 
+        deliveryChallan, 
+        referenceNumber, 
+        deliveryChallanDate, 
+        challanType, 
+        warehouseName, 
+        subTotal
+        };
+  
+      const createdDeliveryChallan = await deliveryChallansModel.create(newDeliveryChallan); // Save the new Delivery Challan
+  
+      console.log("Customer added:", createdDeliveryChallan);
+  
+      res.status(201).send({
+        success: true,
+        message: "Customer added successfully",
+        deliveryChallan: createdDeliveryChallan
+      });
+  
+    } catch (error) {
+      console.log(error)
+      res.status(500).send({
+        success: false,
+        message: 'Error',
+        error,
+      })
+  
+    }
+};
+
+export const handleDeliveryChallanData = async (req, res) => {
+    try {
+      const deliveryChallans = await deliveryChallansModel.find();
+  
+      res.status(200).send({
+        success: true,
+        message: 'DeliveryChallans fetched successfully',
+        customers,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        success: false,
+        message: 'Error',
+        error,
+      });
+    }
 };
