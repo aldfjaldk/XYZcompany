@@ -2,113 +2,122 @@
 <html lang="en">
 
 <head>
-    <title>Delivery Challan</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Sliding Bar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>Sidebar</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-
+    <title>Header</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/60632f752f.js" crossorigin="anonymous"></script>
 
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.min.js"></script>
+
+
+
+    <!--google material icon-->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+
+
+
+    <!--google material icon-->
+
     <style>
-        .dc{
-            background-color: rgba(200, 200, 200, 0.2)
+        #body {
+            background-color: rgb(255, 255, 255);
+            margin-left: 17%;
+        }
+
+        .customers {
+            background-color: rgba(200, 200, 200, 0.2);
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <div id="sidebar"></div>
-        <div id="header"></div>
+    <div id="sidebar"></div>
+    <div id="header"></div>
 
-        <div class="container-fluid" style="margin-left: 18%;">
-            <div>
-                <h1 style="text-align: center;">Delivery Challan</h1>
+    <div id="body">
+        <div class="container mt-4">
+            <h2 class="mb-4">Delivery Challan Page</h2>
 
-                <div class="options" style="text-align: center;">
-                    <button class="button" onclick="window.location.href='deliveryChallan.html'" style="float: left;">Add New</button>
+            <!-- Create Form -->
 
-                </div>
+            <button type="submit" class="btn btn-primary"><a style="color: black;"
+                    href="deliveryChallanForm.html">+NEW</a></button>
+            <hr>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="sort">DATE</th>
-                            <th class="sort">DELIVERY CHALLAN#</th>
-                            <th class="sort">REFERENCE#</th>
-                            <th class="sort">CUSTOMER NAME</th>
-                            <th class="sort">STATUS</th>
-                            <th class="sort">INVOICE STATUS</th>
-                            <th class="sort">AMOUNT</th>
-                        </tr>
-                    </thead>
-                    <tbody id="deliveryChallanList">
+            <!-- Table -->
+            <table class="table table-striped" id="data-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="select-all-checkbox"></th>
+                        <th>Customer Name</th>
+                        <th>Delivery Challan</th>
+                        <th>Reference Number</th>
+                        <th>Delivery Challan Date</th>
+                        <th>Challan Type</th>
+                        <th>Warehouse Name</th>
+                        <th>Sub Total</th>
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!-- <p class="no" id="noText">No details available</p> -->
-
-
-
-        <script>
-
+                    </tr>
+                </thead>
+                <tbody id="customerTableBody">
+                    <!-- <tr>
+                        <td><input type="checkbox" class="entry-checkbox"></td>
+                        <td>John Doe</td>
+                        <td>DC-0001</td>
+                        <td>79469</td>
+                        <td>2023-07-2</td>
+                        <td>Option1</td>
+                        <td>Option1</td>
+                        <td>9613.00</td>
             
+                    </tr>-->
 
+                </tbody>
+            </table>
 
+        </div>
+    </div>
 
-            var deliveryChallanData = [
-                { date: '2023-06-02', deliveryChallanNo: 'DC-000', referenceNo: '19997', customerName: 'abc', status: 'DRAFT', invoiceStatus: 'OPEN', amount: 8400.00, },
-                { date: '2023-06-03', deliveryChallanNo: 'DC-000', referenceNo: '28780', customerName: 'xyz', status: 'OPEN', invoiceStatus: 'DELIVERED', amount: 954.00, },
-                { date: '2023-06-01', deliveryChallanNo: 'DC-000', referenceNo: '93531', customerName: 'mno', status: 'RETURNED', invoiceStatus: 'DRAFT', amount: 600.00, },
-                { date: '2023-06-03', deliveryChallanNo: 'DC-000', referenceNo: '60780', customerName: 'qrs', status: 'DELIVERED', invoiceStatus: 'RETURNED', amount: 6765.00, }
-            ];
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        var selectAllCheckbox = $('#select-all-checkbox');
 
-            var deliveryChallanList = document.getElementById('deliveryChallanList');
-            var noText = document.getElementById('noText');
+        selectAllCheckbox.change(function () {
+            var isChecked = selectAllCheckbox.is(':checked');
+            $('.entry-checkbox').prop('checked', isChecked);
+        });
 
-            if (deliveryChallanData.length === 0) {
-                noText.style.display = 'block';
-            } else {
-                deliveryChallanData.forEach(function (dc) {
-                    var row = document.createElement('tr');
-                    row.innerHTML = '<td>' + dc.date + '</td>' +
-                        '<td>' + dc.deliveryChallanNo + '</td>' +
-                        '<td>' + dc.referenceNo + '</td>' +
-                        '<td>' + dc.customerName + '</td>' +
-                        '<td>' + dc.status + '</td>' +
-                        '<td>' + dc.invoiceStatus + '</td>' +
-                        '<td>' + dc.amount + '</td>';
-                    deliveryChallanList.appendChild(row);
-                });
-            }
+        $('.entry-checkbox').change(function () {
+            var allCheckboxes = $('.entry-checkbox');
+            selectAllCheckbox.prop('checked', allCheckboxes.length === allCheckboxes.filter(':checked').length);
+        });
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
         </script>
-
-
-
-
-        <script src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
-            </script>
-        <script>
-            $(function () {
-                $("#header").load("../Components/header.html");
-                $("#footer").load("../Components/footer.html");
-                $("#sidebar").load("../Components/sidebar.html");
-            });
-        </script>
+    <script>
+        $(function () {
+            $("#header").load("../Components/header.html");
+            $("#footer").load("../Components/footer.html");
+            $("#sidebar").load("../Components/sidebar.html");
+        });
+    </script>
 </body>
 
 </html>
