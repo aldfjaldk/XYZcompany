@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Sliding Bar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>Sidebar</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/60632f752f.js" crossorigin="anonymous"></script>
+
+
+
+
+    <!--google material icon-->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <style>
+        #body {
+            background-color: rgb(255, 255, 255);
+            margin-left: 19%;
+            margin-bottom: 50px;
+        }
+
+        .nav-link.active {
+            background-color: blue;
+            color: rgb(212, 130, 130);
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        nav {
+            background: #fcfcfc;
+            color: white;
+        }
+
+        .logo img {
+            width: 100px;
+            /* Adjust the width as desired */
+            height: 75px;
+            /* Maintain aspect ratio */
+        }
+
+        .customers {
+            background-color: rgba(200, 200, 200, 0.2);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="sidebar"></div>
+    <div id="header"></div>
+    <div id="body">
+        <div class="container mt-4">
+            <form>
+                <h1 class="mt-5">Delivery Challan</h1>
+                <div class="form-group text-danger">
+                    <label for="customerName">Customer Name:</label>
+                    <input placeholder="ABC" type="text" id="customerName" name="customerName">
+                </div>
+
+                <div class="form-group text-danger">
+                    <label for="deliveryChallan">Delivery Challan#:</label>
+                    <input placeholder="DC-00001" type="text" id="deliveryChallan" name="deliveryChallan">
+                </div>
+
+                <div class="form-group">
+                    <label for="referenceNumber">Reference#:</label>
+                    <input type="text" id="referenceNumber" name="referenceNumber">
+                </div>
+
+                <div class="form-group text-danger">
+                    <label for="deliveryChallanDate">Delivery Challan Date:</label>
+                    <input type="date" id="deliveryChallanDate" name="deliveryChallanDate">
+                </div>
+
+                <div class="form-group text-danger my-4 ">
+                    <label for="challanType">Challan Type:</label>
+                    <select class="form-control" id="challanType" name="challanType">
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                    </select>
+                </div>
+
+                <div class="form-group text-danger my-4">
+                    <label for="warehouseName">Warehouse Name:</label>
+                    <select class="form-control" id="warehouseName" name="warehouseName">
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                    </select>
+                </div>
+
+                <div class="item-details">
+                    <h3 class="fs-5">Items And Description:</h3>
+
+                    <div class="item-row">
+                        <input type="text" placeholder="Item" name="item">
+                        <input type="number" placeholder="Quantity" name="quantity" onchange="calculateAmount(this)">
+                        <input type="number" step="1" placeholder="Rate (INR)" name="rate"
+                            onchange="calculateAmount(this)">
+                        <input type="number" step="0.01" placeholder="Tax" name="tax" onchange="calculateAmount(this)">
+                        <input type="number" step="0.1" placeholder="Amount (INR)" name="amount" disabled>
+                    </div>
+
+
+                    <!-- Add more item rows dynamically -->
+
+                    <div class="add-another">
+                        <button type="button" class="btn btn-outline-secondary" style="width: 200px;"
+                            onclick="addAnotherRow()">+ Add another line</button>
+                    </div>
+
+                    <div style="padding-top: 20px;">
+                        <label>Sub Total (INR):</label>
+                        <span id="subTotal" name="subTotal">0.00</span>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" href="#" class="btn btn-primary" aria-current="page">Save as Draft</button>
+                    <button type="submit" href="#" class="btn btn-success" onclick="submitForm()">Save and Send</button>
+                    <button type="submit" href="#" class="btn btn-danger" onclick="cancelForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        // JavaScript code for handling functionalities
+        function addAnotherRow() {
+            var itemDetails = document.querySelector('.item-details');
+
+            var newRow = document.createElement('div');
+            newRow.classList.add('item-row');
+
+            newRow.innerHTML = `
+                <input type="text" placeholder="Item" name="item">
+                <input type="number" placeholder="Quantity" name="quantity" onchange="calculateAmount(this)">
+                <input type="number" step="1" placeholder="Rate (INR)" name="rate" onchange="calculateAmount(this)">
+                <input type="number" step="0.01" placeholder="Tax" name="tax" value="0" onchange="calculateAmount(this)">
+                <input type="number" step="0.1" placeholder="Amount (INR)" name="amount" disabled>
+              `;
+
+            itemDetails.insertBefore(newRow, itemDetails.lastElementChild);
+
+            // Add event listeners to the newly added row
+            var quantityInput = newRow.querySelector('input[name="quantity"]');
+            var rateInput = newRow.querySelector('input[name="rate"]');
+            var taxInput = newRow.querySelector('input[name="tax"]');
+
+            quantityInput.addEventListener('input', function () {
+                calculateAmount(this);
+            });
+
+            rateInput.addEventListener('input', function () {
+                calculateAmount(this);
+            });
+
+            taxInput.addEventListener('input', function () {
+                calculateAmount(this);
+            });
+        }
+
+        // Calculate and update the amount and grand total
+        function calculateAmount(input) {
+            var itemRow = input.parentNode;
+            var quantity = parseFloat(itemRow.querySelector('input[name="quantity"]').value) || 0;
+            var rate = parseFloat(itemRow.querySelector('input[name="rate"]').value) || 0;
+            var tax = parseFloat(itemRow.querySelector('input[name="tax"]').value) || 0;
+
+            var amount = (quantity * rate * (1 + tax / 100)).toFixed(2);
+            itemRow.querySelector('input[name="amount"]').value = amount;
+
+            calculateSubTotal();
+        }
+
+        // Calculate and update the sub total
+        function calculateSubTotal() {
+            var amountInputs = document.querySelectorAll('.item-row input[name="amount"]');
+            var subTotal = 0;
+
+            amountInputs.forEach(function (input) {
+                subTotal += parseFloat(input.value) || 0;
+            });
+
+            var subTotalElement = document.getElementById('subTotal');
+            subTotalElement.innerText = subTotal.toFixed(2);
+        }
+    </script>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.nav-link').click(function (e) {
+                e.preventDefault();
+                $('.nav-link').removeClass('active');
+                $(this).addClass('active');
+                var target = $(this).attr('href');
+                $('.form-section').removeClass('active');
+                $(target).addClass('active');
+            });
+        });
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+        </script>
+    <script>
+        $(function () {
+            $("#header").load("../Components/header.html");
+            $("#footer").load("../Components/footer.html");
+            $("#sidebar").load("../Components/sidebar.html");
+        });
+    </script>
+
+</body>
+
+</html>
