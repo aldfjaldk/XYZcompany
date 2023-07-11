@@ -138,6 +138,12 @@ export const newSalesOrderController = async (req, res) => {
   res.status(200);
 };
 
+//add-expense controller
+export const AddExpensesController = async (req, res) => {
+  console.log("Backend received the new-sales-order request")
+  res.status(200);
+};
+
 // test controller
 
 export const testController = (req, res) => {
