@@ -9,9 +9,12 @@ async function getDeliveryChallans() {
         let tableData = "";
 
         (data.deliveryChallans).map((dc) => {
+            var checkemail=localStorage.getItem("email");
+            if(checkemail===dc.user_email){
             //console.log(tableData);
             tableData += `
                 <tr>
+                    <td></td>
                     <td>${dc.customerName}</td>
                     <td>${dc.deliveryChallan}</td>
                     <td>${dc.referenceNumber}</td>
@@ -21,7 +24,7 @@ async function getDeliveryChallans() {
                     <td>${dc.subTotal}</td>
                 </tr>
             `;
-        });
+    }});
 
         document.getElementById('customerTableBody').innerHTML = tableData;
     } catch (error) {
@@ -31,3 +34,5 @@ async function getDeliveryChallans() {
 
 // Call the getDeliveryChallans function to fetch and display DeliveryChallans data initially
 getDeliveryChallans();
+
+

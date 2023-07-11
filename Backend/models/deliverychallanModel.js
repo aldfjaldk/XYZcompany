@@ -25,30 +25,20 @@ const deliveryChallanSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    items:{
+        type:Array,
+    },
     subTotal: {
         type: Number,
         required: false
     },
-    item: {
-        type: String,
-        required: true
-    },
-    quantity: {
-        type: Number,
-        required: true
-    },
-    rate: {
-        type: Number,
-        required: true
-    },
-    tax: {
-        type: Number,
-        required: true
-    },
-    amount: {
-        type: Number,
-        required: false
+    user_email: {
+        type:String
     }
 })
 
-export default mongoose.model("deliveryChallans", deliveryChallanSchema);
+
+const dchallan  =  mongoose.model("deliverychallans", deliveryChallanSchema);
+
+
+export default dchallan;
