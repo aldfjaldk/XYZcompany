@@ -715,7 +715,7 @@ export const handleDeliveryChallanData = async (req, res) => {
       res.status(200).send({
         success: true,
         message: 'DeliveryChallans fetched successfully',
-        customers,
+        deliveryChallans,
       });
     } catch (error) {
       console.log(error);
