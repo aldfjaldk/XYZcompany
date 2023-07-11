@@ -15,6 +15,7 @@ import {
     currencyController,
     handleCurrencyData,
     deliveryChallanController,
+    AddExpensesController,
     handleDeliveryChallanData
 } from "../controllers/authController.js"
 import { requireSignIn, isAdmin } from "../middlewares/authmiddleware.js"
@@ -36,6 +37,9 @@ router.post("/addDeliveryChallan", deliveryChallanController);
 router.post("/forgot-password", forgotPasswordController);
 ////New Sales Order 
 router.post("/new-sales-order", newSalesOrderController);
+
+router.post("/add-expenses", AddExpensesController);
+
 //test routes
 router.get("/displayvendor", handleVendorData);
 router.get("/displaycustomer", handleCustomerData);
