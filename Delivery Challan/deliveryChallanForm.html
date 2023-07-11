@@ -144,7 +144,7 @@
                     <input type="hidden" name="subTotal" id="subTotalInput"  class="form-control">
                 </div>
                 <div>
-                    <button type="button" href="#" class="btn btn-primary" aria-current="page">Save as Draft</button>
+<!--                     <button type="button" href="#" class="btn btn-primary" aria-current="page">Save as Draft</button> -->
                     <button type="submit" href="#" class="btn btn-success">Save and Send</button>
                     <button type="button" href="#" class="btn btn-danger" onclick="cancelForm()">Cancel</button>
                 </div>
@@ -184,6 +184,10 @@
 
             var subTotalInput = document.getElementById('subTotalInput');
             subTotalInput.value = subTotal.toFixed(2);
+        }
+
+        function cancelForm(){
+            window.location.href = "./deliveryChallanPage.html";
         }
     </script>
 
