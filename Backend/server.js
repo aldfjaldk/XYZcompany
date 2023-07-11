@@ -11,6 +11,8 @@ import Dashboard from "./models/dashboardModel.js";
 import Budget from "./models/budget.js";
 import Payment from "./models/newpayment.js";
 
+import dchallan from "./models/deliverychallanModel.js";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 dotenv.config();
@@ -305,4 +307,54 @@ app.post("/payment-form",async (req,res)=>{
       .json({success: false,error: "Server Error"});
   }
 
+});
+app.post("/challan-submit-form", async (req, res) => {
+  try {
+    const { customerName, deliveryChallan, referenceNumber, deliveryChallanDate,challanType, warehouseName ,items, subTotal,user_email} = req.body;
+    // Check if all required fields are present
+    if (!customerName || !deliveryChallan || !referenceNumber || !deliveryChallanDate ||!challanType || !warehouseName) {
+      const errorMessage = "All fields are required";
+      console.error(errorMessage);
+      return;
+    }
+
+    // Find existing budget document based on name
+    let Challan = await dchallan.findOne({referenceNumber,user_email});
+
+    if (Challan) {
+      // Update existing budget document
+      Challan.customerName = customerName;
+      Challan.deliveryChallan = deliveryChallan;
+      Challan.deliveryChallanDate = deliveryChallanDate;
+      Challan.warehouseName = warehouseName;
+      Challan.items = items;
+      Challan.subTotal = subTotal;
+      
+
+      
+    } else {
+      // Create new budget document
+      Challan = new dchallan({
+        customerName,
+        deliveryChallan,
+        referenceNumber,
+        deliveryChallanDate,
+        challanType,
+        warehouseName,
+        items,
+        subTotal,user_email
+      });
+    }
+
+    // Save the budget document to the database
+    await Challan.save();
+
+  } catch (error) {
+    console.error(error);
+    console.log("Form submission failed");
+    console.log("Internal server error");
+    return res
+      .status(500)
+      .json({ success: false, error: "Internal server error" });
+  }
 });
