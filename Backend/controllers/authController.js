@@ -5,7 +5,7 @@ import vendorsModel from "../models/vendorsModel.js";
 import itemsModel from "../models/itemsModel.js";
 import customersModel from "../models/customersModel.js";
 import employeesModel from "../models/employeesModel.js";
-import deliveryChallansModel from "../models/deliveryChallansModel.js";
+import deliveryChallansModel from "../models/deliverychallanModel.js";
 export const registerController = async (req, res) => {
 
   try {
@@ -658,22 +658,22 @@ export const deliveryChallanController = async (req, res) => {
         return res.send({ message: 'Name is required' })
       }
       if (!deliveryChallan) {
-        return res.send({ message: 'Email is required' })
+        return res.send({ message: 'DeliveryChallan Number is required' })
       }
       if (!referenceNumber) {
-        return res.send({ message: 'company name is required' })
+        return res.send({ message: 'Reference number is required' })
       }
       if (!deliveryChallanDate) {
-        return res.send({ message: 'phone is required' })
+        return res.send({ message: 'DeliveryChallan Date is required' })
       }
       if (!challanType) {
-        return res.send({ message: 'payables required' })
+        return res.send({ message: 'Challan Type required' })
       }
       if (!warehouseName) {
-        return res.send({ message: 'payables required' })
+        return res.send({ message: 'Warehouse Name required' })
       }
       if (!subTotal ) {
-        return res.send({ message: 'payables required' })
+        return res.send({ message: 'SubTotal required' })
       }
   
       const newDeliveryChallan = {
