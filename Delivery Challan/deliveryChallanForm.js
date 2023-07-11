@@ -5,7 +5,12 @@ data = {
     deliveryChallanDate: "...",
     challanType: "...",
     warehouseName: "...",
-    subTotal: "..."
+    subTotal: "...",
+    item: "...",
+    quantity: "...",
+    rate: "...",
+    tax: "...",
+    amount: "..."
 }
 console.log("welcome to the Delivery Challan page.")
 
@@ -47,7 +52,11 @@ function handleDeliveryChallanDate(event) { data.deliveryChallanDate = event.tar
 function handleChallanType(event) { data.challanType = event.target.value; }
 function handleWarehouseName(event) { data.warehouseName = event.target.value; }
 function handleSubTotal(event) { data.subTotal = event.target.value; }
-
+function handleItem(event) { data.item = event.target.value; }
+function handleQuantity(event) { data.quantity = event.target.value; }
+function handleRate(event) { data.rate = event.target.value; }
+function handleDiscount(event) { data.tax = event.target.value; }
+function handleAmount(event) { data.amount = event.target.value; }
 
 document.getElementById("customerName").addEventListener("change", handleCustomerName);
 document.getElementById("deliveryChallan").addEventListener("change", handleDeliveryChallan);
@@ -56,4 +65,9 @@ document.getElementById("deliveryChallanDate").addEventListener("change", handle
 document.getElementById("challanType").addEventListener("change", handleChallanType);
 document.getElementById("warehouseName").addEventListener("change", handleWarehouseName);
 document.getElementById("subTotal").addEventListener("change", handleSubTotal);
+document.getElementById("item").addEventListener("change", handleItem);
+document.getElementById("quantity").addEventListener("change", handleQuantity);
+document.getElementById("rate").addEventListener("change", handleRate);
+document.getElementById("discount").addEventListener("change", handleDiscount);
+document.getElementById("amount").addEventListener("change", handleAmount);
 document.getElementById("mainForm").addEventListener("submit", handleSubmission);
