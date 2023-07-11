@@ -9,18 +9,20 @@ async function getItems() {
         let tableData = "";
 
         (data.items).map((item) => {
+            var checkemail=localStorage.getItem("email");
+            if(checkemail===vendor.useremail){
             //console.log(tableData);
             tableData += `
                 <tr>
                     <td>${item.fullname}</td>
                     <td>${item.description}</td>
-                    <td>${item.rate}</td>
+                    <td>${item.email}</td>
                     <td>${item.stock}</td>
                     <td>${item.hsncode}</td>
                     <td>${item.sku}</td>
                 </tr>
             `;
-        });
+        }});
 
         document.getElementById('itemTableBody').innerHTML = tableData;
     } catch (error) {

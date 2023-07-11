@@ -9,6 +9,8 @@ async function getCustomers() {
         let tableData = "";
 
         (data.customers).map((customer) => {
+            var checkemail=localStorage.getItem("customeremail");
+            if(checkemail===customer.useremail){
             //console.log(tableData);
             tableData += `
                 <tr>
@@ -19,7 +21,7 @@ async function getCustomers() {
                     <td>${customer.receivables}</td>
                 </tr>
             `;
-        });
+    }});
 
         document.getElementById('customerTableBody').innerHTML = tableData;
     } catch (error) {
