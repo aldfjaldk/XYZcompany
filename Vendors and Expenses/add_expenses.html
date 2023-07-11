@@ -11,35 +11,37 @@
     <title>add_expenses</title>
     <style>
 
-.body{
-  background-image: url("bgimg.jpg");
-  background-size: cover;
-  padding: 20px;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: bold;
-  font-size: larger;
-}
- #check{
-    padding: 10px;
-    padding-left: 30px;
- }
- #button{
-    padding:10px;
-    padding-left: 30px;
-    padding-right: 30px;
-    text-align: left;
- }
- .main{
-  margin-left: 19%;
- }
- .expenses{
-  background-color: rgba(200, 200, 200, 0.2);
- }
-</style>
-</head>
+      .body{
+        background-image: url("bgimg.jpg");
+        background-size: cover;
+        padding: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+        font-size: larger;
+      }
+      #check{
+          padding: 10px;
+          padding-left: 30px;
+      }
+      #button{
+          padding:10px;
+          padding-left: 30px;
+          padding-right: 30px;
+          text-align: left;
+      }
+      .main{
+        margin-left: 19%;
+      }
+      .expenses{
+        background-color: rgba(200, 200, 200, 0.2);
+      }
+    </style>
+    <script defer src="addexpensesfunction.js"></script>
+  </head>
 <body class="body">
   <div id="sidebar"></div>
   <div id="header"></div>
+  
 
   <section class="main">
   <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -53,41 +55,39 @@
   </ul>
   <div class="tab-content" id="myTabContent">
      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-      <form>
+      <form id="addexpense">
           <div class="row">
                 <div class="col-lg-6">
                   <label class="form-label">Date</label>
                   
-                  <input type="date" class="form-control" required>
+                  <input type="date" class="form-control" id="date" name="date" required>
                   
                 </div>
           </div>
+          
+
           <div class="row">
                 <div class="col-lg-6">
-                  <label class="form-label">Expense Account</label>
+                  <label class="form-label">Expenses</label>
 
-                  <select class="form-select" required>
+                  <select class="form-select" id="expense" name="expense" required>
                     <option selected disabled value="">Select</option>
-                    <option>...</option>
+                    <option>Advertisement</option>
+                    <option>Delivery expense</option>
+                    <option>Insurance</option>
+                    <option>Office supplies</option>
+                    <option>Rent</option>
+                    <option>Maintainence Repair</option>
+                    <option>Travelling </option>
                   </select>
                   
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <label class="form-label">Expense Type</label>
-                        <div class="row"></div>
-                        <p>
-                            Goods <input type="radio" name="gender">
-                            Services <input type="radio" name="gender">
             
-                        </p>
-                 </div>
-            </div>
             <div class="row">
                 <div class="col-lg-6">
-                  <label class="form-label">SAC</label>
-                  <input type="text" class="form-control" required>
+                  <label class="form-label">SAC- Code</label>
+                  <input placeholder="unique sac code" type="text" class="form-control" id="sac" name="sac"required>
                   </div>
             </div>
             <div class="row">
@@ -96,18 +96,7 @@
             <div class="row">
                 <div class="col-lg-6">
                 <div class="input-group mb-3">
-                  
-                  <div class="dropdown">
-                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" >INR</button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-
-                    <li><button class="dropdown-item" type="button"></button></li>
-                    <li><button class="dropdown-item" type="button"></button></li>
-                    <li><button class="dropdown-item" type="button"></button></li>
-      
-                  </ul>
-                </div>
-                  <input type="text" class="form-control" aria-label="Text input with dropdown button" required>
+                  <input placeholder="Amount in INR" type="number" class="form-control" id="amount" name="amount" required>
                 </div>
                </div>
             </div>
@@ -115,7 +104,7 @@
                 <div class="col-lg-6">
                   <label class="form-label">Paid Through</label>
                   
-                  <select class="form-select" required>
+                  <select class="form-select"  id="paymentthrough" name="paymentthrough" required>
                     <option selected disabled value="">Select Account</option>
                     <option>Petty Cash</option>
                     <option>Undeposited Funds</option>
@@ -132,15 +121,15 @@
                 <div class="col-lg-6">
                   <label class="form-label">Vendor</label>
                  
-                  <select  class="form-select"  required>
-                    <option selected disabled value=""></option>
+                  <select  class="form-select" id="vendor" name="vendor" required>
+                    <option selected disabled value="">Select Vendor</option>
                     <option>Registered Vendor</option>
                     <option>Overseas Vendor</option>
                     <option>SEZ Vendor</option>
                     <option>Deemed Export Vendor</option>
                     <option>Unregistered Vendor</option>
                     <option>Composition Reg Vendor</option>
-                    <option >+ New Vendor</option>
+                    <option >Any other New Vendor</option>
                   </select>
                  
                 </div>
@@ -149,8 +138,8 @@
                 <div class="col-lg-6">
                   <label class="form-label">GST Treatment</label>
                   
-                  <select class="form-select" required>
-                    <option selected disabled value=""></option>
+                  <select class="form-select"  id="gsttype" name="gsttype" required>
+                    <option selected disabled value="">Select GST type</option>
                     <option>Registered Business-Regular
                       Business that is registered under GST
                     </option>
@@ -180,83 +169,58 @@
                 <div class="col-lg-6">
                   <label class="form-label">Destination of Supply</label>
                   
-                  <select class="form-select" required>
-                    <option selected disabled value="">Select</option>
-                    <option>...</option>
-                  </select>
+                  <input type="text"  class="form-control"placeholder="Delivered area" id="destinationofsupply" name="destinationofsupply" >
+                  
                   
                 </div>
             </div>
-            <div class="row" id="check">
-                <div class="form-check">
-                    
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate" required>
-                    <label class="form-check-label" for="flexCheckIndeterminate">
-                        This transaction is applicable for reverse charge
-                    </label>
-                  </div>
-            </div>
+            
             <div class="row">
                 <div class="col-lg-6">
                   <label class="form-label">Tax</label>
                  
-                  <select class="form-select" required>
+                  <select class="form-select"  id="tax" name="tax" required>
                     <option selected disabled value="">Select</option>
-                    <option>...</option>
+                    <option>Service Tax</option>
+                    <option>State Govt Tax(SGST)</option>
+                    <option>Central Govt Tax(CGST)</option>
+                    <option>Any Other Tax</option>
                   </select>
                   
                 </div>
             </div>
             <div class="row">
+              <div class="col-lg-6">
+                <label class="form-label">Tax Amount</label>
+                <input type="number" class="form-control" placeholder="Tax payed in INR" id="taxamount" name="taxamount" required>
+              
+                
+              </div>
+          </div>
+            <div class="row">
                 <div class="col-lg-6">
-                  <label class="form-label">Invoice#</label>
-                  <input type="text" class="form-control" required>
+                  <label class="form-label">Invoice ID #</label>
+                  <input type="text" class="form-control" id="invoice" name="invoice">
                   
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
                   <p><label >Notes</label></p>
-                  <textarea name="address" rows="4" cols="78" required> </textarea>
+                  <textarea name="address" rows="4" cols="78" id="note" name="note"required> </textarea>
                   
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6">
-                  <label class="form-label">Customer Name</label>
-                 
-                  <select class="form-select"  required>
-                    <option selected disabled value=""></option>
-                    <option>Registered Vendor</option>
-                    <option>Overseas Vendor</option>
-                    <option>SEZ Vendor</option>
-                    <option>Deemed Export Vendor</option>
-                    <option>Unregistered Vendor</option>
-                    <option>Composition Reg Vendor</option>
-                    <option >+ New Vendor</option>
-                  </select>
-                 
-                </div>
-            </div>
-            <nav class="nav">
-                <a class="nav-link active" aria-current="page" href="#">Reporting Tags</a>
-                
-                <a class="nav-link" href="#">Associate Tags</a>
-                
-            </nav>
+            
+            
               <hr>   
     <div class="row">           
       <span class="control-fileupload" >
-          <label for="file1" class="text-right">Please attach receipt from your computer.</label>
-          <input type="file" id="file1" required>
+          <label for="file1" class="text-right">Please upload the receipt.</label>
+          <input type="file" class="form-control" id="file" name="file" required>
       </span>
                 
-      <div class="col-lg-2"style="padding: 20px;">
-          <button type="button" class="btn btn-primary">
-              Upload
-          </button>
-      </div>
-    </div>
+      
     <hr>
 <div class="row">
       <div class="d-grid gap-2 d-md-block"  >
@@ -285,6 +249,7 @@
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous">
 </script>
+<script src="./addexpenseback.js"></script>
   <script> 
       $(function(){
         $("#header").load("../Components/header.html"); 
