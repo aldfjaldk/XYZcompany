@@ -51,4 +51,4 @@ const deliveryChallanSchema = new mongoose.Schema({
     }
 })
 
-export default mongoose.model("DeliveryChallans", deliveryChallanSchema);
+export default mongoose.model("deliveryChallans", deliveryChallanSchema);
