@@ -38,10 +38,10 @@
           }
   </style>
 </head>
-<body>
+<body class="body">
   <div id="sidebar"></div>
   <div id="header"></div>
-  
+
   <div id="body">
     <div class="container mt-4">
         <h2>New Item</h2>
@@ -78,9 +78,9 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="rate" class="col-md-2 col-form-label">Rate</label>
+            <label for="email" class="col-md-2 col-form-label">email</label>
             <div class="col-md-3">
-              <input type="text" class="form-control" id="rate" placeholder="">
+              <input type="text" class="form-control" id="email" placeholder="">
             </div>
           </div>
           <div class="form-group row">
@@ -201,9 +201,9 @@
               </div>
               <div class="form-group row">
                 <label for="description" class="col-sm-4 col-form-label">Description</label>
-                <div class="col-sm-8">
+                <!-- <div class="col-sm-8">
                   <textarea class="form-control" id="description" rows="3"></textarea>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>  
@@ -241,6 +241,7 @@
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous">
 </script>
+<script src="./itemsBack.js"></script>
   <script> 
       $(function(){
         $("#header").load("../Components/header.html"); 

@@ -1,7 +1,8 @@
 data = {
+    useremail: "...",
     fullname: "...",
     description: "...", 
-    rate:  "...",
+    email:  "...",
     stock: "...",
     hsncode: "....",   
     sku: "..." ,
@@ -22,7 +23,7 @@ async function postJSON(data) {
         console.log("Success: ", result);
         if (result.success) {
             console.log("data added", data);
-            //window.location.href = "newitemsform.html"
+            window.location.href = "itemspage.html"
         }
         else {
             alert("try again");
@@ -35,13 +36,14 @@ async function postJSON(data) {
 
 function handleSubmission (event) {
     event.preventDefault();
+    data.useremail=localStorage.getItem("email");
     console.log("This is the data collected: ", data);
     postJSON(data)
 }
 
 function handleName(event) {data.fullname = event.target.value;}
 function handleEmail(event) {data.description = event.target.value;}
-function handleRate(event) {data.rate = event.target.value;}
+function handleRate(event) {data.email = event.target.value;}
 function handleStock(event) {data.stock = event.target.value;}
 function handleCompany(event) {data.hsncode = event.target.value;}
 function handlePhone(event) {data.sku = event.target.value;}
@@ -49,7 +51,7 @@ function handlePhone(event) {data.sku = event.target.value;}
 
 document.getElementById("fullname").addEventListener("change", handleName);
 document.getElementById("description").addEventListener("change", handleEmail);
-document.getElementById("rate").addEventListener("change", handleRate);
+document.getElementById("email").addEventListener("change", handleRate);
 document.getElementById("stock").addEventListener("change", handleStock);
 document.getElementById("hsncode").addEventListener("change", handleCompany);
 document.getElementById("sku").addEventListener("change", handlePhone);

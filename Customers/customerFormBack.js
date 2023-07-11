@@ -1,4 +1,5 @@
 data = {
+    useremail: "...",
     firstname: "...",
     customeremail: "...",   
     companyname: "....",   
@@ -21,7 +22,7 @@ async function postJSON(data) {
         console.log("Success: ", result);
         if (result.success) {
             console.log("data added", data);
-            //window.location.href = "CustomerPage.html"
+            window.location.href = "customerPage.html"
         }
         else {
             alert("try again");
@@ -34,6 +35,7 @@ async function postJSON(data) {
 
 function handleSubmission (event) {
     event.preventDefault();
+    data.useremail=localStorage.getItem("customeremail");
     console.log("This is the data collected: ", data);
     postJSON(data)
 }

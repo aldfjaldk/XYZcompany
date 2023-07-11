@@ -193,7 +193,7 @@ export const forgotPasswordController = async (req, res) => {
 export const itemController = async (req, res) => {
 
   try {
-    const { fullname, description, rate, stock, hsncode, sku } = req.body
+    const { useremail,fullname, description, email, stock, hsncode, sku } = req.body
 
     if (!fullname) {
       return res.send({ message: 'Item name is required' })
@@ -201,8 +201,8 @@ export const itemController = async (req, res) => {
     if (!description) {
       return res.send({ message: 'Description is required' })
     }
-    if (!rate) {
-      return res.send({ message: 'rate is required' })
+    if (!email) {
+      return res.send({ message: 'email is required' })
     }
     if (!stock) {
       return res.send({ message: 'stock on hand is required' })
@@ -215,9 +215,10 @@ export const itemController = async (req, res) => {
     }
 
     const newItem = {
+      useremail,
       fullname,
       description,
-      rate,
+      email,
       stock,
       hsncode,
       sku
@@ -334,7 +335,7 @@ export const addpaymentController =async(req,res)=>{
       export const customerController = async (req, res) => {
 
         try {
-          const { firstname, customeremail, companyname, workphone, receivables } = req.body
+          const { useremail,firstname, customeremail, companyname, workphone, receivables } = req.body
       
           if (!firstname) {
             return res.send({ message: 'Name is required' })
@@ -353,7 +354,7 @@ export const addpaymentController =async(req,res)=>{
           }
       
           const newVendor = {
-            
+            useremail,
             firstname,
             customeremail,   
             companyname,   
@@ -361,7 +362,7 @@ export const addpaymentController =async(req,res)=>{
             receivables
             };
       
-          const createdCustomer = await customersModelsModel.create(newCustomer); // Save the new customer
+          const createdCustomer = await customersModel.create(newCustomer); // Save the new customer
       
           console.log("Customer added:", createdCustomer);
       
