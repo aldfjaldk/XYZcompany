@@ -5,7 +5,7 @@ import vendorsModel from "../models/vendorsModel.js";
 import itemsModel from "../models/itemsModel.js";
 import customersModel from "../models/customersModel.js";
 import employeesModel from "../models/employeesModel.js";
-import deliveryChallansModel from "../models/deliveryChallansModel.js";
+import deliveryChallansModel from "../models/deliverychallanModel.js";
 export const registerController = async (req, res) => {
 
   try {
