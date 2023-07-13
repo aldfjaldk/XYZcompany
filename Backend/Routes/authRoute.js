@@ -14,7 +14,6 @@ import {
     handleItemData,
     currencyController,
     handleCurrencyData,
-    deliveryChallanController,
     handleDeliveryChallanData
 } from "../controllers/authController.js"
 import { requireSignIn, isAdmin } from "../middlewares/authmiddleware.js"
@@ -31,7 +30,6 @@ router.post("/addEmployee",employeeController);
 router.post("/addItem", itemController);
 router.post("/addCustomer", customerController);
 router.post("/addCurrency", currencyController);
-router.post("/addDeliveryChallan", deliveryChallanController);
 //Forgot Password || POST
 router.post("/forgot-password", forgotPasswordController);
 ////New Sales Order 

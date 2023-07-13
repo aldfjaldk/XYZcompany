@@ -5,7 +5,7 @@ import vendorsModel from "../models/vendorsModel.js";
 import itemsModel from "../models/itemsModel.js";
 import customersModel from "../models/customersModel.js";
 import employeesModel from "../models/employeesModel.js";
-import deliveryChallansModel from "../models/deliverychallanModel.js";
+import dchallan from "../models/deliverychallanModel.js";
 export const registerController = async (req, res) => {
 
   try {
@@ -138,6 +138,12 @@ export const newSalesOrderController = async (req, res) => {
   res.status(200);
 };
 
+//add-expense controller
+export const AddExpensesController = async (req, res) => {
+  console.log("Backend received the new-sales-order request")
+  res.status(200);
+};
+
 // test controller
 
 export const testController = (req, res) => {
@@ -193,7 +199,7 @@ export const forgotPasswordController = async (req, res) => {
 export const itemController = async (req, res) => {
 
   try {
-    const { fullname, description, rate, stock, hsncode, sku } = req.body
+    const { useremail,fullname, description, email, stock, hsncode, sku } = req.body
 
     if (!fullname) {
       return res.send({ message: 'Item name is required' })
@@ -201,8 +207,8 @@ export const itemController = async (req, res) => {
     if (!description) {
       return res.send({ message: 'Description is required' })
     }
-    if (!rate) {
-      return res.send({ message: 'rate is required' })
+    if (!email) {
+      return res.send({ message: 'email is required' })
     }
     if (!stock) {
       return res.send({ message: 'stock on hand is required' })
@@ -215,9 +221,10 @@ export const itemController = async (req, res) => {
     }
 
     const newItem = {
+      useremail,
       fullname,
       description,
-      rate,
+      email,
       stock,
       hsncode,
       sku
@@ -334,7 +341,7 @@ export const addpaymentController =async(req,res)=>{
       export const customerController = async (req, res) => {
 
         try {
-          const { firstname, customeremail, companyname, workphone, receivables } = req.body
+          const { useremail,firstname, customeremail, companyname, workphone, receivables } = req.body
       
           if (!firstname) {
             return res.send({ message: 'Name is required' })
@@ -353,7 +360,7 @@ export const addpaymentController =async(req,res)=>{
           }
       
           const newVendor = {
-            
+            useremail,
             firstname,
             customeremail,   
             companyname,   
@@ -361,7 +368,7 @@ export const addpaymentController =async(req,res)=>{
             receivables
             };
       
-          const createdCustomer = await customersModelsModel.create(newCustomer); // Save the new customer
+          const createdCustomer = await customersModel.create(newCustomer); // Save the new customer
       
           console.log("Customer added:", createdCustomer);
       
@@ -649,73 +656,14 @@ export const handleCurrencyData = async (req, res) => {
   }
 };
 
-export const deliveryChallanController = async (req, res) => {
-
-    try {
-      const { customerName, deliveryChallan, referenceNumber, deliveryChallanDate, challanType, warehouseName, subTotal} = req.body
-  
-      if (!customerName) {
-        return res.send({ message: 'Name is required' })
-      }
-      if (!deliveryChallan) {
-        return res.send({ message: 'Email is required' })
-      }
-      if (!referenceNumber) {
-        return res.send({ message: 'company name is required' })
-      }
-      if (!deliveryChallanDate) {
-        return res.send({ message: 'phone is required' })
-      }
-      if (!challanType) {
-        return res.send({ message: 'payables required' })
-      }
-      if (!warehouseName) {
-        return res.send({ message: 'payables required' })
-      }
-      if (!subTotal ) {
-        return res.send({ message: 'payables required' })
-      }
-  
-      const newDeliveryChallan = {
-        
-        customerName, 
-        deliveryChallan, 
-        referenceNumber, 
-        deliveryChallanDate, 
-        challanType, 
-        warehouseName, 
-        subTotal
-        };
-  
-      const createdDeliveryChallan = await deliveryChallansModel.create(newDeliveryChallan); // Save the new Delivery Challan
-  
-      console.log("Customer added:", createdDeliveryChallan);
-  
-      res.status(201).send({
-        success: true,
-        message: "Customer added successfully",
-        deliveryChallan: createdDeliveryChallan
-      });
-  
-    } catch (error) {
-      console.log(error)
-      res.status(500).send({
-        success: false,
-        message: 'Error',
-        error,
-      })
-  
-    }
-};
-
 export const handleDeliveryChallanData = async (req, res) => {
     try {
-      const deliveryChallans = await deliveryChallansModel.find();
+      const deliveryChallans = await dchallan.find();
   
       res.status(200).send({
         success: true,
         message: 'DeliveryChallans fetched successfully',
-        customers,
+        deliveryChallans,
       });
     } catch (error) {
       console.log(error);

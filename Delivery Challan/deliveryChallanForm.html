@@ -22,9 +22,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/60632f752f.js" crossorigin="anonymous"></script>
 
-
-
-
     <!--google material icon-->
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
     <style>
@@ -71,7 +68,7 @@
     <div id="header"></div>
     <div id="body">
         <div class="container mt-4">
-            <form>
+            <form id="challan-form" action="http://localhost:8000/challan-submit-form" method="post">
                 <h1 class="mt-5">Delivery Challan</h1>
                 <div class="form-group text-danger">
                     <label for="customerName">Customer Name:</label>
@@ -82,10 +79,14 @@
                     <label for="deliveryChallan">Delivery Challan#:</label>
                     <input placeholder="DC-00001" type="text" id="deliveryChallan" name="deliveryChallan">
                 </div>
+                <div class="form-group text-danger" hidden>
+                    <label for="user_email">Usermail</label>
+                    <input type="text" id="user_email" name="user_email" class="form-control" required>
+                </div>
 
                 <div class="form-group">
                     <label for="referenceNumber">Reference#:</label>
-                    <input type="text" id="referenceNumber" name="referenceNumber">
+                    <input type="number" id="referenceNumber" name="referenceNumber">
                 </div>
 
                 <div class="form-group text-danger">
@@ -113,105 +114,82 @@
 
                 <div class="item-details">
                     <h3 class="fs-5">Items And Description:</h3>
-
-                    <div class="item-row">
-                        <input type="text" placeholder="Item" name="item">
-                        <input type="number" placeholder="Quantity" name="quantity" onchange="calculateAmount(this)">
-                        <input type="number" step="1" placeholder="Rate (INR)" name="rate"
-                            onchange="calculateAmount(this)">
-                        <input type="number" step="0.01" placeholder="Tax" name="tax" onchange="calculateAmount(this)">
-                        <input type="number" step="0.1" placeholder="Amount (INR)" name="amount" disabled>
-                    </div>
-
-
-                    <!-- Add more item rows dynamically -->
-
-                    <div class="add-another">
-                        <button type="button" class="btn btn-outline-secondary" style="width: 200px;"
-                            onclick="addAnotherRow()">+ Add another line</button>
-                    </div>
-
-                    <div style="padding-top: 20px;">
-                        <label>Sub Total (INR):</label>
-                        <span id="subTotal" name="subTotal">0.00</span>
+                    <div class="container mt-3">
+                        <div class="row">
+                            <div class="col-sm-11">
+                                <table class="table table-bordered border-dark">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="col-sm-1">S No.</th>
+                                            <th scope="col" class="col-sm-2">Item.</th>
+                                            <th scope="col" class="col-sm-2">Quantity</th>
+                                            <th scope="col" class="col-sm-2">Rate</th>
+                                            <th scope="col" class="col-sm-2">Tax</th>
+                                            <th scope="col" class="col-sm-2">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="expenseTableBody">
+                                        <!-- Table rows will be dynamically generated here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <button type="button" class="btn btn-primary mt-3 col-sm-3" id="addExpensesBtn">Add Items</button>
 
+                <div style="padding-top: 20px;">
+                    <label>Sub Total (INR):</label>
+                    <span id="subTotal" name="subTotal">0.00</span>
+                    <input type="hidden" name="subTotal" id="subTotalInput"  class="form-control">
+                </div>
                 <div>
-                    <button type="submit" href="#" class="btn btn-primary" aria-current="page">Save as Draft</button>
-                    <button type="submit" href="#" class="btn btn-success" onclick="submitForm()">Save and Send</button>
-                    <button type="submit" href="#" class="btn btn-danger" onclick="cancelForm()">Cancel</button>
+<!--                     <button type="button" href="#" class="btn btn-primary" aria-current="page">Save as Draft</button> -->
+                    <button type="submit" href="#" class="btn btn-success">Save and Send</button>
+                    <button type="button" href="#" class="btn btn-danger" onclick="cancelForm()">Cancel</button>
                 </div>
             </form>
         </div>
     </div>
 
-
     <script>
-        // JavaScript code for handling functionalities
-        function addAnotherRow() {
-            var itemDetails = document.querySelector('.item-details');
+        var email = localStorage.getItem("email");
+        document.getElementById("user_email").value = email;
+        function calculateAmount() {
+            var rows = document.querySelectorAll('#expenseTableBody tr');
+            rows.forEach(function (row) {
+                var quantity = parseFloat(row.querySelector('td:nth-child(3) input').value) || 0;
+                var rate = parseFloat(row.querySelector('td:nth-child(4) input').value) || 0;
+                var tax = parseFloat(row.querySelector('td:nth-child(5) input').value) || 0;
 
-            var newRow = document.createElement('div');
-            newRow.classList.add('item-row');
-
-            newRow.innerHTML = `
-                <input type="text" placeholder="Item" name="item">
-                <input type="number" placeholder="Quantity" name="quantity" onchange="calculateAmount(this)">
-                <input type="number" step="1" placeholder="Rate (INR)" name="rate" onchange="calculateAmount(this)">
-                <input type="number" step="0.01" placeholder="Tax" name="tax" value="0" onchange="calculateAmount(this)">
-                <input type="number" step="0.1" placeholder="Amount (INR)" name="amount" disabled>
-              `;
-
-            itemDetails.insertBefore(newRow, itemDetails.lastElementChild);
-
-            // Add event listeners to the newly added row
-            var quantityInput = newRow.querySelector('input[name="quantity"]');
-            var rateInput = newRow.querySelector('input[name="rate"]');
-            var taxInput = newRow.querySelector('input[name="tax"]');
-
-            quantityInput.addEventListener('input', function () {
-                calculateAmount(this);
+                var amount = quantity * rate * (1 + tax / 100);
+                row.querySelector('td:nth-child(6)').innerText = amount.toFixed(2);
+                row.querySelector('td:nth-child(6)').name = amount.toFixed(2);
             });
-
-            rateInput.addEventListener('input', function () {
-                calculateAmount(this);
-            });
-
-            taxInput.addEventListener('input', function () {
-                calculateAmount(this);
-            });
-        }
-
-        // Calculate and update the amount and grand total
-        function calculateAmount(input) {
-            var itemRow = input.parentNode;
-            var quantity = parseFloat(itemRow.querySelector('input[name="quantity"]').value) || 0;
-            var rate = parseFloat(itemRow.querySelector('input[name="rate"]').value) || 0;
-            var tax = parseFloat(itemRow.querySelector('input[name="tax"]').value) || 0;
-
-            var amount = (quantity * rate * (1 + tax / 100)).toFixed(2);
-            itemRow.querySelector('input[name="amount"]').value = amount;
 
             calculateSubTotal();
         }
 
-        // Calculate and update the sub total
         function calculateSubTotal() {
-            var amountInputs = document.querySelectorAll('.item-row input[name="amount"]');
+            var amountCells = document.querySelectorAll('.item-row td[name="amount"]');
+            console.log(amountCells);
             var subTotal = 0;
 
-            amountInputs.forEach(function (input) {
-                subTotal += parseFloat(input.value) || 0;
+            amountCells.forEach(function (cell) {
+                subTotal += parseFloat(cell.innerText) || 0;
             });
 
             var subTotalElement = document.getElementById('subTotal');
             subTotalElement.innerText = subTotal.toFixed(2);
+
+            var subTotalInput = document.getElementById('subTotalInput');
+            subTotalInput.value = subTotal.toFixed(2);
+        }
+
+        function cancelForm(){
+            window.location.href = "./deliveryChallanPage.html";
         }
     </script>
-
-
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
@@ -229,18 +207,68 @@
         });
     </script>
 
-
     <script src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
-        </script>
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script>
         $(function () {
             $("#header").load("../Components/header.html");
             $("#footer").load("../Components/footer.html");
             $("#sidebar").load("../Components/sidebar.html");
+
+            $("#addExpensesBtn").click(function (event) {
+                event.preventDefault();
+                const tr = $("<tr class='item-row'>");
+                const serialNumber = $("<td>").text($("#expenseTableBody tr").length + 1);
+                const item = $("<td>").append(
+                    $("<input>").attr({
+                        type: "text",
+                        class: "form-control amount-input",
+                        name: "items[][" + ($("#expenseTableBody tr").length + 1) + "]",
+                        required: true,
+                    })
+                );
+                const quantity = $("<td>").append(
+                    $("<input>").attr({
+                        type: "number",
+                        class: "form-control amount-input",
+                        onchange: "calculateAmount()",
+                        name: "items[][" + ($("#expenseTableBody tr").length + 1) + "]",
+                        required: true,
+                    })
+                );
+                const rate = $("<td>").append(
+                    $("<input>").attr({
+                        type: "number",
+                        class: "form-control amount-input",
+                        onchange: "calculateAmount()",
+                        name: "items[][" + ($("#expenseTableBody tr").length + 1) + "]",
+                        required: true,
+                    })
+                );
+                const tax = $("<td>").append(
+                    $("<input>").attr({
+                        type: "number",
+                        class: "form-control amount-input",
+                        onchange: "calculateAmount()",
+                        name: "items[][" + ($("#expenseTableBody tr").length + 1) + "]",
+                        required: true,
+                    })
+                );
+                const amount = $("<td>").attr("name", "amount").text(0);
+
+                tr.append(serialNumber, item, quantity, rate, tax, amount);
+                $("#expenseTableBody").append(tr);
+            });
+
+            $("button[type='submit']").click(function (event) {
+                event.preventDefault();
+                $("#challan-form").submit();
+                setTimeout(function () {
+                    window.location.href = "./deliveryChallanPage.html";
+                }, 2000);
+            });
         });
     </script>
-
 </body>
 
 </html>

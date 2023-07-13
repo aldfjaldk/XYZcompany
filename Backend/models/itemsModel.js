@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
 const itemSchema = new mongoose.Schema({
+    useremail:{
+        type:String,
+        required:true,
+    },
     fullname: {
         type:String,
         required:true,
@@ -8,7 +12,7 @@ const itemSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
-    rate:{
+    email:{
         type:String,
         required:true
     },
