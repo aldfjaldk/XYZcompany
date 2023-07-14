@@ -674,3 +674,22 @@ export const handleDeliveryChallanData = async (req, res) => {
       });
     }
 };
+
+export const deletevendor = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await vendorsModel.deleteOne({ _id: id });
+
+    res.status(200).send({
+      success: true,
+      message: 'Vendor deleted successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};

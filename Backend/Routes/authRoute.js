@@ -14,7 +14,8 @@ import {
     handleItemData,
     currencyController,
     handleCurrencyData,
-    handleDeliveryChallanData
+    handleDeliveryChallanData,
+    deletevendor
 } from "../controllers/authController.js"
 import { requireSignIn, isAdmin } from "../middlewares/authmiddleware.js"
 
@@ -24,6 +25,7 @@ const router = express.Router();
 //register ||method Post
 router.post("/register", registerController);
 //LOGIN||POST
+router.delete("/deletevendor/:id", deletevendor);
 router.post("/login", loginController);
 router.post("/addVendor", vendorController);
 router.post("/addEmployee",employeeController);
