@@ -10,10 +10,11 @@ async function getItems() {
 
         (data.items).map((item) => {
             var checkemail=localStorage.getItem("email");
-            if(checkemail===vendor.useremail){
+            if(checkemail===item.useremail){
             //console.log(tableData);
             tableData += `
                 <tr>
+                    <td><input type="checkbox" class="entry-checkbox"></td>
                     <td>${item.fullname}</td>
                     <td>${item.description}</td>
                     <td>${item.email}</td>
