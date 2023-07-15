@@ -7,15 +7,15 @@ var formatteddate= year + "-" + month + "-" + day;
 
 
 data = {
-    useremail: "",
-    eno:"",
+    useremail: "...",
+    eno:"Not defined",
     date: formatteddate,
-    expenseaccount: "",
-    amount:"",  
-    paidthrough: "",   
-    vendor: "" ,
-    invoice: "",
-    customer:""
+    expenseaccount: "Not defined",
+    amount:"Not defined",  
+    paidthrough: "Not defined",   
+    vendor: "Not defined" ,
+    invoice: "Not defined",
+    customer:"Not defined"
 }
 
 async function postJSON(data) {
