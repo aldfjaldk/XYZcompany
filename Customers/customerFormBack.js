@@ -1,7 +1,7 @@
 data = {
     useremail: "...",
     firstname: "...",
-    customeremail: "...",   
+    email: "...",   
     companyname: "....",   
     workphone: "..." ,
     receivables: "..."
@@ -35,20 +35,20 @@ async function postJSON(data) {
 
 function handleSubmission (event) {
     event.preventDefault();
-    data.useremail=localStorage.getItem("customeremail");
+    data.useremail=localStorage.getItem("email");
     console.log("This is the data collected: ", data);
     postJSON(data)
 }
 
 function handleName(event) {data.firstname = event.target.value;}
-function handleEmail(event) {data.customeremail = event.target.value;}
+function handleEmail(event) {data.email = event.target.value;}
 function handleCompany(event) {data.companyname = event.target.value;}
 function handlePhone(event) {data.workphone = event.target.value;}
 function handlePayables(event) {data.receivables = event.target.value;}
 
 
 document.getElementById("firstname").addEventListener("change", handleName);
-document.getElementById("customeremail").addEventListener("change", handleEmail);
+document.getElementById("email").addEventListener("change", handleEmail);
 document.getElementById("companyname").addEventListener("change", handleCompany);
 document.getElementById("workphone").addEventListener("change", handlePhone);
 document.getElementById("receivables").addEventListener("change", handlePayables);

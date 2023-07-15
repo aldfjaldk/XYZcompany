@@ -338,12 +338,12 @@ export const addpaymentController =async(req,res)=>{
       export const customerController = async (req, res) => {
 
         try {
-          const { useremail,firstname, customeremail, companyname, workphone, receivables } = req.body
+          const { useremail,firstname, email, companyname, workphone, receivables } = req.body
       
           if (!firstname) {
             return res.send({ message: 'Name is required' })
           }
-          if (!customeremail) {
+          if (!email) {
             return res.send({ message: 'Email is required' })
           }
           if (!companyname) {
@@ -356,10 +356,10 @@ export const addpaymentController =async(req,res)=>{
             return res.send({ message: 'payables required' })
           }
       
-          const newVendor = {
+          const newCustomer = {
             useremail,
             firstname,
-            customeremail,   
+            email,   
             companyname,   
             workphone ,
             receivables
