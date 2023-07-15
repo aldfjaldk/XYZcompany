@@ -16,7 +16,7 @@ import {
     currencyController,
     handleCurrencyData,
     handleDeliveryChallanData,
-    deletevendor
+    deletevendor,
     handleExpenseData
 } from "../controllers/authController.js"
 import { requireSignIn, isAdmin } from "../middlewares/authmiddleware.js"
