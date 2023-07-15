@@ -19,6 +19,7 @@ async function getVendors() {
                     <td>${vendor.email}</td>
                     <td>${vendor.phone}</td>
                     <td>${vendor.payables}</td>
+                    <td><button class="btn btn-outline-danger me-2" onclick="removeItem('${vendor._id}')">REMOVE</button></td>
                 </tr>
             `;
     }});
@@ -30,4 +31,24 @@ async function getVendors() {
 }
 
 // Call the getVendors function to fetch and display vendors data initially
+
 getVendors();
+
+async function removeItem(id) {
+    try {
+        const response = await fetch(`http://localhost:8000/api/v1/auth/deletevendor/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id })
+        });
+        const data = await response.json();
+        console.log("Remove Item response:", data);
+
+        // Call getVendors function again to refresh the table after removing the item
+        getVendors();
+    } catch (error) {
+        console.log("Error removing item:", error);
+    }
+}
