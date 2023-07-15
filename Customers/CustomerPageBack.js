@@ -9,14 +9,15 @@ async function getCustomers() {
         let tableData = "";
 
         (data.customers).map((customer) => {
-            var checkemail=localStorage.getItem("customeremail");
+            var checkemail=localStorage.getItem("email");
             if(checkemail===customer.useremail){
             //console.log(tableData);
             tableData += `
                 <tr>
+                    <td><input type="checkbox" class="entry-checkbox"></td>
                     <td>${customer.firstname}</td>
                     <td>${customer.companyname}</td>
-                    <td>${customer.customeremail}</td>
+                    <td>${customer.email}</td>
                     <td>${customer.workphone}</td>
                     <td>${customer.receivables}</td>
                 </tr>
