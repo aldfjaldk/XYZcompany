@@ -8,6 +8,7 @@ import cors from "cors";
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import Dashboard from "./models/dashboardModel.js";
+import PayrollDashboard from "./models/payrolldashboardModel.js";
 import Budget from "./models/budget.js";
 import Payment from "./models/newpayment.js";
 
@@ -356,5 +357,39 @@ app.post("/challan-submit-form", async (req, res) => {
     return res
       .status(500)
       .json({ success: false, error: "Internal server error" });
+  }
+});
+
+app.post("/api/payrolldashboard", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const totalCostSize = 4;
+
+    const randomTotalCost = Array.from({ length: totalCostSize }, () => Math.floor(Math.random() * 100000));
+    const totalCostArr = randomTotalCost;
+
+    const payrolldashboardData = {
+      email: email,
+      epfAmount: 15257,
+      esiAmount: 7693,
+      tdsAmount: 13039,
+      activeEmployeesCount: 7,
+      totalCostArr: totalCostArr
+    };
+
+    const existingPayrollDashboard = await PayrollDashboard.findOne({ email });
+
+    if (existingPayrollDashboard) {
+      const updatedPayrollDashboard = await PayrollDashboard.findOneAndUpdate({ email }, payrolldashboardData, { new: true });
+      res.json(updatedPayrollDashboard);
+    } else {
+      const newPayrollDashboard = new PayrollDashboard(payrolldashboardData);
+      const savedPayrollDashboard = await newPayrollDashboard.save();
+      res.json(savedPayrollDashboard);
+    }
+  } catch (error) {
+    console.error('Error updating or fetching dashboard data:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
