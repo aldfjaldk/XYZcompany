@@ -2,6 +2,7 @@ import { hashPassword, comparePassword } from "../helper/authhelper.js";
 import userModel from "../models/userModel.js";
 import JWT from "jsonwebtoken";
 import vendorsModel from "../models/vendorsModel.js";
+import expensesModel from "../models/expensesModel.js";
 import itemsModel from "../models/itemsModel.js";
 import customersModel from "../models/customersModel.js";
 import employeesModel from "../models/employeesModel.js";
@@ -139,10 +140,6 @@ export const newSalesOrderController = async (req, res) => {
 };
 
 //add-expense controller
-export const AddExpensesController = async (req, res) => {
-  console.log("Backend received the new-sales-order request")
-  res.status(200);
-};
 
 // test controller
 
@@ -674,3 +671,90 @@ export const handleDeliveryChallanData = async (req, res) => {
       });
     }
 };
+
+export const expenseController = async (req, res) => {
+
+  try {
+    const { useremail,eno, date, expenseaccount, amount, paidthrough,vendor,invoice, customer} = req.body
+    if (!eno) {
+      return res.send({ message: 'Eno. is required' })
+    }
+    if (!date) {
+      return res.send({ message: 'Date is required' })
+    }
+    if (!expenseaccount) {
+      return res.send({ message: 'Expense Account is required' })
+    }
+    if (!amount) {
+      return res.send({ message: 'Amount is required' })
+    }
+    if (!paidthrough) {
+      return res.send({ message: 'paid through is required' })
+    }
+    if (!vendor) {
+      return res.send({ message: 'Vendor is required' })
+    }
+    if (!invoice) {
+      return res.send({ message: 'Invoice is required' })
+    }
+    if (!customer) {
+      return res.send({ message: 'Customer is required' })
+    }
+    
+    
+
+    const newExpense = {
+      useremail,
+      eno,
+      date,
+      expenseaccount,
+      amount,
+      paidthrough,
+      vendor,
+      invoice,
+      customer,
+    };
+
+    const createdExpense = await expensesModel.create(newExpense);
+
+    console.log("Expense added:", createdExpense);
+
+    res.status(201).send({
+      success: true,
+      message: "Expense added successfully",
+      expense: createdExpense
+    });
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    })
+
+  }
+
+
+};
+
+export const handleExpenseData = async (req, res) => {
+  try {
+    const expenses = await expensesModel.find();
+
+    res.status(200).send({
+      success: true,
+      message: 'Expense fetched successfully',
+      expenses,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
+
+

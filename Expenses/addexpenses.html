@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expenses</title>
+    <script src="./addexpenses.js"></script>
+    <style>
+        .main{
+            margin-left: 18%;
+        }
+        form input,form select{
+            
+            height: 30px;
+            margin-bottom: 30px;
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar"></div>
+    <div id="header"></div>
+
+    <section class="main">
+        <h4>Record Expense</h4>
+        <form id="mainForm">
+            Expense No.<input id="eno"><br>
+            Date<input type="date" id="date" value="" required><br>
+            Expense Account<select id="expenseaccount" required>
+                <optgroup label="Expense">
+                  <option value="advertising">Advertising and Marketing</option>
+                  <option value="automobile">Automobile Expense</option>
+                </optgroup>
+                <optgroup label="Fixed Asset">
+                  <option value="furniture">Furniture and Equipment</option>
+                </optgroup>
+              </select><br>
+            
+            Amount<input type="number" id="amount"  required><br>
+            Paid Through<select id="paidthrough"  required>
+                <optgroup label="Cash">
+                  <option value="pettycash">Petty Cash</option>
+                  <option value="undepositedfunds">Undeposited Funds</option>
+                </optgroup>
+                <optgroup label="Bank">
+                  <option value="sbi">SBI Current Account</option>
+                </optgroup>
+              </select><br>
+              Vendor<select id="vendor" >
+                  <option value="Tata">Tata</option>
+                  <option value="Adani">Adani</option>
+                  </select><br>
+            Invoice#<input id="invoice" type="text"><br>
+            Customer Name<select id="customer" >
+                <option value="pettycash">Petty Cash</option>
+                <option value="sidd">Siddharth</option>
+                </select><br>
+            <button type="submit" type="button">Save</button>
+            <button>Cancel</button>
+        </form>
+    </section>
+
+
+    <script>
+        var date = new Date();
+        var year = date.toLocaleString("default", { year: "numeric" });
+        var month = date.toLocaleString("default", { month: "2-digit" });
+        var day = date.toLocaleString("default", { day: "2-digit" });
+        document.getElementById("date").value= year + "-" + month + "-" + day;
+    </script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" 
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+</script>
+<script>
+    $(function () {
+        $("#header").load("../Components/header.html");
+        $("#sidebar").load("../Components/sidebar.html");
+    });
+</script>
+</body>
+</html>

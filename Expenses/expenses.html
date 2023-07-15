@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses</title>
+    <script src="./displayexpenses.js"></script>
+    <style>
+        .main{
+            margin-left: 18%;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar"></div>
+    <div id="header"></div>
+    <section class="main">
+        <h3>Expenses</h3>
+        <a href="addexpenses.html">+New</a>
+        <table>
+            <thead>
+                <th width="20%">EXPENSE NO.</th>
+                <th width="20%">DATE</th>
+                <th width="20%">EXPENSE ACCOUNT</th>
+                <th width="20%">AMOUNT</th>
+                <th width="20%">VENDOR NAME</th>
+                <th width="10%"></th>
+            </thead>
+            <tbody id="tablebody">
+
+            </tbody>
+            
+        </table>
+        <form>
+            Amount<input class="amount2">
+        </form>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" 
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+    </script>
+    <script>
+        $(function () {
+            $("#header").load("../Components/header.html");
+            $("#sidebar").load("../Components/sidebar.html");
+        });
+    </script>
+
+</body>
+</html>

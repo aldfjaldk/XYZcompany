@@ -5,6 +5,7 @@ import {
     testController,
     forgotPasswordController,
     vendorController,
+    expenseController,
     employeeController,
     handleVendorData,
     newSalesOrderController,
@@ -14,7 +15,9 @@ import {
     handleItemData,
     currencyController,
     handleCurrencyData,
-    handleDeliveryChallanData
+    handleDeliveryChallanData,
+    
+    handleExpenseData
 } from "../controllers/authController.js"
 import { requireSignIn, isAdmin } from "../middlewares/authmiddleware.js"
 
@@ -26,6 +29,7 @@ router.post("/register", registerController);
 //LOGIN||POST
 router.post("/login", loginController);
 router.post("/addVendor", vendorController);
+router.post("/addExpense", expenseController);
 router.post("/addEmployee",employeeController);
 router.post("/addItem", itemController);
 router.post("/addCustomer", customerController);
@@ -36,6 +40,7 @@ router.post("/forgot-password", forgotPasswordController);
 router.post("/new-sales-order", newSalesOrderController);
 //test routes
 router.get("/displayvendor", handleVendorData);
+router.get("/displayexpense", handleExpenseData);
 router.get("/displaycustomer", handleCustomerData);
 router.get("/displayitem", handleItemData);
 router.get("/displaycurrency", handleCurrencyData);
