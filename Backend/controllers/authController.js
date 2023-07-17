@@ -552,7 +552,6 @@ export const employeeController = async (req, res) => {
       message: "Employee added successfully",
       employee: createdEmployee
     });
-
   } catch (error) {
     console.log(error)
     res.status(500).send({
@@ -574,6 +573,7 @@ export const handleEmployeeData = async (req, res) => {
       message: 'Employees fetched successfully',
       employees,
     });
+    // console.log(createdEmployee);
   } catch (error) {
     console.log(error);
     res.status(500).send({
