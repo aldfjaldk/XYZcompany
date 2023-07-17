@@ -569,7 +569,6 @@ export const employeeController = async (req, res) => {
 export const handleEmployeeData = async (req, res) => {
   try {
     const employees = await employeesModel.find();
-
     res.status(200).send({
       success: true,
       message: 'Employees fetched successfully',

@@ -7,6 +7,7 @@ import {
     vendorController,
     expenseController,
     employeeController,
+    handleEmployeeData,
     handleVendorData,
     newSalesOrderController,
     customerController,
@@ -41,6 +42,7 @@ router.post("/forgot-password", forgotPasswordController);
 router.post("/new-sales-order", newSalesOrderController);
 //test routes
 router.get("/displayvendor", handleVendorData);
+router.get("/displayemployee", handleEmployeeData);
 router.get("/displayexpense", handleExpenseData);
 router.get("/displaycustomer", handleCustomerData);
 router.get("/displayitem", handleItemData);

@@ -1,18 +1,18 @@
 data = {
-    name: "....",
-    id: "....",
-    gender: "....",   
-    doj: "....",   
-    email: "...." ,
-    dob: "....",
-    phone:"....",
-    department:"....",
-    designation:"....",
-    basic:"....",
-    rent:"....",
-    conveyance:"....",
-    fixed:"....",
-    ctc:"...."
+    name: "...",
+    id: "...",
+    gender: "...",   
+    doj: "...",   
+    email: "..." ,
+    dob: "...",
+    phone:"...",
+    department:"...",
+    designation:"...",
+    basic:"...",
+    rent:"...",
+    conveyance:"...",
+    fixed:"...",
+    ctc:"..."
 }
 console.log("welcome to the employees page.")
 
@@ -44,8 +44,9 @@ async function postJSON(data) {
 
 function handleSubmission (event) {
     event.preventDefault();
+    data.useremail=localStorage.getItem("email");
+    console.log(event.target.value);
     console.log("This is the data collected: ", data);
-    //data.useremail=localStorage.getItem("email"); //no need for this line
     postJSON(data)
 }
 
