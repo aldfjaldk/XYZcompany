@@ -5,70 +5,70 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
     <style>
-        .pe{
+        .pe {
             background-color: rgba(200, 200, 200, 0.2);
         }
     </style>
 </head>
+
 <body>
     <div id="sidebar"></div>
     <div id="header"></div>
-        
-        <section class="right">
-            <section class="top">
-                <div id="searchbox">
-                    <form action="search.php">
-                        <input required placeholder="Search Employee" name="name">
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>
-                <div class="add">
-                    <button onclick="window.location.href='addemployee.html'">Add Employee</button>
-                </div>
-            </section>
 
-            <!--Demo employee details-->
-            <!--We can add a loop and display all details by fetching from database-->
-            <div class="box">
-        
+    <section class="right">
+        <section class="top">
+            <div id="searchbox">
+                <form action="search.php">
+                    <input required placeholder="Search Employee" name="name">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
             </div>
-            <!--Code for collapsible details-->
-            <script>
-                var coll = document.getElementsByClassName("collapsible");
-                var i;
-                for (i = 0; i < coll.length; i++) {
-                  coll[i].addEventListener("click", function() {
+            <div class="add">
+                <button onclick="window.location.href='addemployee.html'">Add Employee</button>
+            </div>
+        </section>
+
+        <!--Demo employee details-->
+        <!--We can add a loop and display all details by fetching from database-->
+        <div id="box">
+
+        </div>
+        <!--Code for collapsible details-->
+        <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function () {
                     this.classList.toggle("active");
                     var content = this.nextElementSibling;
                     if (content.style.display === "block") {
-                      content.style.display = "none";
+                        content.style.display = "none";
                     } else {
-                      content.style.display = "block";
+                        content.style.display = "block";
                     }
-                  });
-                }
-                </script>
+                });
+            }
+        </script>
 
-            <!--Display below text if database is empty(i.e.no employees are added)-->
-            <!--<section class="text">
+        <!--Display below text if database is empty(i.e.no employees are added)-->
+        <!--<section class="text">
                 <h1 class="heading">Get your employees onboard</h1>
                 <p>Add your employee details and manage their salary and allowances easily.</p>
             </section>-->
 
-        </section>
+    </section>
 
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.js"
-    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-    crossorigin="anonymous">
-  </script>
-  <script src="./displayemployees.js"></script>
-    <script> 
-        $(function(){
-          $("#header").load("../Components/header.html"); 
-          $("#footer").load("../Components/footer.html"); 
-          $("#sidebar").load("../Components/sidebar.html");
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+        </script>
+    <script src="./displayemployees2.js"></script>
+    <script>
+        $(function () {
+            $("#header").load("../Components/header.html");
+            $("#footer").load("../Components/footer.html");
+            $("#sidebar").load("../Components/sidebar.html");
         });
     </script>
 </body>
+
 </html>
