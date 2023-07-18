@@ -33,6 +33,7 @@ router.post("/register", registerController);
 
 //DELETE
 router.delete("/deletevendor/:id", deletevendor);
+router.delete("/deleteexpense/:id", deleteexpense);
 router.post("/login", loginController);
 router.post("/addVendor", vendorController);
 router.post("/addExpense", expenseController);
