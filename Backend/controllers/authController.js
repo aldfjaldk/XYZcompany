@@ -734,8 +734,6 @@ export const expenseController = async (req, res) => {
     })
 
   }
-
-
 };
 
 export const handleExpenseData = async (req, res) => {
@@ -756,6 +754,27 @@ export const handleExpenseData = async (req, res) => {
     });
   }
 };
+
+export const deleteexpense = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await expensesModel.deleteOne({ _id: id });
+
+    res.status(200).send({
+      success: true,
+      message: 'Expense deleted successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
+
+
 
 export const deletevendor = async (req, res) => {
   try {

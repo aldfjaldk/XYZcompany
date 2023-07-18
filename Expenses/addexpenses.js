@@ -67,7 +67,6 @@ if (el) {el.addEventListener("change", handleDate);}
 else{formatteddate.addEventListener("change", handleDate);}
 
 document.getElementById("expenseaccount").addEventListener("change", handleExpenseAccount);
-
 document.getElementById("amount").addEventListener("change", handleAmount);
 document.getElementById("paidthrough").addEventListener("change", handlePaidThrough);
 document.getElementById("vendor").addEventListener("change", handleVendor);

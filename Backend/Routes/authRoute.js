@@ -17,7 +17,8 @@ import {
     handleCurrencyData,
     handleDeliveryChallanData,
     deletevendor,
-    handleExpenseData
+    handleExpenseData,
+    deleteexpense,
 } from "../controllers/authController.js"
 import { requireSignIn, isAdmin } from "../middlewares/authmiddleware.js"
 
@@ -26,8 +27,12 @@ const router = express.Router();
 //routing
 //register ||method Post
 router.post("/register", registerController);
-//LOGIN||POST
+
+//DELETE
 router.delete("/deletevendor/:id", deletevendor);
+router.delete("/deleteexpense/:id", deleteexpense);
+//LOGIN||POST
+
 router.post("/login", loginController);
 router.post("/addVendor", vendorController);
 router.post("/addExpense", expenseController);
@@ -35,6 +40,8 @@ router.post("/addEmployee",employeeController);
 router.post("/addItem", itemController);
 router.post("/addCustomer", customerController);
 router.post("/addCurrency", currencyController);
+
+
 //Forgot Password || POST
 router.post("/forgot-password", forgotPasswordController);
 ////New Sales Order 

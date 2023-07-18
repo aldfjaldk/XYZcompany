@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +8,93 @@
         .main{
             margin-left: 18%;
         }
-        form input,form select{
-            
-            height: 30px;
-            margin-bottom: 30px;
-            margin-left: 50px;
-        }
+        #mainForm {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Styles for the form headings */
+    h4 {
+        text-align: center;
+        margin-top: 0;
+        color: #333;
+    }
+
+    /* Styles for the form inputs and labels */
+    form input,
+    form select {
+        
+        margin-bottom: 10px;
+        width: 300px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+        background-color: #f2f2f2;
+    }
+
+    /* Styles for the form buttons */
+    form button {
+        display: inline-block;
+        padding: 8px 12px;
+        margin-top: 10px;
+        margin-right: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #4CAF50;
+        color: #fff;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    /* Hover state for buttons */
+    form button:hover {
+        background-color: #45a049;
+    }
+
+    /* Styles for the cancel button */
+    form button:last-child {
+        background-color: #ccc;
+        color: #333;
+    }
+
+    /* Styles for select dropdowns */
+    form select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: #f2f2f2;
+    }
+
+    /* Styles for select dropdown arrow */
+    form select::-ms-expand {
+        display: none;
+    }
+
+    /* Styles for the select dropdown's dropdown indicator */
+    form select::after {
+        content: '\25BC';
+        position: absolute;
+        top: 12px;
+        right: 10px;
+        color: #888;
+    }
+
+    /* Styles for the select dropdown's dropdown options */
+    form select option {
+        background-color: #fff;
+    }
+    label {
+        display: inline-block;
+        width: 190px;
+        color: #777777;
+      }
+</style>
     </style>
 </head>
 <body>
@@ -24,40 +104,48 @@
     <section class="main">
         <h4>Record Expense</h4>
         <form id="mainForm">
-            Expense No.<input id="eno"><br>
-            Date<input type="date" id="date" value="" required><br>
-            Expense Account<select id="expenseaccount" required>
-                <optgroup label="Expense">
-                  <option value="advertising">Advertising and Marketing</option>
-                  <option value="automobile">Automobile Expense</option>
-                </optgroup>
-                <optgroup label="Fixed Asset">
-                  <option value="furniture">Furniture and Equipment</option>
-                </optgroup>
-              </select><br>
-            
-            Amount<input type="number" id="amount"  required><br>
-            Paid Through<select id="paidthrough"  required>
-                <optgroup label="Cash">
-                  <option value="pettycash">Petty Cash</option>
-                  <option value="undepositedfunds">Undeposited Funds</option>
-                </optgroup>
-                <optgroup label="Bank">
-                  <option value="sbi">SBI Current Account</option>
-                </optgroup>
-              </select><br>
-              Vendor<select id="vendor" >
-                  <option value="Tata">Tata</option>
-                  <option value="Adani">Adani</option>
-                  </select><br>
-            Invoice#<input id="invoice" type="text"><br>
-            Customer Name<select id="customer" >
+            <label class="label">Expense No.</label>
+            <input id="eno"> <br><br>
+            <label class="label">Date</label>
+            <input type="date" id="date" value="" required> <br><br>
+            <label class="label">Expense Account</label>
+            <select id="expenseaccount" required>
+              <optgroup label="Expense">
+                <option value="advertising">Advertising and Marketing</option>
+                <option value="automobile">Automobile Expense</option>
+              </optgroup>
+              <optgroup label="Fixed Asset">
+                <option value="furniture">Furniture and Equipment</option>
+              </optgroup>
+            </select> <br><br>
+            <label class="label">Amount</label>
+            <input type="number" id="amount" required> <br><br>
+            <label class="label">Paid Through</label>
+            <select id="paidthrough" required>
+              <optgroup label="Cash">
                 <option value="pettycash">Petty Cash</option>
-                <option value="sidd">Siddharth</option>
-                </select><br>
+                <option value="undepositedfunds">Undeposited Funds</option>
+              </optgroup>
+              <optgroup label="Bank">
+                <option value="sbi">SBI Current Account</option>
+              </optgroup>
+            </select> <br><br>
+            <label class="label">Vendor</label>
+            <select id="vendor">
+              <option value="Tata">Tata</option>
+              <option value="Adani">Adani</option>
+            </select> <br><br>
+            <label class="label">Invoice#</label>
+            <input id="invoice" type="text"> <br><br>
+            <label class="label">Customer Name</label>
+            <select id="customer">
+              <option value="pettycash">Petty Cash</option>
+              <option value="sidd">Siddharth</option>
+            </select> <br><br>
             <button type="submit" type="button">Save</button>
-            <button>Cancel</button>
-        </form>
+            <button onclick="window.location.href='expenses.html'">Cancel</button>
+          </form>
+          
     </section>
 
 
