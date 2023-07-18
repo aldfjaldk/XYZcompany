@@ -26,9 +26,9 @@
                         <option value="female">Female</option>
                     </select>
                     Date of Joining:<input class="input" type="date" name="doj" id="doj">
-                    Email:<input class="input" type="email" name="email" id="email">
+                    Email:<input class="input" type="text" name="email" id="email">
                     Date of Birth:<input class="input" type="date" name="dob" id="dob">
-                    Mobile Number:<input class="input" type="number" name="number" id="number">
+                    Mobile Number:<input class="input" type="number" name="number" id="phone">
                 </div>
 
                 <div class="tab">
@@ -62,6 +62,7 @@
                     <div style="float:right;">
                         <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
                         <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                        <!-- <button type="submit">Submit707</button> -->
                     </div>
                 </div>
                 
@@ -92,7 +93,7 @@
                         x[currentTab].style.display = "none";
                         currentTab = currentTab + n;
                         if (currentTab >= x.length) {
-                            document.getElementById("regForm").submit();
+                            document.getElementById("nextBtn").setAttribute('type', 'submit')
                             return false;
                         }
                         showTab(currentTab);

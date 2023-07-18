@@ -7,6 +7,7 @@ import {
     vendorController,
     expenseController,
     employeeController,
+    handleEmployeeData,
     handleVendorData,
     newSalesOrderController,
     customerController,
@@ -18,7 +19,9 @@ import {
     handleDeliveryChallanData,
     deletevendor,
     handleExpenseData,
-    deleteexpense,
+    editvendordata,
+    VendorDataByID,
+    deleteexpense
 } from "../controllers/authController.js"
 import { requireSignIn, isAdmin } from "../middlewares/authmiddleware.js"
 
@@ -30,9 +33,6 @@ router.post("/register", registerController);
 
 //DELETE
 router.delete("/deletevendor/:id", deletevendor);
-router.delete("/deleteexpense/:id", deleteexpense);
-//LOGIN||POST
-
 router.post("/login", loginController);
 router.post("/addVendor", vendorController);
 router.post("/addExpense", expenseController);
@@ -48,6 +48,7 @@ router.post("/forgot-password", forgotPasswordController);
 router.post("/new-sales-order", newSalesOrderController);
 //test routes
 router.get("/displayvendor", handleVendorData);
+router.get("/displayemployee", handleEmployeeData);
 router.get("/displayexpense", handleExpenseData);
 router.get("/displaycustomer", handleCustomerData);
 router.get("/displayitem", handleItemData);

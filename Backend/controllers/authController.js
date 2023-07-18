@@ -552,7 +552,6 @@ export const employeeController = async (req, res) => {
       message: "Employee added successfully",
       employee: createdEmployee
     });
-
   } catch (error) {
     console.log(error)
     res.status(500).send({
@@ -569,12 +568,12 @@ export const employeeController = async (req, res) => {
 export const handleEmployeeData = async (req, res) => {
   try {
     const employees = await employeesModel.find();
-
     res.status(200).send({
       success: true,
       message: 'Employees fetched successfully',
       employees,
     });
+    // console.log(createdEmployee);
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -790,6 +789,72 @@ export const deletevendor = async (req, res) => {
     res.status(500).send({
       success: false,
       message: 'Error',
+      error,
+    });
+  }
+};
+
+export const editvendordata = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedData = req.body; // Assuming the request body contains the updated vendor data
+
+    // Check if the vendor with the provided ID exists
+    const existingVendor = await vendorsModel.findById(id);
+    if (!existingVendor) {
+      return res.status(404).send({
+        success: false,
+        message: 'Vendor not found',
+      });
+    }
+
+    // Update the vendor data
+    const updatedVendor = await vendorsModel.findByIdAndUpdate(id, updatedData, {
+      new: true, // Return the updated document
+      runValidators: true, // Run validation on the updated data
+    });
+
+    res.status(200).send({
+      success: true,
+      message: 'Vendor updated successfully',
+      vendor: updatedVendor,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error updating vendor',
+      error,
+    });
+  }
+};
+
+export const VendorDataByID = async (req, res) => {
+  try {
+    const vendorId = req.params.id;
+
+    // Fetch the vendor data with the provided ID from the database
+    const vendor = await vendorsModel.findById(vendorId);
+
+    // If the vendor is not found, return a 404 status
+    if (!vendor) {
+      return res.status(404).json({
+        success: false,
+        message: 'Vendor not found',
+      });
+    }
+
+    // Return the vendor data as a JSON response
+    res.status(200).json({
+      success: true,
+      message: 'Vendor found successfully',
+      vendor: vendor,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error finding vendor',
       error,
     });
   }

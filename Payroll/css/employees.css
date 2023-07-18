@@ -102,14 +102,16 @@
     display: block;
     float: left;
     margin: 0 10px;
+    min-width: 200px;
 }
 .d2{
     display: block;
-    margin: 0 300px;
+    margin-left: 200px;
     float: left;
+    min-width: 200px;
 }
 .d3{
     display: block;
-    float: right;
-    margin-right: 150px;
+    float: left;
+    margin-left: 200px;
 }
