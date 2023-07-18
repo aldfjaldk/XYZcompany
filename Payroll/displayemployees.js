@@ -1,37 +1,54 @@
-async function getEmployees() {
-    try {
-        const response = await fetch("http://localhost:8000/api/v1/auth/displayemployee");
-        const data = await response.json();
-        console.log("Employees data:", data.employees[0]);
-        console.log("data type of data.employees", typeof data.employees);
-        
-        // Display the vendors data in the table
-        let tableData = "";
+document.addEventListener("DOMContentLoaded", function() {
+    fetch("http://localhost:8000/api/v1/auth/displayemployee")
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log("myData: ", data);
+            displayData(data); //complete this function
+        })
+        .catch((err) => {
+            console.error("Error: ", err);
+        });
+});
 
-        (data.employees).map((employee) => {
-            var checkemail=localStorage.getItem("email");
-            if(checkemail===employee.useremail){
-            console.log(tableData);
-            tableData += `
-                <div>
-                <button type="button" class="collapsible"><p class="d1">${employee.name}</p><p class="d2">Employee Id: ${employee.id}</p><p class="d3">${employee.designation}</p></button>
-                <div class="content">
-                    <p>Gender: ${employee.gender}</p>
-                    <p>Date of Joining: ${employee.doj}</p>
-                    <p>Email: ${employee.email}</p>
-                    <p>Mobile Number: ${employee.phone}</p>
-                    <p>Date of Birth: ${employee.dob}</p>
-                    <p>Department: ${employee.department}</p>
-                    <p>Salary(CTC): ${employee.ctc}</p>
-                </div>
-                </div>
-            `;
-    }});
+function displayData(data) {
+    let msgToBeDisplayed = '';
 
-        document.getElementById('box').innerHTML = tableData;
-    } catch (error) {
-        console.log("Error fetching employees:", error);
+    for (let i = 0; i < data.employees.length; i++) {
+        msgToBeDisplayed += `
+        <div>
+            <button type="button" class="collapsible">
+                <p class="d1">Name: ${data.employees[i].name}</p>
+                <p class="d2">Employee Id: ${data.employees[i].id}</p>
+                <p class="d3">Designation: ${data.employees[i].designation}</p>
+            </button>
+            <div class="content">
+                <p>Gender: ${data.employees[i].gender}</p>
+                <p>Date of Joining: ${data.employees[i].doj}</p>
+                <p>Email: ${data.employees[i].email}</p>
+                <p>Mobile Number: ${data.employees[i].phone}</p>
+                <p>Date of Birth: ${data.employees[i].dob}</p>
+                <p>Department: ${data.employees[i].department}</p>
+                <p>Salary(CTC): ${data.employees[i].ctc}</p>
+            </div>
+        </div>`;
+    }
+
+    document.getElementById("box").innerHTML = msgToBeDisplayed;
+
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
     }
 }
-
-getEmployees();

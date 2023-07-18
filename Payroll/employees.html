@@ -30,11 +30,11 @@
 
         <!--Demo employee details-->
         <!--We can add a loop and display all details by fetching from database-->
-        <div id="box">
+        <div id="box" class="box">
 
         </div>
         <!--Code for collapsible details-->
-        <script>
+        <!-- <script>
             var coll = document.getElementsByClassName("collapsible");
             var i;
             for (i = 0; i < coll.length; i++) {
@@ -48,7 +48,7 @@
                     }
                 });
             }
-        </script>
+        </script> -->
 
         <!--Display below text if database is empty(i.e.no employees are added)-->
         <!--<section class="text">
@@ -61,7 +61,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
         </script>
-    <script src="./displayemployees2.js"></script>
+    <script src="./displayemployees.js"></script>
     <script>
         $(function () {
             $("#header").load("../Components/header.html");
