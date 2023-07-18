@@ -18,7 +18,9 @@ import {
     handleCurrencyData,
     handleDeliveryChallanData,
     deletevendor,
-    handleExpenseData
+    handleExpenseData,
+    editvendordata,
+    VendorDataByID
 } from "../controllers/authController.js"
 import { requireSignIn, isAdmin } from "../middlewares/authmiddleware.js"
 
@@ -29,6 +31,8 @@ const router = express.Router();
 router.post("/register", registerController);
 //LOGIN||POST
 router.delete("/deletevendor/:id", deletevendor);
+router.put("/editvendor/:id", editvendordata);
+router.get("/showvendor/:id", VendorDataByID);
 router.post("/login", loginController);
 router.post("/addVendor", vendorController);
 router.post("/addExpense", expenseController);
