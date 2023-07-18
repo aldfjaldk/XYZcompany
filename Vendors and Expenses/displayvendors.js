@@ -19,6 +19,7 @@ async function getVendors() {
                     <td>${vendor.email}</td>
                     <td>${vendor.phone}</td>
                     <td>${vendor.payables}</td>
+                    <td><button class="btn btn-outline-danger me-2" onclick="editItem('${vendor._id}')">EDIT</button></td>
                     <td><button class="btn btn-outline-danger me-2" onclick="removeItem('${vendor._id}')">REMOVE</button></td>
                 </tr>
             `;
@@ -68,7 +69,7 @@ async function editItem(id) {
       document.getElementById("email").value = data.vendor.email;
       document.getElementById("phone").value = data.vendor.phone;
       document.getElementById("payables").value = data.vendor.payables;
-      
+      window.location.href = "new_vendor.html"
   
       // Add an event listener to the form's submit button to update the vendor data on the server
       document.getElementById('mainForm').addEventListener('submit', async (event) => {
