@@ -90,11 +90,10 @@ app.get('/Budgets/budget.html', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
-
 app.post("/budget-submit-form", async (req, res) => {
   try {
     console.log(req.body);
-    const { name, period, description, amount, expenses ,user} = req.body;
+    const { name, period, description, amount, expenses, user } = req.body;
 
     // Check if all required fields are present
     if (!name || !period || !amount || !description || !expenses) {
@@ -103,17 +102,15 @@ app.post("/budget-submit-form", async (req, res) => {
       return;
     }
 
-    // Find existing budget document based on name
-    let budget = await Budget.findOne({name, user});
-
+    // Find existing budget document based on name and user
+    let budget = await Budget.findOne({ name, user });
+    console.log(budget)
     if (budget) {
       // Update existing budget document
       budget.period = period;
       budget.description = description;
       budget.amount = amount;
-      
       budget.expense = expenses;
-      
     } else {
       // Create new budget document
       budget = new Budget({
@@ -131,13 +128,10 @@ app.post("/budget-submit-form", async (req, res) => {
 
   } catch (error) {
     console.error(error);
-    console.log("Form submission failed");
-    console.log("Internal server error");
-    return res
-      .status(500)
-      .json({ success: false, error: "Internal server error" });
+    res.status(500).json({ success: false, error: "Internal server error" });
   }
 });
+
 
 app.delete("/api/v1/budgets/:id", async (req, res) => {
   try {
@@ -152,6 +146,25 @@ app.delete("/api/v1/budgets/:id", async (req, res) => {
     res.status(500).json({ success: false, error: "Internal server error" });
   }
 });
+
+
+app.get("/api/v1/budgets/:id", async (req, res) => {
+  try {
+    const budgetId = req.params.id;
+    
+    // Delete the budget document from the database
+    const budgets = await Budget.findById(budgetId);
+    
+    
+    res.status(200).json(budgets);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+});
+
+
+
 
 app.post("/api/salesReport" , async(req , res) => {
   try{
