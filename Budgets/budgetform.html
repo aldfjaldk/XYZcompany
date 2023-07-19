@@ -12,7 +12,6 @@
   </style>
 </head>
 <body>
-
   <div id="sidebar"></div>
   <div id="header"></div>
 
@@ -26,7 +25,6 @@
           <input type="text" name="name" class="form-control" id="name" required>
         </div>
       </div>
-
 
       <div class="form-group row">
         <label for="period" class="col-sm-2 col-form-label">Budget Period</label>
@@ -52,7 +50,6 @@
           <input type="text" id="EmailInput" name="user" class="form-control" required>
         </div>
       </div>
-      
 
       <div class="form-group row">
         <label for="expense" class="col-sm-2 col-form-label">Expenses</label>
@@ -92,17 +89,15 @@
                 <label class="form-check-label" for="exp8">Savings</label>
               </div>
               <div class="form-check ml-3">
-                <input class="form-check-input" type="checkbox" id="exp8" value="Others">
+                <input class="form-check-input" type="checkbox" id="exp9" value="Others">
                 <label class="form-check-label" for="exp9">Others</label>
               </div>
             </div>
             <div class="mt-2 ml-5"><strong>Select at least one expense</strong></div>
             <button class="btn btn-primary mt-3 col-sm-3" id="addExpensesBtn">Add Expenses</button>
-            
           </div>
         </div>
       </div>
-
 
       <div class="container mt-3">
         <div class="row">
@@ -131,63 +126,104 @@
         </div>
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-primary col-sm-1" >Save</button>
+        <button type="submit" class="btn btn-primary col-sm-1">Save</button>
         <a href="budget.html" class="btn btn-secondary col-sm-1">Go back</a>
       </div>
     </form>
   </section>
-
-  
-
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-  <script> 
-    var email = localStorage.getItem("email");
-    document.getElementById("EmailInput").value = email;
-
+  <script>
     $(function() {
       $("#header").load("../Components/header.html");
       $("#footer").load("../Components/footer.html");
       $("#sidebar").load("../Components/sidebar.html");
-
-
+  
+      var email = localStorage.getItem("email");
+      document.getElementById("EmailInput").value = email;
+  
+      // Check if budgetId is present in localStorage
+      var budgetId = localStorage.getItem("budgetId");
+      console.log(Boolean(budgetId && budgetId!== 'undefined'))
+      if (budgetId && budgetId!== 'undefined') {
+        // AJAX request to fetch the budget details
+        $.ajax({
+          url: "http://localhost:8000/api/v1/budgets/" + budgetId,
+          type: "GET",
+          success: function(response) {
+            // Populate the form fields with the fetched data
+            $("#name").val(response.name).prop("readonly", true);
+            $("#period").val(response.period);
+            $("#amount").val(response.amount);
+            $("#description").val(response.description);
+  
+            // Check the corresponding checkboxes for expenses
+            for (var key in response.expense) {
+              $("#" + key).prop("checked", true);
+            }
+          },
+          error: function(error) {
+            console.log("Error:", error);
+          }
+        });
+      } else {
+        // Hide or disable elements specific to editing an existing budget
+        $("#name").prop("readonly", false); // Enable editing the name field
+        // Add additional logic here to hide or disable other elements as needed
+      }
+  
       $("#addExpensesBtn").click(function(event) {
-          event.preventDefault();
-          // Clear previous expense form elements
-          $("#expenseTableBody").empty();
-
-          // Get the selected expenses
-          const selectedExpenses = $(".card .form-check-input:checked");
-
-          // Create form elements for selected expenses
-          selectedExpenses.each(function(index) {
-            const serialNumber = index + 1;
-            const expenseValue = $(this).val();
-
-            const tr = $("<tr>");
-            const tdSerial = $("<td>").text(serialNumber);
-            const tdExpense = $("<td>").text(expenseValue);
-            const tdAmount = $("<td>").append(
-              $("<input>")
-                .attr({
-                  type: "number",
-                  class: "form-control amount-input",
-                  name: "expenses[" + expenseValue + "]", // Use expenseValue as the key
-                  required: true
-                })
-            );
-
-            tr.append(tdSerial, tdExpense, tdAmount);
-            $("#expenseTableBody").append(tr);
-            });
-});
+        event.preventDefault();
+        // Clear previous expense form elements
+        $("#expenseTableBody").empty();
+  
+        // Get the selected expenses
+        const selectedExpenses = $(".card .form-check-input:checked");
+  
+        // Create form elements for selected expenses
+        selectedExpenses.each(function(index) {
+          const serialNumber = index + 1;
+          const expenseValue = $(this).val();
+  
+          const tr = $("<tr>");
+          const tdSerial = $("<td>").text(serialNumber);
+          const tdExpense = $("<td>").text(expenseValue);
+          const tdAmount = $("<td>").append(
+            $("<input>")
+              .attr({
+                type: "number",
+                class: "form-control amount-input",
+                name: "expenses[" + expenseValue + "]", // Use expenseValue as the key
+                required: true
+              })
+          );
+  
+          tr.append(tdSerial, tdExpense, tdAmount);
+          $("#expenseTableBody").append(tr);
+        });
+      });
+      
       // Event listener for the save button click
       $("button[type='submit']").click(function(event) {
-        event.preventDefault();
-        $("#budget-form").submit(); // Trigger the form submission manually
-        setTimeout(function() {
+    event.preventDefault();
+
+    // Perform form validation
+    var form = $("#budget-form")[0];
+    if (form.checkValidity()) {
+      // If the form is valid, submit it
+      $("#budget-form").submit();
+      setTimeout(function() {
         window.location.href = "./budget.html";
-        }, 2000);
-      });
+      }, 2000);
+    } else {
+      // If the form is invalid, display an error message or handle it accordingly
+      // For example, you can show a message near the form or highlight the missing fields
+      console.log("Required fields are missing.");
+    }
+});
+
     });
+    
   </script>
+  
+</body>
 </html>
