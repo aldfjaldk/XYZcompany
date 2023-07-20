@@ -19,8 +19,6 @@ import {
     handleDeliveryChallanData,
     deletevendor,
     handleExpenseData,
-    editvendordata,
-    VendorDataByID,
     deleteexpense
 } from "../controllers/authController.js"
 import { requireSignIn, isAdmin } from "../middlewares/authmiddleware.js"

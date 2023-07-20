@@ -1,3 +1,11 @@
+data = {
+  useremail: "...",
+  vendorname: "...",
+  email: "...",   
+  company: "....",   
+  phone: "..." ,
+  payables: "..."
+}
 async function getVendors() {
     try {
         const response = await fetch("http://localhost:8000/api/v1/auth/displayvendor");
@@ -19,8 +27,8 @@ async function getVendors() {
                     <td>${vendor.email}</td>
                     <td>${vendor.phone}</td>
                     <td>${vendor.payables}</td>
-                    <td><button class="btn btn-outline-danger me-2" onclick="editItem('${vendor._id}')">EDIT</button></td>
-                    <td><button class="btn btn-outline-danger me-2" onclick="removeItem('${vendor._id}')">REMOVE</button></td>
+                    <td><button class="btn btn-warning me-2" onclick="editItem('${vendor._id}')">EDIT</button></td>
+                    <td><button class="btn btn-danger me-2" onclick="removeItem('${vendor._id}')">REMOVE</button></td>
                 </tr>
             `;
     }});
@@ -57,46 +65,78 @@ async function removeItem(id) {
 async function editItem(id) {
     // You can add your own logic here to handle the edit functionality
     try {
-      // Fetch the vendor data with the provided ID from the server
-      const response = await fetch(`http://localhost:8000/api/v1/auth/showvendor/${id}`);
-      const data = await response.json();
-      console.log("previous data", data);
-      console.log("vendorname: ",document.getElementById("vendorname"));
-      // Assuming you have a form for editing the vendor data, you can populate the form fields with the fetched data
-      
-      document.getElementById("vendorname").value = data.vendor.vendorname;
-      document.getElementById("company").value = data.vendor.company;
-      document.getElementById("email").value = data.vendor.email;
-      document.getElementById("phone").value = data.vendor.phone;
-      document.getElementById("payables").value = data.vendor.payables;
-      window.location.href = "new_vendor.html"
-  
-      // Add an event listener to the form's submit button to update the vendor data on the server
-      document.getElementById('mainForm').addEventListener('submit', async (event) => {
-        event.preventDefault();
-  
-        const updatedData = {
-          vendorname: document.getElementById("vendorname").value,
-          company: document.getElementById("company").value,
-          email: document.getElementById("email").value,
-          phone: document.getElementById("phone").value,
-          payables: document.getElementById("payables").value,
-        };
-  
-        // Send a PUT request to update the vendor data on the server
-        const updatedresponce= await fetch(`http://localhost:8000/api/v1/auth/editvendor/${id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(updatedData),
-        });
-        const data= await updatedresponce.json();
-
-        // Refresh the table after the update
-        getVendors();
-      });
-    } catch (error) {
-      console.log("Error editing item:", error);
-    }
+      const response = await fetch("http://localhost:8000/api/v1/auth/displayvendor");
+      const d = await response.json();
+      console.log("vendor data:", d.vendors[0]);
+      (d.vendors).map((vendor) => {
+          if(id===vendor._id){
+              document.querySelector('#vendorname').value=vendor.vendorname;
+              document.querySelector('#company').value=vendor.company;
+              document.querySelector('#email').value=vendor.email;
+              document.querySelector('#phone').value=vendor.phone;
+              document.querySelector('#payables').value=vendor.payables; 
+              data = {
+                useremail: vendor.useremail,
+                vendorname: vendor.vendorname,
+                email: vendor.email,   
+                company: vendor.company,   
+                phone: vendor.phone ,
+                payables: vendor.payables
+              }       
+}});  
+} catch (error) {
+  console.log("Error fetching vendors:", error);
+}
+document.getElementsByClassName('main')[0].style.display="none";
+document.getElementsByClassName('main2')[0].style.display="block";
+removeItem(id);
   }
+
+  async function postJSON(data) {
+    try {
+        const response = await fetch("http://localhost:8000/api/v1/auth/addVendor", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        const result = await response.json();
+        console.log("Success: ", result);
+        if (result.success) {
+            console.log("data added", data);
+
+            window.location.href = "vendors.html"
+        }
+        else {
+            alert("try again");
+        }
+    }
+    catch(error) {
+        console.log("Error: ", error);
+    }
+}
+
+function handleSubmission (event) {
+    event.preventDefault();
+    data.useremail=localStorage.getItem("email");
+    //document.getElementById("inputEmail").value=useremail;
+    console.log("This is the data collected: ", data);
+    postJSON(data)
+}
+
+function handleName(event) {data.vendorname = event.target.value;}
+function handleEmail(event) {data.email = event.target.value;}
+function handleCompany(event) {data.company = event.target.value;}
+function handlePhone(event) {data.phone = event.target.value;}
+function handlePayables(event) {data.payables = event.target.value;}
+
+
+document.getElementById("vendorname").addEventListener("change", handleName);
+document.getElementById("email").addEventListener("change", handleEmail);
+document.getElementById("company").addEventListener("change", handleCompany);
+document.getElementById("phone").addEventListener("change", handlePhone);
+document.getElementById("payables").addEventListener("change", handlePayables);
+document.getElementById("mainForm2").addEventListener("submit", handleSubmission);
+
+
