@@ -584,6 +584,27 @@ export const handleEmployeeData = async (req, res) => {
   }
 };
 
+export const deleteemployee = async (req, res) => {
+  console.log(req);
+  try {
+    const id = req.params.id;
+    console.log(id);
+    await employeesModel.deleteOne({ _id: id });
+
+    res.status(200).send({
+      success: true,
+      message: 'Employee deleted successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
+
 export const currencyController = async (req, res) => {
 
   try {
@@ -793,4 +814,3 @@ export const deletevendor = async (req, res) => {
     });
   }
 };
-
