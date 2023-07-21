@@ -4,7 +4,14 @@ data = {
     email: "...",   
     company: "....",   
     phone: "..." ,
-    payables: "..."
+    payables: "...",
+    sourceofsupply: "...",
+    openingbalance: "...",
+    paymentterms: "...",
+    website: "...",
+    GSTtreatment: "...",
+    tds: "..."
+
 }
 console.log("welcome to the vendors page.")
 
@@ -47,6 +54,12 @@ function handleEmail(event) {data.email = event.target.value;}
 function handleCompany(event) {data.company = event.target.value;}
 function handlePhone(event) {data.phone = event.target.value;}
 function handlePayables(event) {data.payables = event.target.value;}
+function handlesourceofsupply(event) {data.sourceofsupply = event.target.value;}
+function handleopeningbalance(event) {data.openingbalance = event.target.value;}
+function handlepaymentterms(event) {data.paymentterms = event.target.value;}
+function handlewebsite(event) {data.website = event.target.value;}
+function handleGSTtreatment(event) {data.GSTtreatment = event.target.value;}
+function handletds(event) {data.tds = event.target.value;}
 
 
 document.getElementById("vendorname").addEventListener("change", handleName);
@@ -54,4 +67,10 @@ document.getElementById("email").addEventListener("change", handleEmail);
 document.getElementById("company").addEventListener("change", handleCompany);
 document.getElementById("phone").addEventListener("change", handlePhone);
 document.getElementById("payables").addEventListener("change", handlePayables);
+document.getElementById("sourceofsupply").addEventListener("change", handlesourceofsupply);
+document.getElementById("openingbalance").addEventListener("change", handleopeningbalance);
+document.getElementById("paymentterms").addEventListener("change", handlepaymentterms);
+document.getElementById("website").addEventListener("change", handlewebsite);
+document.getElementById("GSTtreatment").addEventListener("change", handleGSTtreatment);
+document.getElementById("tds").addEventListener("change", handletds);
 document.getElementById("mainForm").addEventListener("submit", handleSubmission);

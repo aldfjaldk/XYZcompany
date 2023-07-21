@@ -409,7 +409,7 @@ export const addpaymentController =async(req,res)=>{
 export const vendorController = async (req, res) => {
 
   try {
-    const { useremail, vendorname, email, company, phone, payables } = req.body
+    const { useremail, vendorname, email, company, phone, payables,sourceofsupply,openingbalance,paymentterms,website,GSTtreatment,tds } = req.body
 
     if (!vendorname) {
       return res.send({ message: 'Name is required' })
@@ -433,7 +433,13 @@ export const vendorController = async (req, res) => {
       email,
       company,
       phone,
-      payables
+      payables,
+      sourceofsupply,
+      openingbalance,
+      paymentterms,
+      website,
+      GSTtreatment,
+      tds
     };
 
     const createdVendor = await vendorsModel.create(newVendor); // Save the new vendor

@@ -1,10 +1,17 @@
 data = {
-  useremail: "...",
-  vendorname: "...",
-  email: "...",   
-  company: "....",   
-  phone: "..." ,
-  payables: "..."
+    useremail: "...",
+    vendorname: "...",
+    email: "...",   
+    company: "....",   
+    phone: "..." ,
+    payables: "...",
+    sourceofsupply: "...",
+    openingbalance: "...",
+    paymentterms: "...",
+    website: "...",
+    GSTtreatment: "...",
+    tds: "..."
+
 }
 async function getVendors() {
     try {
@@ -75,13 +82,26 @@ async function editItem(id) {
               document.querySelector('#email').value=vendor.email;
               document.querySelector('#phone').value=vendor.phone;
               document.querySelector('#payables').value=vendor.payables; 
+              document.querySelector('#sourceofsupply').value=vendor.sourceofsupply;
+              document.querySelector('#openingbalance').value=vendor.openingbalance;
+              document.querySelector('#paymentterms').value=vendor.paymentterms;
+              document.querySelector('#website').value=vendor.website;
+              document.querySelector('#GSTtreatment').value=vendor.GSTtreatment;
+              document.querySelector('#tds').value=vendor.tds;
               data = {
                 useremail: vendor.useremail,
                 vendorname: vendor.vendorname,
                 email: vendor.email,   
                 company: vendor.company,   
                 phone: vendor.phone ,
-                payables: vendor.payables
+                payables: vendor.payables,
+                sourceofsupply: vendor.sourceofsupply,
+                openingbalance: vendor.openingbalance,
+                paymentterms: vendor.paymentterms,
+                website: vendor.website,
+                GSTtreatment: vendor.GSTtreatment,
+                tds: vendor.tds
+
               }       
 }});  
 } catch (error) {
@@ -130,6 +150,12 @@ function handleEmail(event) {data.email = event.target.value;}
 function handleCompany(event) {data.company = event.target.value;}
 function handlePhone(event) {data.phone = event.target.value;}
 function handlePayables(event) {data.payables = event.target.value;}
+function handlesourceofsupply(event) {data.sourceofsupply = event.target.value;}
+function handleopeningbalance(event) {data.openingbalance = event.target.value;}
+function handlepaymentterms(event) {data.paymentterms = event.target.value;}
+function handlewebsite(event) {data.website = event.target.value;}
+function handleGSTtreatment(event) {data.GSTtreatment = event.target.value;}
+function handletds(event) {data.tds = event.target.value;}
 
 
 document.getElementById("vendorname").addEventListener("change", handleName);
@@ -137,4 +163,10 @@ document.getElementById("email").addEventListener("change", handleEmail);
 document.getElementById("company").addEventListener("change", handleCompany);
 document.getElementById("phone").addEventListener("change", handlePhone);
 document.getElementById("payables").addEventListener("change", handlePayables);
+document.getElementById("sourceofsupply").addEventListener("change", handlesourceofsupply);
+document.getElementById("openingbalance").addEventListener("change", handleopeningbalance);
+document.getElementById("paymentterms").addEventListener("change", handlepaymentterms);
+document.getElementById("website").addEventListener("change", handlewebsite);
+document.getElementById("GSTtreatment").addEventListener("change", handleGSTtreatment);
+document.getElementById("tds").addEventListener("change", handletds);
 document.getElementById("mainForm2").addEventListener("submit", handleSubmission);
