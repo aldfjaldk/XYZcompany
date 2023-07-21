@@ -110,30 +110,34 @@
             <input type="date" id="date" value="" required> <br><br>
             <label class="label">Expense Account</label>
             <select id="expenseaccount" required>
+             <option>Select Account</option>
               <optgroup label="Expense">
-                <option value="advertising">Advertising and Marketing</option>
-                <option value="automobile">Automobile Expense</option>
+                <option value="Advertising and Marketing">Advertising and Marketing</option>
+                <option value="Automobile Expense">Automobile Expense</option>
+                <option value="Bank Fees and Charges">Bank Fees and Charges</option>
+                <option value="Credit Card Charges">Credit Card Charges</option>
+                <option value="Automobile Expense">Automobile Expense</option>
               </optgroup>
               <optgroup label="Fixed Asset">
-                <option value="furniture">Furniture and Equipment</option>
+                <option value="Furniture and Equipment">Furniture and Equipment</option>
               </optgroup>
             </select> <br><br>
             <label class="label">Amount</label>
             <input type="number" id="amount" required> <br><br>
             <label class="label">Paid Through</label>
             <select id="paidthrough" required>
+                <option>Select Payment Method</option>
               <optgroup label="Cash">
-                <option value="pettycash">Petty Cash</option>
-                <option value="undepositedfunds">Undeposited Funds</option>
+                <option value="Petty Cash">Petty Cash</option>
+                <option value="Undeposited Funds">Undeposited Funds</option>
               </optgroup>
               <optgroup label="Bank">
-                <option value="sbi">SBI Current Account</option>
+                <option value="SBI Current Account">SBI Current Account</option>
               </optgroup>
             </select> <br><br>
             <label class="label">Vendor</label>
             <select id="vendor">
-              <option value="Tata">Tata</option>
-              <option value="Adani">Adani</option>
+                
             </select> <br><br>
             <label class="label">Invoice#</label>
             <input id="invoice" type="text"> <br><br>

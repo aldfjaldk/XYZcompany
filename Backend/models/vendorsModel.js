@@ -23,6 +23,30 @@ const vendorSchema = new mongoose.Schema({
     payables:{
         type:String,
         required:true
+    },
+    sourceofsupply:{
+        type:String,
+        required:true,
+    },
+    openingbalance: {
+        type:String,
+        required:true,
+    },
+    paymentterms:{
+        type:String,
+        required:true,
+    },
+    website:{
+        type:String,
+        required:true
+    },
+    GSTtreatment:{
+        type:String,
+        required:true
+    },
+    tds:{
+        type:String,
+        required:true
     }
 })
 

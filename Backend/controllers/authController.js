@@ -409,7 +409,7 @@ export const addpaymentController =async(req,res)=>{
 export const vendorController = async (req, res) => {
 
   try {
-    const { useremail, vendorname, email, company, phone, payables } = req.body
+    const { useremail, vendorname, email, company, phone, payables,sourceofsupply,openingbalance,paymentterms,website,GSTtreatment,tds } = req.body
 
     if (!vendorname) {
       return res.send({ message: 'Name is required' })
@@ -433,7 +433,13 @@ export const vendorController = async (req, res) => {
       email,
       company,
       phone,
-      payables
+      payables,
+      sourceofsupply,
+      openingbalance,
+      paymentterms,
+      website,
+      GSTtreatment,
+      tds
     };
 
     const createdVendor = await vendorsModel.create(newVendor); // Save the new vendor
@@ -585,21 +591,24 @@ export const handleEmployeeData = async (req, res) => {
 };
 
 export const deleteemployee = async (req, res) => {
-  console.log(req);
+  console.log("Here is the id to be deleted: ", req.params.id);
   try {
     const id = req.params.id;
-    console.log(id);
-    await employeesModel.deleteOne({ _id: id });
-
-    res.status(200).send({
-      success: true,
-      message: 'Employee deleted successfully',
-    });
+    res.status(200);
+    const result = await employeesModel.deleteOne({ id: id });
+    if (result.deletedCount>0) {
+      res.send({success: true, message: 'Employee deleted'});
+      console.log("employee deleted");
+    }
+    else {
+      res.send({success: false, message: 'no employee found with this id.'});
+      console.log("no employee with this id found.")
+    }
   } catch (error) {
-    console.log(error);
+    console.log("there was an error");
     res.status(500).send({
       success: false,
-      message: 'Error',
+      message: 'there was an error.',
       error,
     });
   }
