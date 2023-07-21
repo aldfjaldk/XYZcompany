@@ -138,5 +138,3 @@ document.getElementById("company").addEventListener("change", handleCompany);
 document.getElementById("phone").addEventListener("change", handlePhone);
 document.getElementById("payables").addEventListener("change", handlePayables);
 document.getElementById("mainForm2").addEventListener("submit", handleSubmission);
-
-
