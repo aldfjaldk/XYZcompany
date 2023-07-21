@@ -590,8 +590,14 @@ export const deleteemployee = async (req, res) => {
     const id = req.params.id;
     res.status(200);
     const result = await employeesModel.deleteOne({ id: id });
-    if (result.deletedCount>0) res.send({message: 'Employee deleted'});
-    else res.send({message: 'no employee found'});
+    if (result.deletedCount>0) {
+      res.send({success: true, message: 'Employee deleted'});
+      console.log("employee deleted");
+    }
+    else {
+      res.send({success: false, message: 'no employee found with this id.'});
+      console.log("no employee with this id found.")
+    }
   } catch (error) {
     console.log("there was an error");
     res.status(500).send({
