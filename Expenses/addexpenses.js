@@ -74,3 +74,34 @@ document.getElementById("invoice").addEventListener("change", handleInvoice);
 document.getElementById("customer").addEventListener("change", handleCustomer);
 document.getElementById("mainForm").addEventListener("submit", handleSubmission);
 }
+
+//Code for fetching vendors name list
+async function getVendors() {
+    try {
+        const response = await fetch("http://localhost:8000/api/v1/auth/displayvendor");
+        const data = await response.json();
+        let v = `<option>Select Vendor</option>`;
+        (data.vendors).map((vendor) => {
+            if(localStorage.getItem("email")==vendor.useremail){
+            v += `<option value="${vendor.vendorname}">${vendor.vendorname}</option>`;
+    }});
+    document.getElementById('vendor').innerHTML = v;
+    } catch (error) {}
+}
+getVendors();
+
+//Code for fetching customers list
+async function getCustomers() {
+    try {
+        const response = await fetch("http://localhost:8000/api/v1/auth/displaycustomer");
+        const data = await response.json();
+        let c=`<option>Select Customer</option>`;
+        (data.customers).map((customer) => {
+            if(localStorage.getItem("email")==customer.useremail){
+            c += `<option value="${customer.firstname}">${customer.firstname}</option>`;
+    }});
+    document.getElementById('customer').innerHTML = c;
+    } catch (error) {
+    }
+}
+getCustomers();
