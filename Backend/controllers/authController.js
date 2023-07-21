@@ -585,18 +585,17 @@ export const handleEmployeeData = async (req, res) => {
 };
 
 export const deleteemployee = async (req, res) => {
-  console.log(req);
+  console.log("Here is the id to be deleted: ", req.params.id);
   try {
     const id = req.params.id;
-    console.log(id);
-    await employeesModel.deleteOne({ _id: id });
+    employeesModel.deleteOne({ _id: id });
 
     res.status(200).send({
       success: true,
       message: 'Employee deleted successfully',
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).send({
       success: false,
       message: 'Error',
