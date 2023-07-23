@@ -23,7 +23,7 @@ function displayData(data) {
                 <p class="d2">Employee Id: ${data.employees[i].id}</p>
                 <p class="d3">Designation: ${data.employees[i].designation}</p>
                 <p class="d4" onclick="deleteEmployee('${data.employees[i]._id}')">Del</p>
-                <p class="d5" onclick="deleteEmployee('${data.employees[i]._id}')">Del</p>
+                <a class="d5" href="./addemployee.html">Edit</a>
             </button>
             <div class="content">
                 <p>Gender: ${data.employees[i].gender}</p>
@@ -77,3 +77,31 @@ function deleteEmployee(id) {
         console.error('Error deleting employee:', err);
     });
 }
+
+// function editEmployee(id, updatedEmployeeData) {
+//     // Send a PUT request to the server to update the employee with the given ID
+//     fetch(`http://localhost:8000/api/v1/auth/editemployee/${id}`, {
+//         method: 'PUT',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(updatedEmployeeData) // Convert the data to JSON format
+//     })
+//     .then((response) => {
+//         if (!response.ok) {
+//             console.log(response);
+//             throw new Error('Network response was not ok');
+//         }
+//         // If the employee is successfully updated, fetch the updated data and refresh the display
+//         return fetch("http://localhost:8000/api/v1/auth/displayemployee");
+//     })
+//     .then((response) => response.json())
+//     .then((data) => {
+//         console.log("myData: ", data);
+//         displayData(data); // Refresh the display with updated data
+//     })
+//     .catch((err) => {
+//         console.error('Error updating employee:', err);
+//     });
+// }
+

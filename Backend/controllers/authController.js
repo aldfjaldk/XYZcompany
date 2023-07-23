@@ -485,51 +485,12 @@ export const handleVendorData = async (req, res) => {
 };
 
 export const employeeController = async (req, res) => {
-
   try {
-    const { name, id, gender, doj, email, dob, phone, department, designation, basic, rent, conveyance, fixed, ctc } = req.body
+    const { name, id, gender, doj, email, dob, phone, department, designation, basic, rent, conveyance, fixed, ctc } = req.body;
 
-    if (!name) {
-      return res.send({ message: 'Name is required' })
-    }
-    if (!id) {
-      return res.send({ message: 'Id is required' })
-    }
-    if (!gender) {
-      return res.send({ message: 'Gender is required' })
-    }
-    if (!doj) {
-      return res.send({ message: 'Date of joining is required' })
-    }
-    if (!email) {
-      return res.send({ message: 'Email is required' })
-    }
-    if (!dob) {
-      return res.send({ message: 'Date of birth required' })
-    }
-    if (!phone) {
-      return res.send({ message: 'Phone number is required' })
-    }
-    if (!department) {
-      return res.send({ message: 'Department is required' })
-    }
-    if (!designation) {
-      return res.send({ message: 'Designation is required' })
-    }
-    if (!basic) {
-      return res.send({ message: 'Basic pay is required' })
-    }
-    if (!rent) {
-      return res.send({ message: 'House Rent is required' })
-    }
-    if (!conveyance) {
-      return res.send({ message: 'Conveyance is required' })
-    }
-    if (!fixed) {
-      return res.send({ message: 'Fixed Allowance is required' })
-    }
-    if (!ctc) {
-      return res.send({ message: 'CTC is required' })
+    // Validate the required fields
+    if (!name || !id || !gender || !doj || !email || !dob || !phone || !department || !designation || !basic || !rent || !conveyance || !fixed || !ctc) {
+      return res.status(400).send({ message: 'All fields are required' });
     }
 
     const newEmployee = {
@@ -548,27 +509,38 @@ export const employeeController = async (req, res) => {
       fixed,
       ctc
     };
+    console.log(newEmployee.id);
+    const existingEmployee = await employeesModel.findOne({ id: newEmployee.id });
+    console.log(existingEmployee);
+    if (existingEmployee) {
+      // If an employee with the same ID exists, update the existing entry with the new values
+      await employeesModel.updateOne({ id: newEmployee.id }, newEmployee);
 
-    const createdEmployee = await employeesModel.create(newEmployee); // Save the new vendor
+      res.status(200).send({
+        success: true,
+        message: 'Employee updated successfully',
+      });
+    }
+    else {
+      // If no employee with the same ID exists, create a new entry
+      const createdEmployee = await employeesModel.create(newEmployee);
 
-    console.log("Employee added:", createdEmployee);
+      console.log("Employee added:", createdEmployee);
 
-    res.status(201).send({
-      success: true,
-      message: "Employee added successfully",
-      employee: createdEmployee
-    });
+      res.status(201).send({
+        success: true,
+        message: "Employee added successfully",
+        employee: createdEmployee
+      });
+    }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).send({
       success: false,
       message: 'Error',
       error,
-    })
-
+    });
   }
-
-
 };
 
 export const handleEmployeeData = async (req, res) => {
@@ -591,28 +563,49 @@ export const handleEmployeeData = async (req, res) => {
 };
 
 export const deleteemployee = async (req, res) => {
-  console.log("Here is the id to be deleted: ", req.params.id);
+  // console.log(req);
   try {
     const id = req.params.id;
-    res.status(200);
-    const result = await employeesModel.deleteOne({ id: id });
-    if (result.deletedCount>0) {
-      res.send({success: true, message: 'Employee deleted'});
-      console.log("employee deleted");
-    }
-    else {
-      res.send({success: false, message: 'no employee found with this id.'});
-      console.log("no employee with this id found.")
-    }
+    console.log(id);
+    await employeesModel.deleteOne({ _id: id });
+
+    res.status(200).send({
+      success: true,
+      message: 'Employee deleted successfully',
+    });
   } catch (error) {
-    console.log("there was an error");
+    console.log(error);
     res.status(500).send({
       success: false,
-      message: 'there was an error.',
+      message: 'Error',
       error,
     });
   }
 };
+
+
+// export const editemployee = async (req, res) => {
+//   console.log(req);
+//   try {
+//     const id = req.params.id;
+//     const updatedEmployeeData = req.body; // Assuming the updated data is sent in the request body as JSON
+
+//     // Use the mongoose findByIdAndUpdate method to update the employee with the given ID
+//     await employeesModel.findByIdAndUpdate(id, updatedEmployeeData);
+
+//     res.status(200).send({
+//       success: true,
+//       message: 'Employee updated successfully',
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send({
+//       success: false,
+//       message: 'Error',
+//       error,
+//     });
+//   }
+// };
 
 export const currencyController = async (req, res) => {
 
