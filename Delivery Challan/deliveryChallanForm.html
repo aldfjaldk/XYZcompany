@@ -214,6 +214,87 @@
             $("#header").load("../Components/header.html");
             $("#footer").load("../Components/footer.html");
             $("#sidebar").load("../Components/sidebar.html");
+            console.log("email");
+            var chalId = localStorage.getItem("ChallanId");
+            console.log(Boolean(chalId && chalId!== 'undefined'))
+            
+            if (chalId && chalId!== 'undefined') {
+                // AJAX request to fetch the budget details
+            $.ajax({
+                    url: "http://localhost:8000/api/v1/dischallan/" + chalId,
+                    type: "GET",
+                    success: function(response) {
+                    // Populate the form fields with the fetched data
+                    $("#customerName").val(response.customerName);
+                    $("#user_email").val(response.user_email);
+                    $("#deliveryChallan").val(response.deliveryChallan).prop("readonly", true);
+                    $("#referenceNumber").val(response.referenceNumber);
+                    $("#deliveryChallanDate").val(response.deliveryChallanDate.slice(0, 10));
+                    $("#challanType").val(response.challanType);
+                    $("#warehouseName").val(response.warehouseName);
+
+                    // Populate the item details in the table
+                    if (response.items && response.items.length > 0) {
+                    response.items.forEach(function(item, index) {
+                        const tr = $("<tr class='item-row'>");
+                        const serialNumber = $("<td>").text(index + 1);
+                        const itemName = $("<td>").append(
+                        $("<input>").attr({
+                            type: "text",
+                            class: "form-control amount-input",
+                            value: item[0], // Item name
+                            name: "items[" + index + "][name]",
+                            required: true,
+                        })
+                        );
+                        const quantity = $("<td>").append(
+                        $("<input>").attr({
+                            type: "number",
+                            class: "form-control amount-input",
+                            value: item[1], // Quantity
+                            name: "items[" + index + "][quantity]",
+                            required: true,
+                            onchange: "calculateAmount()",
+                        })
+                        );
+                        const rate = $("<td>").append(
+                        $("<input>").attr({
+                            type: "number",
+                            class: "form-control amount-input",
+                            value: item[2], // Rate
+                            name: "items[" + index + "][rate]",
+                            required: true,
+                            onchange: "calculateAmount()",
+                        })
+                        );
+                        const tax = $("<td>").append(
+                        $("<input>").attr({
+                            type: "number",
+                            class: "form-control amount-input",
+                            value: item[3], // Tax
+                            name: "items[" + index + "][tax]",
+                            required: true,
+                            onchange: "calculateAmount()",
+                        })
+                        );
+                        const amount = $("<td>").attr("name", "amount").text((parseFloat(item[1]) * parseFloat(item[2]) * (1 + parseFloat(item[3]) / 100)).toFixed(2));
+
+                        tr.append(serialNumber, itemName, quantity, rate, tax, amount);
+                        $("#expenseTableBody").append(tr);
+                    });
+
+                    calculateAmount();
+                    }
+                    },
+                    error: function(error) {
+                    console.log("Error:", error);
+                    }
+                });
+                } else {
+                // Hide or disable elements specific to editing an existing budget
+                $("#deliveryChallan").prop("readonly", false); // Enable editing the name field
+                // Add additional logic here to hide or disable other elements as needed
+                }
 
             $("#addExpensesBtn").click(function (event) {
                 event.preventDefault();
@@ -268,7 +349,27 @@
                 }, 2000);
             });
         });
+
+        $("button[type='submit']").click(function(event) {
+    event.preventDefault();
+
+    // Perform form validation
+    var form = $("#challan-form")[0];
+    if (form.checkValidity()) {
+      // If the form is valid, submit it
+      $("#challan-form").submit();
+      setTimeout(function() {
+        window.location.href = "./deliveryChallanPage.html";
+      }, 2000);
+    } else {
+      // If the form is invalid, display an error message or handle it accordingly
+      // For example, you can show a message near the form or highlight the missing fields
+      console.log("Required fields are missing.");
+    }
+        });
     </script>
 </body>
 
 </html>
+
+
