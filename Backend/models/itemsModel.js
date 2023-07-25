@@ -27,6 +27,22 @@ const itemSchema = new mongoose.Schema({
     sku:{
         type:String,
         required:true
+    },
+    unit:{
+        type:String,
+        required:true
+    },
+    tax:{
+        type:String,
+        required:true
+    },
+    sp:{
+        type:String,
+        required:true
+    },
+    account:{
+        type:String,
+        required:true
     }
 })
 

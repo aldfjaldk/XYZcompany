@@ -17,6 +17,7 @@ import {
     currencyController,
     handleCurrencyData,
     handleDeliveryChallanData,
+    deleteitem,
     deletevendor,
     deleteemployee,
     handleExpenseData,
@@ -31,6 +32,7 @@ const router = express.Router();
 router.post("/register", registerController);
 
 //DELETE
+router.delete("/deleteitem/:id", deleteitem);
 router.delete("/deletevendor/:id", deletevendor);
 router.delete("/deleteemployee/:id", deleteemployee);
 router.delete("/deleteexpense/:id", deleteexpense);

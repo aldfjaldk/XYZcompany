@@ -1,14 +1,17 @@
 data = {
     useremail: "...",
     fullname: "...",
-    description: "...", 
-    email:  "...",
-    stock: "...",
-    hsncode: "....",   
-    sku: "..." ,
+    description: "...",   
+    email: "....",   
+    stock: "..." ,
+    hsncode: "...",
+    sku: "...",
+    unit: "...",
+    tax: "...",
+    sp: "...",
+    account: "..."
 }
 console.log("welcome to the items page.")
-
 
 async function postJSON(data) {
     try {
@@ -42,17 +45,25 @@ function handleSubmission (event) {
 }
 
 function handleName(event) {data.fullname = event.target.value;}
-function handleEmail(event) {data.description = event.target.value;}
-function handleRate(event) {data.email = event.target.value;}
+function handleDescription(event) {data.description = event.target.value;}
+function handleEmail(event) {data.email = event.target.value;}
 function handleStock(event) {data.stock = event.target.value;}
-function handleCompany(event) {data.hsncode = event.target.value;}
-function handlePhone(event) {data.sku = event.target.value;}
-
+function handleHsncode(event) {data.hsncode = event.target.value;}
+function handleSKU(event) {data.sku = event.target.value;}
+function handleUnit(event) {data.unit = event.target.value;}
+function handleTax(event) {data.tax = event.target.value;}
+function handleSp(event) {data.sp = event.target.value;}
+function handleAccount(event) {data.account = event.target.value;}
 
 document.getElementById("fullname").addEventListener("change", handleName);
-document.getElementById("description").addEventListener("change", handleEmail);
-document.getElementById("email").addEventListener("change", handleRate);
+document.getElementById("description").addEventListener("change", handleDescription);
+document.getElementById("email").addEventListener("change", handleEmail);
 document.getElementById("stock").addEventListener("change", handleStock);
-document.getElementById("hsncode").addEventListener("change", handleCompany);
-document.getElementById("sku").addEventListener("change", handlePhone);
+document.getElementById("hsncode").addEventListener("change", handleHsncode);
+document.getElementById("sku").addEventListener("change", handleSKU);
+document.getElementById("unit").addEventListener("change", handleUnit);
+document.getElementById("tax").addEventListener("change", handleTax);
+document.getElementById("sp").addEventListener("change", handleSp);
+document.getElementById("account").addEventListener("change", handleAccount);
 document.getElementById("mainForm").addEventListener("submit", handleSubmission);
+

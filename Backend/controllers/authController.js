@@ -196,7 +196,7 @@ export const forgotPasswordController = async (req, res) => {
 export const itemController = async (req, res) => {
 
   try {
-    const { useremail,fullname, description, email, stock, hsncode, sku } = req.body
+    const { useremail,fullname, description, email, stock, hsncode, sku, unit, tax, sp, account } = req.body
 
     if (!fullname) {
       return res.send({ message: 'Item name is required' })
@@ -224,7 +224,11 @@ export const itemController = async (req, res) => {
       email,
       stock,
       hsncode,
-      sku
+      sku,
+      unit,
+      tax,
+      sp,
+      account
     };
 
     const createdItem = await itemsModel.create(newItem); // Save the new item
@@ -247,7 +251,6 @@ export const itemController = async (req, res) => {
 
   }
 
-
 };
 
 export const handleItemData = async (req, res) => {
@@ -268,6 +271,9 @@ export const handleItemData = async (req, res) => {
     });
   }
 };
+
+
+
 
 
 
@@ -823,3 +829,23 @@ export const deletevendor = async (req, res) => {
     });
   }
 };
+
+export const deleteitem = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await itemsModel.deleteOne({ _id: id });
+
+    res.status(200).send({
+      success: true,
+      message: 'Item deleted successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
+
