@@ -36,8 +36,8 @@ router.delete("/deletevendor/:id", deletevendor);
 router.delete("/deleteemployee/:id", deleteemployee);
 router.delete("/deleteexpense/:id", deleteexpense);
 
-//PUT
-// router.put("/editemployee/:id", editemployee);
+
+// router.get("/editemployee/:id", editemployee);
 
 //POST
 router.post("/login", loginController);

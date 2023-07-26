@@ -588,24 +588,24 @@ export const deleteemployee = async (req, res) => {
 //   console.log(req);
 //   try {
 //     const id = req.params.id;
-//     const updatedEmployeeData = req.body; // Assuming the updated data is sent in the request body as JSON
-
-//     // Use the mongoose findByIdAndUpdate method to update the employee with the given ID
-//     await employeesModel.findByIdAndUpdate(id, updatedEmployeeData);
-
-//     res.status(200).send({
+//     console.log(id);
+//     const updatedEmployeeData = await employeesModel.findById({_id:id});
+//     console.log(updatedEmployeeData);
+//     res.status(200).json({
 //       success: true,
-//       message: 'Employee updated successfully',
+//       message: 'Employee data retrieved successfully',
+//       data: updatedEmployeeData,
 //     });
 //   } catch (error) {
 //     console.log(error);
-//     res.status(500).send({
+//     res.status(500).json({
 //       success: false,
 //       message: 'Error',
 //       error,
 //     });
 //   }
 // };
+
 
 export const currencyController = async (req, res) => {
 
