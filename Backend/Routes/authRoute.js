@@ -19,7 +19,7 @@ import {
     handleDeliveryChallanData,
     deletevendor,
     deleteemployee,
-    // editemployee,
+    editemployee,
     handleExpenseData,
     deleteexpense
 } from "../controllers/authController.js"
@@ -37,7 +37,7 @@ router.delete("/deleteemployee/:id", deleteemployee);
 router.delete("/deleteexpense/:id", deleteexpense);
 
 
-// router.get("/editemployee/:id", editemployee);
+router.get("/editemployee/:id", editemployee);
 
 //POST
 router.post("/login", loginController);

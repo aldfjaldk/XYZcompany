@@ -23,7 +23,7 @@ function displayData(data) {
                 <p class="d2">Employee Id: ${data.employees[i].id}</p>
                 <p class="d3">Designation: ${data.employees[i].designation}</p>
                 <p class="d4" onclick="deleteEmployee('${data.employees[i]._id}')">Del</p>
-                <a class="d5" href="./addemployee.html">Edit</a>
+                <p class="d5" onclick="editEmployee('${data.employees[i]._id}')">Edit</p>
             </button>
             <div class="content">
                 <p>Gender: ${data.employees[i].gender}</p>
@@ -78,30 +78,50 @@ function deleteEmployee(id) {
     });
 }
 
-// function editEmployee(id, updatedEmployeeData) {
-//     // Send a PUT request to the server to update the employee with the given ID
+// function editEmployee(id) {
 //     fetch(`http://localhost:8000/api/v1/auth/editemployee/${id}`, {
-//         method: 'PUT',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(updatedEmployeeData) // Convert the data to JSON format
+//         method: 'GET',
+//         // headers: {
+//         //     'Content-Type': 'application/json'
+//         // },
+//         // body: JSON.stringify(data)
 //     })
 //     .then((response) => {
+//         console.log(response);
 //         if (!response.ok) {
 //             console.log(response);
 //             throw new Error('Network response was not ok');
 //         }
-//         // If the employee is successfully updated, fetch the updated data and refresh the display
-//         return fetch("http://localhost:8000/api/v1/auth/displayemployee");
 //     })
 //     .then((response) => response.json())
 //     .then((data) => {
 //         console.log("myData: ", data);
-//         displayData(data); // Refresh the display with updated data
+//         localStorage.setItem("emp", JSON.stringify(data));
+//         return fetch("http://localhost:8000/api/v1/auth/addEmployee");
 //     })
 //     .catch((err) => {
 //         console.error('Error updating employee:', err);
 //     });
 // }
+
+function editEmployee(id) {
+    fetch(`http://localhost:8000/api/v1/auth/editemployee/${id}`, {
+        method: 'GET',
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then((data) => {
+        console.log("myData: ", data);
+        localStorage.setItem("emp", JSON.stringify(data));
+        // Redirect or navigate to the form page after setting the data in localStorage
+        window.location.href = "addemployee.html";
+    })
+    .catch((err) => {
+        console.error('Error updating employee:', err);
+    });
+}
 

@@ -566,7 +566,7 @@ export const deleteemployee = async (req, res) => {
   // console.log(req);
   try {
     const id = req.params.id;
-    console.log(id);
+    // console.log(id);
     await employeesModel.deleteOne({ _id: id });
 
     res.status(200).send({
@@ -585,12 +585,12 @@ export const deleteemployee = async (req, res) => {
 
 
 // export const editemployee = async (req, res) => {
-//   console.log(req);
+//   // console.log(req);
 //   try {
 //     const id = req.params.id;
-//     console.log(id);
+//     // console.log(id);
 //     const updatedEmployeeData = await employeesModel.findById({_id:id});
-//     console.log(updatedEmployeeData);
+//     // console.log(updatedEmployeeData);
 //     res.status(200).json({
 //       success: true,
 //       message: 'Employee data retrieved successfully',
@@ -605,6 +605,27 @@ export const deleteemployee = async (req, res) => {
 //     });
 //   }
 // };
+
+export const editemployee = async (req, res) => {
+  try {
+    const id = req.params.id;
+    console.log(id);
+    const updatedEmployeeData = await employeesModel.findById({ _id: id });
+    console.log(updatedEmployeeData);
+    res.status(200).json({
+      success: true,
+      message: 'Employee data retrieved successfully',
+      data: updatedEmployeeData.toObject(), // Convert to object
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
 
 
 export const currencyController = async (req, res) => {

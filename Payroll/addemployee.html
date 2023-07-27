@@ -18,21 +18,21 @@
             <h1 class="heading1">Add Employee</h1>
             <form id="mainForm">
                 <div class="tab">
-                    Employee Name:<input class="input" name="name" id="name">
-                    Employee ID:<input class="input" name="id" id="id">
-                    Gender:<select class="input" name="gender" id="gender">
+                    Employee Name:<input class="input" name="name" id="name" value="">
+                    Employee ID:<input class="input" name="id" id="id" value="">
+                    Gender:<select class="input" name="gender" id="gender" value="">
                         <option>Select</option>>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
-                    Date of Joining:<input class="input" type="date" name="doj" id="doj">
-                    Email:<input class="input" type="text" name="email" id="email">
-                    Date of Birth:<input class="input" type="date" name="dob" id="dob">
-                    Mobile Number:<input class="input" type="number" name="number" id="phone">
+                    Date of Joining:<input class="input" type="date" name="doj" id="doj" value="">
+                    Email:<input class="input" type="text" name="email" id="email" value="">
+                    Date of Birth:<input class="input" type="date" name="dob" id="dob" value="">
+                    Mobile Number:<input class="input" type="number" name="number" id="phone" value="">
                 </div>
 
                 <div class="tab">
-                    Department:<select class="input" name="department" id="department">
+                    Department:<select class="input" name="department" id="department" value="">
                         <option>Select</option>>
                         <option value="finance">Finance</option>
                         <option value="sales">Sales</option>
@@ -40,7 +40,7 @@
                         <option value="marketing">Marketing</option>
                         <option value="management">Management</option>
                     </select>
-                    Designation:<select class="input" name="designation" id="designation">
+                    Designation:<select class="input" name="designation" id="designation" value="">
                         <option>Select</option>>
                         <option value="mnanager">Manager</option>
                         <option value="projectengineer">Project Engineer</option>
@@ -51,11 +51,11 @@
                 </div>
 
                 <div class="tab">
-                        Basic : <input onblur="findTotal()" id="basic" name="qty" class="input">
-                        House Rent Allowance : <input onblur="findTotal()" id="rent" name="qty" class="input">
-                        Conveyance Allowance : <input onblur="findTotal()" id="conveyance" name="qty" class="input">
-                        Fixed allowance : <input onblur="findTotal()" id="fixed" name="qty" class="input">
-                        Cost To Company : <input name="ctc" id="ctc" class="input">
+                        Basic : <input onblur="findTotal()" id="basic" name="qty" class="input" value="">
+                        House Rent Allowance : <input onblur="findTotal()" id="rent" name="qty" class="input" value="">
+                        Conveyance Allowance : <input onblur="findTotal()" id="conveyance" name="qty" class="input" value="">
+                        Fixed allowance : <input onblur="findTotal()" id="fixed" name="qty" class="input" value="">
+                        Cost To Company : <input name="ctc" id="ctc" class="input" value="">
                 </div>
 
                 <div style="overflow:auto;">
@@ -72,7 +72,48 @@
                     <span class="step"></span>
                 </div>
             </form>
-                
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script>
+                $(function(){
+                    console.log("entered autofill");
+                    if(localStorage){
+                    const storedEmployee = localStorage.getItem("emp");
+                    const parsedEmployee = JSON.parse(storedEmployee);
+                    console.log(parsedEmployee);
+                    document.getElementById("name").value=parsedEmployee.data.name;
+                    document.getElementById("name").dispatchEvent(new Event('change'));
+                    document.getElementById("id").value=parsedEmployee.data.id;
+                    document.getElementById("id").dispatchEvent(new Event('change'));
+                    document.getElementById("gender").value=parsedEmployee.data.gender;
+                    document.getElementById("gender").dispatchEvent(new Event('change'));
+                    document.getElementById("doj").value=parsedEmployee.data.doj;
+                    document.getElementById("doj").dispatchEvent(new Event('change'));
+                    document.getElementById("email").value=parsedEmployee.data.email;
+                    document.getElementById("email").dispatchEvent(new Event('change'));
+                    document.getElementById("dob").value=parsedEmployee.data.dob;
+                    document.getElementById("dob").dispatchEvent(new Event('change'));
+                    document.getElementById("phone").value=parsedEmployee.data.phone;
+                    document.getElementById("phone").dispatchEvent(new Event('change'));
+                    document.getElementById("department").value=parsedEmployee.data.department;
+                    document.getElementById("department").dispatchEvent(new Event('change'));
+                    document.getElementById("designation").value=parsedEmployee.data.designation;
+                    document.getElementById("designation").dispatchEvent(new Event('change'));
+                    document.getElementById("basic").value=parsedEmployee.data.basic;
+                    document.getElementById("basic").dispatchEvent(new Event('change'));
+                    document.getElementById("rent").value=parsedEmployee.data.rent;
+                    document.getElementById("rent").dispatchEvent(new Event('change'));
+                    document.getElementById("conveyance").value=parsedEmployee.data.conveyance;
+                    document.getElementById("conveyance").dispatchEvent(new Event('change'));
+                    document.getElementById("fixed").value=parsedEmployee.data.fixed;
+                    document.getElementById("fixed").dispatchEvent(new Event('change'));
+                    document.getElementById("ctc").value=parsedEmployee.data.ctc;
+                    document.getElementById("ctc").dispatchEvent(new Event('change'));
+                }
+                    });
+                    document.getElementById("mainForm").addEventListener("submit", function() {
+    localStorage.clear();
+  });
+              </script>
                 <script>
                     var currentTab = 0;
                     showTab(currentTab);
