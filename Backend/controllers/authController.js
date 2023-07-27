@@ -639,19 +639,23 @@ export const currencyController = async (req, res) => {
     if (!amount_to_convert) {
       return res.send({ message: 'Amount_to_convert is required' })
     }
-    if (!gain_or_loss) {
-      return res.send({ message: 'Gain_or_loss is required' })
+    if (!from) {
+      return res.send({ message: 'From is required' })
+    }
+    if (!to) {
+      return res.send({ message: 'To is required' })
     }
     if (!notes) {
       return res.send({ message: 'Notes is required' })
     }
    
 
-    const newVendor = {
+    const newCurrency = {
       
       date,
       amount_to_convert,   
-      gain_or_loss,   
+      from,
+      to,   
       notes ,
       };
 

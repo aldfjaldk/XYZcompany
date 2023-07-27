@@ -9,7 +9,11 @@ const currencySchema = new mongoose.Schema({
         type:Numbers,
         required:true,
     },
-    gain_or_loss:{
+    from:{
+        type:String,
+        required:true,
+    } ,
+    to:{
         type:String,
         required:true,
     } ,
