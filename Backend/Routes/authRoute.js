@@ -19,6 +19,7 @@ import {
     handleDeliveryChallanData,
     deletevendor,
     deleteemployee,
+    deletecurrency,
     // editemployee,
     handleExpenseData,
     deleteexpense
