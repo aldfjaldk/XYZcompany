@@ -19,6 +19,7 @@ import {
     handleDeliveryChallanData,
     deletevendor,
     deleteemployee,
+    deletecurrency,
     editemployee,
     handleExpenseData,
     deleteexpense
@@ -34,6 +35,7 @@ router.post("/register", registerController);
 //DELETE
 router.delete("/deletevendor/:id", deletevendor);
 router.delete("/deleteemployee/:id", deleteemployee);
+router.delete("/deletecurrency/:id", deletecurrency);
 router.delete("/deleteexpense/:id", deleteexpense);
 
 
