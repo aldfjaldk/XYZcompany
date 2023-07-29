@@ -22,7 +22,7 @@
     .form-section.active {
       display: block;
     }
-    #main{
+    .main{
       width: 83vw;
       box-sizing: border-box;
       right: 0;
@@ -45,6 +45,7 @@
   <div id="body">
     <div class="container mt-4">
         <h2>New Item</h2>
+        <section class="main">
         <form id="mainForm">
           <div class="form-group row">
             <label for="type" class="col-sm-2 col-form-label">Type</label>
@@ -62,40 +63,48 @@
           <div class="form-group row">
             <label for="salutation" class="col-sm-2 col-form-label">Name</label>
             <div class="col-sm-4"> <!-- Use the entire width of the row for the input box -->
-              <input type="text" class="form-control" id="fullname" placeholder="">
+              <input type="text" class="form-control" id="fullname" placeholder="" required>
             </div>            
           </div>
           <div class="form-group row">
             <label for="sku" class="col-md-2 col-form-label">SKU</label>
             <div class="col-md-3">
-              <input type="text" class="form-control" id="sku" placeholder="">
+              <input type="text" class="form-control" id="sku" placeholder="", required>
             </div>
           </div>
           <div class="form-group row">
             <label for="stock" class="col-md-2 col-form-label">Stock on Hand</label>
             <div class="col-md-3">
-              <input type="text" class="form-control" id="stock" placeholder="">
+              <input type="text" class="form-control" id="stock" placeholder="" required>
             </div>
           </div>
           <div class="form-group row">
             <label for="email" class="col-md-2 col-form-label">email</label>
             <div class="col-md-3">
-              <input type="text" class="form-control" id="email" placeholder="">
+              <input type="text" class="form-control" id="email" placeholder="" required>
             </div>
           </div>
           <div class="form-group row">
-            <label for="unit" class="col-sm-2 col-form-label">Unit</label>
             <div class="col-md-3">
-            <select class="form-control" id="unit">
-                <option value="option1">DOZEN</option>
-                <option value="option2">BOX</option>
-                <option value="option3">GRAMS</option>
-                <option value="option3">KILOGRAMS</option>
-                <option value="option3">METERS</option>
-                <option value="option3">TABLETS</option>
-                <option value="option3">UNITS</option>
-                <option value="option3">PIECES</option>
-            </select>
+              <label class="form-label">Unit</label>
+              <select id="unit" class="form-select" required>
+                <option selected disabled value=""></option>
+                      <option>DOZEN
+                      </option>
+                      <option>BOX
+                      </option>
+                      <option>GRAMS
+                      </option>
+                      <option>KILOGRAMS
+                      </option>
+                      <option>METERS
+                      </option>
+                      <option>TABLETS
+                      </option>
+                      <option>PIECES
+                      </option>
+              </select>
+             
             </div>
           </div>
           <div class="form-group row">
@@ -126,12 +135,16 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="tax" class="col-sm-2 col-form-label">If non-taxable, Exemption Reason</label>
             <div class="col-md-3">
-            <select class="form-control" id="tax">
-                <option value="option1">Delaware</option>
-                <option value="option2">White</option>
-            </select>
+              <label class="form-label">If non-taxable, Exemption Reason</label>
+              <select id="tax" class="form-select" required>
+                <option selected disabled value=""></option>
+                      <option>Delaware
+                      </option>
+                      <option>White
+                      </option>
+              </select>
+             
             </div>
           </div>
           <div class="form-row">
@@ -147,16 +160,24 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="account" class="col-sm-4 col-form-label">Account</label>
                 <div class="col-sm-8">
-                  <select class="form-control" id="account">
-                    <option value="option1">Discount</option>
-                    <option value="option2">General Income</option>
-                    <option value="option3">Interest Income</option>
-                    <option value="option3">Late Fee Income</option>
-                    <option value="option3">Other Charges</option>
-                    <option value="option3">Sales</option>
-                    <option value="option3">Shipping Charge</option>
+                  <label class="form-label">Account</label>
+                  <select id="account" class="form-select" required>
+                    <option selected disabled value=""></option>
+                          <option>Discount
+                          </option>
+                          <option>General Income
+                          </option>
+                          <option>Interest Income
+                          </option>
+                          <option>Late Fee Income
+                          </option>
+                          <option>Other Charges
+                          </option>
+                          <option>Sales
+                          </option>
+                          <option>Shipping Charge
+                          </option>
                   </select>
                 </div>
               </div>
@@ -168,7 +189,7 @@
               </div>
             </div>
       
-            <div class="col-sm-6">
+            <!-- <div class="col-sm-6">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="purchase-info-checkbox">
                 <label class="form-check-label" for="purchase-info-checkbox">Purchase Information</label>
@@ -201,11 +222,11 @@
               </div>
               <div class="form-group row">
                 <label for="description" class="col-sm-4 col-form-label">Description</label>
-                <!-- <div class="col-sm-8">
+                <div class="col-sm-8">
                   <textarea class="form-control" id="description" rows="3"></textarea>
-                </div> -->
+                </div>
               </div>
-            </div>
+            </div> -->
           </div>  
         
       </div>
@@ -219,6 +240,7 @@
         </div>
       </div>
     </form>
+  </section>
   </div>
 </div>
 
@@ -243,6 +265,7 @@
   crossorigin="anonymous">
 </script>
 <script src="./itemsBack.js"></script>
+<script src="./displayitems.js"></script>
   <script> 
       $(function(){
         $("#header").load("../Components/header.html"); 
