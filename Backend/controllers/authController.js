@@ -983,7 +983,24 @@ export const deletevendor = async (req, res) => {
     });
   }
 };
+export const deletecustomer = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await customersModel.deleteOne({ _id: id });
 
+    res.status(200).send({
+      success: true,
+      message: 'Customer deleted successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
 export const deleteitem = async (req, res) => {
   try {
     const id = req.params.id;
