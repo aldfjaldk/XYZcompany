@@ -1,43 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>All Sales Order</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <style>
-      body {
-          text-align: center;
-      }
-      .salesorders{
-        background-color: rgba(200, 200, 200, 0.2);
-      }
-    </style>
+  <title>All Sales Order</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    body {
+      text-align: center;
+    }
+
+    .salesorders {
+      background-color: rgba(200, 200, 200, 0.2);
+    }
+
+    .main2 {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
-    <div id="sidebar"></div>
-    <div id="header"></div>
-
-    <div style="padding-top: 250px; position:absolute;margin-left: 33%;">
-        <h3>Start Managing Your Sales Activities!</h3>
-        <h4>Create, customize and send professional Sales Orders.</h4>
-        <button class="button" onclick="window.location.href='newsalesorder.html'">Create Sales Order</button>
+  <div id="sidebar"></div>
+  <div id="header" style="margin-left: 17%;"></div>
+  <section class="main">
+    <div style="margin-left: 18%;">
+      <h4 style="float: left;">Sales Orders</h4>
+      <button class="button" onclick="window.location.href='newsalesorder.html'"
+        style="padding-bottom: 2.3rem; float: right;">Create
+        Sales Order</button>
     </div>
-    
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.js"
-    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    <div class="container" style="padding-top: 5rem; margin-left:17%; width: 74.8rem;">
+      <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Sales Order#</th>
+            <th scope="col">Reference#</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Delete/Edit</th>
+          </tr>
+        </thead>
+        <tbody id="table_body">
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="main2" style="margin-left: 18%;">
+    <h4> Edit Vendors</h4>
+    <form id="mainForm2">
+      <div class="form">
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Customer Name:</label>
+            <input id="customerName" type="text" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Sales Order:</label>
+            <input id="salesOrder" type="text" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Reference Number:</label>
+            <input id="referenceNumber" type="text" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Sales Order Date:</label>
+            <input id="salesOrderDate" type="date" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Expected Shipment Date:</label>
+            <input id="expectedShipmentDate" type="date" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Payment Terms:</label>
+            <input id="paymentTerms" type="text" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Delivery Method:</label>
+            <input id="deliveryMethod" type="text" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Customer Notes:</label>
+            <input id="customerNotes" type="text" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Grand Total:</label>
+            <input id="grandTotal" type="number" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Item:</label>
+            <input id="item" type="text" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Quantity:</label>
+            <input id="quantity" type="number" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Rate:</label>
+            <input id="rate" type="number" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Discount:</label>
+            <input id="discount" type="number" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-label">Amount:</label>
+            <input id="amount" type="number" class="form-control" required>
+          </div>
+        </div>
+        <div class="bottom">
+          <nav class="navbar navbar shadow">
+            <div class="container-fluid justify-content-start">
+              <button type="submit" class="btn btn-outline-primary me-2">Submit</button>
+              <button class="btn btn-sm btn-outline-secondary" type="button">Cancel</button>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous">
-  </script>
-    <script> 
-        $(function(){
-          $("#header").load("../Components/header.html"); 
-          $("#footer").load("../Components/footer.html"); 
-          $("#sidebar").load("../Components/sidebar.html");
-        });
     </script>
+  <script src="salesorder.js"></script>
+  <script>
+    $(function () {
+      $("#header").load("../Components/header.html");
+      $("#footer").load("../Components/footer.html");
+      $("#sidebar").load("../Components/sidebar.html");
+    });
+  </script>
 </body>

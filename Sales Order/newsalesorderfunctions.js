@@ -5,7 +5,7 @@ function addAnotherRow() {
     newRow.classList.add('item-row');
 
     newRow.innerHTML = `
-        <input type="text" placeholder="Item" id="item" name="item">
+        <input type="text" placeholder="Item" id="item" name="item" style="width: 125rem;">
         <input type="number" placeholder="Quantity" id="quantity" name="quantity" onchange="calculateAmount(this)">
         <input type="number" step="1" placeholder="Rate (INR)" id="rate" name="rate" onchange="calculateAmount(this)">
         <input type="number" step="0.01" placeholder="Discount (%)" id="discount" name="discount" onchange="calculateAmount(this)">
@@ -66,6 +66,12 @@ discountInputs.forEach(function (input) {
 
 function saveAndSend() {
     var body = document.getElementById("customerName").value;
-    var SubjectLine = document.createElement("salesOrder").value;
-    window.location.href = "mailto:primekeliye02@gmail.com?subject=" + SubjectLine + "&body=" + body;
+    var sales_order = document.getElementById("salesOrder").value;
+    var SubjectLine = "Sales Order from abc (Sales Order #: " + sales_order + ")";
+    var orderDate = document.getElementById("salesOrderDate").value;
+    var amount = document.getElementById("amount").value;
+    window.location.href = "mailto:@gmail.com?subject=" + SubjectLine + "&body=" + "Dear " + body + "," + "%0d%0a %0d%0a Thanks for your interest in our services.%0d%0a %0d%0a Please find our sales order attached with this mail. %0d%0a %0d%0a An overview of the sales order is available below for your reference: %0d%0a %0d%0a ---------------------------------------------------------------------------------------- %0d%0a %0d%0a Sales Order #:" + sales_order + "%0d%0a %0d%0a ---------------------------------------------------------------------------------------- %0d%0a %0d%0a Order Date      : " + orderDate + "%0d%0a %0d%0a Amount           : ₹" + amount + "%0d%0a %0d%0a ---------------------------------------------------------------------------------------- %0d%0a %0d%0a Assuring you of our best services at all times. %0d%0a %0d%0a Regards, %0d%0a %0d%0a Employee BlueBuck";
 }
+
+var Gmail = localStorage.getItem("email");
+module.export(Gmail);

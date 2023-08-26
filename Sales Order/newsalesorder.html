@@ -73,18 +73,19 @@
                         onchange="calculateAmount(this)">
                     <input type="number" step="0.01" placeholder="Discount (%)" id="discount" name="discount"
                         onchange="calculateAmount(this)">
-                    <input type="number" step="0.1" placeholder="Amount (INR)" id="amount" name="amount" disabled>
+                    <input type="number" step="0.1" placeholder="Amount (INR)" id="amount" name="amount">
                 </div>
 
                 <!-- Add more item rows dynamically -->
 
                 <div class="add-another">
-                    <button type="button" class="button" onclick="addAnotherRow()">Add Another Item</button>
+                    <button style="padding-bottom: 2rem;" type="button" class="button" onclick="addAnotherRow()">Add
+                        Another Item</button>
                 </div>
 
                 <div style="padding-top: 20px;">
                     <label>Grand Total (INR):</label>
-                    <span id="grandTotal">0.00</span>
+                    <span class="grandTotal" id="grandTotal">0.00</span>
                 </div>
             </div>
 
@@ -100,15 +101,17 @@
             </div>
 
             <div class="form-group" style="padding-top: 10px; display: inline;">
-                <button type="submit" class="button" onclick="saveDraft()">Save Draft</button>
-                <button type="button" class="button" id="EmailButton" onclick="saveAndSend()">Save and Send</button>
+                <button style="padding-bottom: 2rem;" type="submit" class="button" onclick="">Save
+                    Draft</button>
+                <button style="padding-bottom: 2rem;" type="button" class="button" id="EmailButton"
+                    onclick="saveAndSend()">Save and Send</button>
             </div>
         </div>
     </form>
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
         </script>
-    <script src="./newsalesorderback.js"></script>
+    <script src="newsalesorderback.js"></script>
     <script>
         $(function () {
             $("#header").load("../Components/header.html");
