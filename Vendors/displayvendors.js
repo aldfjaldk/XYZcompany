@@ -129,7 +129,7 @@ removeItem(id);
             window.location.href = "vendors.html"
         }
         else {
-            alert("try again");
+            alert("try again"); 
         }
     }
     catch(error) {
