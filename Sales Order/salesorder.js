@@ -67,8 +67,10 @@ async function editItem(id) {
         const response = await fetch("http://localhost:8000/api/v1/auth/display-sales-order");
         const d = await response.json();
         console.log("Sales Order data:", d.salesOrder[0]);
-        (d.salesOrder).map((dc) => {
-            if (id === salesOrder._id) {
+        print("hey");
+        console.log("Hey");
+        (d.salesOrder).forEach((dc) => {
+            if (id === dc._id) {
                 document.querySelector('#customerName').value = dc.customerName;
                 document.querySelector('#salesOrder').value = dc.salesOrder;
                 document.querySelector('#referenceNumber').value = dc.referenceNumber;
@@ -94,11 +96,11 @@ async function editItem(id) {
                     customerNotes: dc.customerNotes,
                     grandTotal: dc.grandTotal,
                     item: dc.item,
+                    quantity: dc.quantity,
                     rate: dc.rate,
                     discount: dc.discount,
-                    quantity: dc.quantity,
                     amount: dc.amount,
-                    email: localStorage.getItem("email")
+                    email: dc.email
                 }
             }
         });
@@ -139,13 +141,12 @@ function handleSubmission(event) {
     event.preventDefault();
     data.email = localStorage.getItem("email");
     console.log("This is the data collected: ", data);
-    console.log(data.amount);
-    console.log(data.grandTotal);
     postJSON(data);
 }
 
 function handleName(event) {
     data.customerName = event.target.value;
+    print(data);
 }
 function handleSalesOrder(event) {
     data.salesOrder = event.target.value;
@@ -195,7 +196,7 @@ document.getElementById("expectedShipmentDate").addEventListener("change", handl
 document.getElementById("paymentTerms").addEventListener("change", handlePaymentTerms);
 document.getElementById("deliveryMethod").addEventListener("change", handleDeliveryMethod);
 document.getElementById("customerNotes").addEventListener("change", handleCustomerNotes);
-document.getElementById("newOrder").addEventListener("change", handleGrandTotal);
+document.getElementById("grandTotal").addEventListener("change", handleGrandTotal);
 document.getElementById("item").addEventListener("change", handleItem);
 document.getElementById("quantity").addEventListener("change", handleQuantity);
 document.getElementById("rate").addEventListener("change", handleRate);
