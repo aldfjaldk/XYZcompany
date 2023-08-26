@@ -10,6 +10,8 @@ import {
     handleEmployeeData,
     handleVendorData,
     newSalesOrderController,
+    displaySalesOrderData,
+    deletesalesorder,
     customerController,
     handleCustomerData,
     itemController,
@@ -47,7 +49,7 @@ router.get("/editemployee/:id", editemployee);
 router.post("/login", loginController);
 router.post("/addVendor", vendorController);
 router.post("/addExpense", expenseController);
-router.post("/addEmployee",employeeController);
+router.post("/addEmployee", employeeController);
 router.post("/addItem", itemController);
 router.post("/addCustomer", customerController);
 router.post("/addCurrency", currencyController);
@@ -57,6 +59,9 @@ router.post("/addCurrency", currencyController);
 router.post("/forgot-password", forgotPasswordController);
 ////New Sales Order 
 router.post("/new-sales-order", newSalesOrderController);
+router.get("/display-sales-order", displaySalesOrderData);
+router.delete("/deletesalesorder/:id", deletesalesorder);
+
 //test routes
 router.get("/displayvendor", handleVendorData);
 router.get("/displayemployee", handleEmployeeData);

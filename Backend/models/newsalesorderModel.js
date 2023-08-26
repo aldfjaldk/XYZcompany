@@ -7,11 +7,13 @@ const salesSchema = new mongoose.Schema({
     },
     salesOrder: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     referenceNumber: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     salesOrderDate: {
         type: Date,
@@ -35,11 +37,7 @@ const salesSchema = new mongoose.Schema({
     },
     grandTotal: {
         type: Number,
-        required: false
-    },
-    salesOrderAttachment: {
-        type: Document,
-        required: false
+        required: true
     },
     item: {
         type: String,
@@ -60,7 +58,16 @@ const salesSchema = new mongoose.Schema({
     amount: {
         type: Number,
         required: false
+    },
+    email: {
+        type: String,
+        required: true
     }
-}, { timestamps: true })
+},
+    {
+        collection: 'newSalesOrder'
+    }
+)
 
-export default mongoose.model("newSalesOrder", salesSchema);
+const newSalesOrder = mongoose.model("newSalesOrder", salesSchema);
+export default newSalesOrder;

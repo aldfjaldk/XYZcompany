@@ -7,17 +7,17 @@ data = {
     paymentTerms: "...",
     deliveryMethod: "...",
     customerNotes: "...",
-    grandTotal: "...",
-    salesOrderAttachment: "...",
+    grandTotal: '...',
     item: "...",
     quantity: "...",
     rate: "...",
     discount: "...",
-    amount: "..."
+    amount: '...',
+    email: "...",
 }
 
 async function postJSON(data) {
-    console.log("frontend posted the data successfully to the backend")
+    console.log("worked")
     try {
         const response = await fetch("http://localhost:8000/api/v1/auth/new-sales-order", {
             method: "POST",
@@ -29,9 +29,8 @@ async function postJSON(data) {
         const result = await response.json();
         console.log("Success: ", result);
         if (result.success) {
-            alert("data sent to backend successfully.")
-            // localStorage.setItem("name", data.handleName) //no need for this line for your work
-            // window.location.href = "../Dashboard/dashboard.html" //no need of this line to re-direct
+            localStorage.setItem("name", data.handleName)
+            window.location.href = "./salesorder.html"
         }
         else {
             alert("try again");
@@ -44,8 +43,11 @@ async function postJSON(data) {
 
 function handleSubmission(event) {
     event.preventDefault();
+    data.email = localStorage.getItem("email");
     console.log("This is the data collected: ", data);
-    postJSON(data)
+    console.log(data.amount);
+    console.log(data.grandTotal);
+    postJSON(data);
 }
 
 function handleName(event) {
@@ -55,7 +57,7 @@ function handleSalesOrder(event) {
     data.salesOrder = event.target.value;
 }
 function handleReferenceNumber(event) {
-    data.referenceNumber = event.target.value;
+    data.referenceNumber = parseInt(event.target.value);
 }
 function handleSalesOrderDate(event) {
     data.salesOrderDate = event.target.value;
@@ -72,26 +74,24 @@ function handleDeliveryMethod(event) {
 function handleCustomerNotes(event) {
     data.customerNotes = event.target.value;
 }
-function handleGrandTotal(event) {
-    data.grandTotal = event.target.value;
-}
-function handleSalesOrderAttachment(event) {
-    data.salesOrderAttachment = event.target.value;
-}
 function handleItem(event) {
     data.item = event.target.value;
 }
 function handleQuantity(event) {
-    data.quantity = event.target.value;
+    data.quantity = parseFloat(event.target.value);
 }
 function handleRate(event) {
-    data.rate = event.target.value;
+    data.rate = parseFloat(event.target.value);
 }
 function handleDiscount(event) {
-    data.discount = event.target.value;
+    data.discount = parseFloat(event.target.value);
 }
 function handleAmount(event) {
     data.amount = event.target.value;
+    data.amount = (data.quantity * data.rate * (1 - data.discount / 100));
+}
+function handleGrandTotal() {
+    data.grandTotal = parseFloat(document.getElementById('grandTotal').innerText);
 }
 
 document.getElementById("customerName").addEventListener("change", handleName);
@@ -102,11 +102,12 @@ document.getElementById("expectedShipmentDate").addEventListener("change", handl
 document.getElementById("paymentTerms").addEventListener("change", handlePaymentTerms);
 document.getElementById("deliveryMethod").addEventListener("change", handleDeliveryMethod);
 document.getElementById("customerNotes").addEventListener("change", handleCustomerNotes);
-document.getElementById("grandTotal").addEventListener("change", handleGrandTotal);
-document.getElementById("salesOrderAttachment").addEventListener("change", handleSalesOrderAttachment);
+document.getElementById("newOrder").addEventListener("submit", handleGrandTotal);
 document.getElementById("item").addEventListener("change", handleItem);
 document.getElementById("quantity").addEventListener("change", handleQuantity);
 document.getElementById("rate").addEventListener("change", handleRate);
 document.getElementById("discount").addEventListener("change", handleDiscount);
-document.getElementById("amount").addEventListener("change", handleAmount);
+document.getElementById("newOrder").addEventListener("submit", handleAmount);
 document.getElementById("newOrder").addEventListener("submit", handleSubmission);
+
+
