@@ -6,7 +6,7 @@ const currencySchema = new mongoose.Schema({
         required:true,
     },
     amount_to_convert:{
-        type:Numbers,
+        type:String,
         required:true,
     },
     from:{
