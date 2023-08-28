@@ -5,14 +5,9 @@ const currencySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-<<<<<<< HEAD
     amount_to_convert:{
-        type:String,
-        required:true,
-=======
-    amount_to_convert: {
-        type: Number,
-        required: true,
+    type:String,
+    required:true,
     },
     from: {
         type: String,
@@ -21,7 +16,6 @@ const currencySchema = new mongoose.Schema({
     to: {
         type: String,
         required: true,
->>>>>>> e315508a27083aee1e6dd3b7e01dc4aa4445a498
     },
     notes: {
         type: String,
