@@ -10,6 +10,8 @@ import {
     handleEmployeeData,
     handleVendorData,
     newSalesOrderController,
+    displaySalesOrderData,
+    deletesalesorder,
     customerController,
     handleCustomerData,
     itemController,
@@ -19,6 +21,7 @@ import {
     handleDeliveryChallanData,
     deleteitem,
     deletevendor,
+    deletecustomer,
     deleteemployee,
     deletecurrency,
     editemployee,
@@ -36,6 +39,7 @@ router.post("/register", registerController);
 //DELETE
 router.delete("/deleteitem/:id", deleteitem);
 router.delete("/deletevendor/:id", deletevendor);
+router.delete("/deletecustomer/:id", deletecustomer);
 router.delete("/deleteemployee/:id", deleteemployee);
 router.delete("/deletecurrency/:id", deletecurrency);
 router.delete("/deleteexpense/:id", deleteexpense);
@@ -47,7 +51,7 @@ router.get("/editemployee/:id", editemployee);
 router.post("/login", loginController);
 router.post("/addVendor", vendorController);
 router.post("/addExpense", expenseController);
-router.post("/addEmployee",employeeController);
+router.post("/addEmployee", employeeController);
 router.post("/addItem", itemController);
 router.post("/addCustomer", customerController);
 router.post("/addCurrency", currencyController);
@@ -57,6 +61,9 @@ router.post("/addCurrency", currencyController);
 router.post("/forgot-password", forgotPasswordController);
 ////New Sales Order 
 router.post("/new-sales-order", newSalesOrderController);
+router.get("/display-sales-order", displaySalesOrderData);
+router.delete("/deletesalesorder/:id", deletesalesorder);
+
 //test routes
 router.get("/displayvendor", handleVendorData);
 router.get("/displayemployee", handleEmployeeData);

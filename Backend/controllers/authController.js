@@ -5,6 +5,7 @@ import vendorsModel from "../models/vendorsModel.js";
 import expensesModel from "../models/expensesModel.js";
 import itemsModel from "../models/itemsModel.js";
 import customersModel from "../models/customersModel.js";
+import newsalesorderModel from "../models/newsalesorderModel.js";
 import currencysModel from "../models/currencyModel.js";
 import employeesModel from "../models/employeesModel.js";
 import dchallan from "../models/deliverychallanModel.js";
@@ -135,9 +136,125 @@ export const loginController = async (req, res) => {
   }
 };
 //new-sales-order controller
+export const deletesalesorder = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await newsalesorderModel.deleteOne({ _id: id });
+
+    res.status(200).send({
+      success: true,
+      message: 'Sales Order deleted successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
+
+export const displaySalesOrderData = async (req, res) => {
+  try {
+    const salesOrder = await newsalesorderModel.find();
+
+    res.status(200).send({
+      success: true,
+      message: 'SalesOrder fetched successfully',
+      salesOrder,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
+
 export const newSalesOrderController = async (req, res) => {
-  console.log("Backend received the new-sales-order request")
-  res.status(200);
+  console.log("successfully")
+  try {
+    const { customerName, salesOrder, referenceNumber, salesOrderDate, expectedShipmentDate, paymentTerms, deliveryMethod, customerNotes, grandTotal, salesOrderAttachment, item, quantity, rate, discount, amount, email } = req.body;
+    if (!customerName) {
+      return res.status(400).send({ message: 'Customer Name is required' });
+    }
+    if (!salesOrder) {
+      return res.status(400).send({ message: 'Sales Order is required' });
+    }
+    if (!referenceNumber) {
+      return res.status(400).send({ message: 'Reference Number is required' });
+    }
+    if (!salesOrderDate) {
+      return res.status(400).send({ message: 'Sales Order Date is required' });
+    }
+    if (!expectedShipmentDate) {
+      return res.status(400).send({ message: 'Shipment Date is required' });
+    }
+    if (!paymentTerms) {
+      return res.status(400).send({ message: 'Payment Terms is required' });
+    }
+    if (!deliveryMethod) {
+      return res.status(400).send({ message: 'Delivery Method is required' });
+    }
+    if (!customerNotes) {
+      return res.status(400).send({ message: 'Customer Notes is required' });
+    }
+    if (!grandTotal) {
+      return res.status(400).send({ message: 'Grand Total is required' });
+    }
+    if (!item) {
+      return res.status(400).send({ message: 'Item is required' });
+    }
+    if (!quantity) {
+      return res.status(400).send({ message: 'Quantity is required' });
+    }
+    if (!rate) {
+      return res.status(400).send({ message: 'Rate is required' });
+    }
+    if (!discount) {
+      return res.status(400).send({ message: 'Discount is required' });
+    }
+    if (!amount) {
+      return res.status(400).send({ message: 'Amount is required' });
+    }
+    const newSalesOrder = {
+      customerName,
+      salesOrder,
+      referenceNumber,
+      salesOrderDate,
+      expectedShipmentDate,
+      paymentTerms,
+      deliveryMethod,
+      customerNotes,
+      grandTotal,
+      item,
+      quantity,
+      rate,
+      discount,
+      amount,
+      email
+    };
+
+    const createdNewSalesOrder = await newsalesorderModel.create(newSalesOrder); // Save the new vendor
+
+    console.log("New Sales Order Created:", createdNewSalesOrder);
+
+    res.status(201).send({
+      success: true,
+      message: "New Sales Order Created successfully",
+      order: createdNewSalesOrder
+    });
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    })
+  }
 };
 
 //add-expense controller
@@ -197,7 +314,7 @@ export const forgotPasswordController = async (req, res) => {
 export const itemController = async (req, res) => {
 
   try {
-    const { useremail,fullname, description, email, stock, hsncode, sku, unit, tax, sp, account } = req.body
+    const { useremail, fullname, description, email, stock, hsncode, sku, unit, tax, sp, account } = req.body
 
     if (!fullname) {
       return res.send({ message: 'Item name is required' })
@@ -278,145 +395,145 @@ export const handleItemData = async (req, res) => {
 
 
 
-export const addpaymentController =async(req,res)=>{
+export const addpaymentController = async (req, res) => {
 
-      try{
-          const {customerName,amount,paymentdate,paymentTerms,paymentMode,deliveryMethod,taxDeducted,customerNotes,salesOrderAttachment}=req.body
-  
-          if(!customerName){
-              return res.send({message:'Name is required'})
-          }
-          if(!amount){
-              return res.send({message:'Amount is required'})
-          }
-          if(!paymentdate){
-              return res.send({message:'Date of payment is required'})
-          }
-          if(!paymentTerms){
-              return res.send({message:'It is required'})
-          }
-          if(!deliveryMethod){
-              return res.send({message:'Method of delivery is required'})
-          }
-          if(!taxDeducted){
-              return res.send({message:'Mention the amount of tax deducted, if so'})
-          }
-          if(!customerNotes){
-              return res.send({message:'Please give some extra note '})
-          }
-          if(!salesOrderAttachment){
-              return res.send({message:'attach the sales order file'})
-          }
-  
-          const newpayment = {
-            customerNme,
-            amount,
-            paymentdate,
-            paymentTerms,
-            deliveryMethod,
-            taxDeducted,
-            customerNotes,
-            salesOrderAttachment
-        };
-  
-        const createdPayemnt = await addpaymentmodel.create(newpayment); // Save the new payment
-  
-        console.log("Payment added:", createdPayemnt);
-  
-        res.status(201).send({
-            success: true,
-            message: "New payment added successfully",
-            newpayment: createdVendor
-        });
-  
-      }catch(error){
-          console.log(error)
-          res.status(500).send({
-              success:false,
-              message:'Error',
-              error,
-          })
-  
-      }
-  
-  
-      };
+  try {
+    const { customerName, amount, paymentdate, paymentTerms, paymentMode, deliveryMethod, taxDeducted, customerNotes, salesOrderAttachment } = req.body
 
-      export const customerController = async (req, res) => {
+    if (!customerName) {
+      return res.send({ message: 'Name is required' })
+    }
+    if (!amount) {
+      return res.send({ message: 'Amount is required' })
+    }
+    if (!paymentdate) {
+      return res.send({ message: 'Date of payment is required' })
+    }
+    if (!paymentTerms) {
+      return res.send({ message: 'It is required' })
+    }
+    if (!deliveryMethod) {
+      return res.send({ message: 'Method of delivery is required' })
+    }
+    if (!taxDeducted) {
+      return res.send({ message: 'Mention the amount of tax deducted, if so' })
+    }
+    if (!customerNotes) {
+      return res.send({ message: 'Please give some extra note ' })
+    }
+    if (!salesOrderAttachment) {
+      return res.send({ message: 'attach the sales order file' })
+    }
 
-        try {
-          const { useremail,firstname, email, companyname, workphone, receivables } = req.body
-      
-          if (!firstname) {
-            return res.send({ message: 'Name is required' })
-          }
-          if (!email) {
-            return res.send({ message: 'Email is required' })
-          }
-          if (!companyname) {
-            return res.send({ message: 'company name is required' })
-          }
-          if (!workphone) {
-            return res.send({ message: 'phone is required' })
-          }
-          if (!receivables) {
-            return res.send({ message: 'payables required' })
-          }
-      
-          const newCustomer = {
-            useremail,
-            firstname,
-            email,   
-            companyname,   
-            workphone ,
-            receivables
-            };
-      
-          const createdCustomer = await customersModel.create(newCustomer); // Save the new customer
-      
-          console.log("Customer added:", createdCustomer);
-      
-          res.status(201).send({
-            success: true,
-            message: "Customer added successfully",
-            customer: createdCustomer
-          });
-      
-        } catch (error) {
-          console.log(error)
-          res.status(500).send({
-            success: false,
-            message: 'Error',
-            error,
-          })
-      
-        }
-      };
-      
-      
-      export const handleCustomerData = async (req, res) => {
-        try {
-          const customers = await customersModel.find();
-      
-          res.status(200).send({
-            success: true,
-            message: 'Customers fetched successfully',
-            customers,
-          });
-        } catch (error) {
-          console.log(error);
-          res.status(500).send({
-            success: false,
-            message: 'Error',
-            error,
-          });
-        }
-      };
+    const newpayment = {
+      customerNme,
+      amount,
+      paymentdate,
+      paymentTerms,
+      deliveryMethod,
+      taxDeducted,
+      customerNotes,
+      salesOrderAttachment
+    };
+
+    const createdPayemnt = await addpaymentmodel.create(newpayment); // Save the new payment
+
+    console.log("Payment added:", createdPayemnt);
+
+    res.status(201).send({
+      success: true,
+      message: "New payment added successfully",
+      newpayment: createdVendor
+    });
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    })
+
+  }
+
+
+};
+
+export const customerController = async (req, res) => {
+
+  try {
+    const { useremail, firstname, email, companyname, workphone, receivables } = req.body
+
+    if (!firstname) {
+      return res.send({ message: 'Name is required' })
+    }
+    if (!email) {
+      return res.send({ message: 'Email is required' })
+    }
+    if (!companyname) {
+      return res.send({ message: 'company name is required' })
+    }
+    if (!workphone) {
+      return res.send({ message: 'phone is required' })
+    }
+    if (!receivables) {
+      return res.send({ message: 'payables required' })
+    }
+
+    const newCustomer = {
+      useremail,
+      firstname,
+      email,
+      companyname,
+      workphone,
+      receivables
+    };
+
+    const createdCustomer = await customersModel.create(newCustomer); // Save the new customer
+
+    console.log("Customer added:", createdCustomer);
+
+    res.status(201).send({
+      success: true,
+      message: "Customer added successfully",
+      customer: createdCustomer
+    });
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    })
+
+  }
+};
+
+
+export const handleCustomerData = async (req, res) => {
+  try {
+    const customers = await customersModel.find();
+
+    res.status(200).send({
+      success: true,
+      message: 'Customers fetched successfully',
+      customers,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
 
 export const vendorController = async (req, res) => {
 
   try {
-    const { useremail, vendorname, email, company, phone, payables,sourceofsupply,openingbalance,paymentterms,website,GSTtreatment,tds } = req.body
+    const { useremail, vendorname, email, company, phone, payables, sourceofsupply, openingbalance, paymentterms, website, GSTtreatment, tds } = req.body
 
     if (!vendorname) {
       return res.send({ message: 'Name is required' })
@@ -638,7 +755,7 @@ export const editemployee = async (req, res) => {
 export const currencyController = async (req, res) => {
 
   try {
-    const {date, amount_to_convert, gain_or_loss, notes} = req.body
+    const { date, amount_to_convert, gain_or_loss, notes } = req.body
 
     if (!date) {
       return res.send({ message: 'Date is required' })
@@ -655,18 +772,18 @@ export const currencyController = async (req, res) => {
     if (!notes) {
       return res.send({ message: 'Notes is required' })
     }
-   
+
 
     const newCurrency = {
-      
-      date,
-      amount_to_convert,   
-      from,
-      to,   
-      notes ,
-      };
 
-    const createdCurrency = await currencysModelsModel.create(newCurrency); 
+      date,
+      amount_to_convert,
+      from,
+      to,
+      notes,
+    };
+
+    const createdCurrency = await currencysModelsModel.create(newCurrency);
 
     console.log("Currency added:", createdCurrency);
 
@@ -708,28 +825,28 @@ export const handleCurrencyData = async (req, res) => {
 };
 
 export const handleDeliveryChallanData = async (req, res) => {
-    try {
-      const deliveryChallans = await dchallan.find();
-  
-      res.status(200).send({
-        success: true,
-        message: 'DeliveryChallans fetched successfully',
-        deliveryChallans,
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({
-        success: false,
-        message: 'Error',
-        error,
-      });
-    }
+  try {
+    const deliveryChallans = await dchallan.find();
+
+    res.status(200).send({
+      success: true,
+      message: 'DeliveryChallans fetched successfully',
+      deliveryChallans,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
 };
 
 export const expenseController = async (req, res) => {
 
   try {
-    const { useremail,eno, date, expenseaccount, amount, paidthrough,vendor,invoice, customer} = req.body
+    const { useremail, eno, date, expenseaccount, amount, paidthrough, vendor, invoice, customer } = req.body
     if (!eno) {
       return res.send({ message: 'Eno. is required' })
     }
@@ -754,8 +871,8 @@ export const expenseController = async (req, res) => {
     if (!customer) {
       return res.send({ message: 'Customer is required' })
     }
-    
-    
+
+
 
     const newExpense = {
       useremail,
@@ -866,7 +983,24 @@ export const deletevendor = async (req, res) => {
     });
   }
 };
+export const deletecustomer = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await customersModel.deleteOne({ _id: id });
 
+    res.status(200).send({
+      success: true,
+      message: 'Customer deleted successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
 export const deleteitem = async (req, res) => {
   try {
     const id = req.params.id;
