@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Received</title>
+    <script  src="./displaypayment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <style>
+        .main{
+            margin-left: 18%;
+            display:block;
+            padding: 20px;
+        }
+        .main2{
+            margin-left: 18%;
+            display:none;
+        }
+        #invoice{
+            border: 3px solid black;
+            padding: 50px;
+            width: 600px;
+            display: none;
+        }
+        #bluebuck{
+            margin: auto;
+            background-color: rgb(21, 21, 67);
+            color: white;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .a1, .a2{
+            box-sizing: border-box;
+            width: 200px;
+            margin: 0;
+            display: inline-block;
+            padding: 15px;
+            font-weight: bold;
+        }
+        #er{
+            text-align: center;
+            font-size: 20px;
+        }
+        #copyright{
+            text-align: center;
+        }
+        #new-btn{
+            height: 40px;
+            width: 200px;
+            background-color: black;
+            color: white;
+            border-radius: 7px;
+            font-size: 20px;
+            float: right;
+            text-align: center;
+            font-weight: bold;
+            margin-right: 50px;
+            margin-top: 10px;
+        }
+        h2{
+            width: 400px;
+            float: left;
+        }
+        table{
+            margin-top: 70px;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even){
+            background-color: #f2f2f2;
+        }
+        #edit-btn,#delete-btn,#download-btn{
+            color:white;
+            padding: 4px;
+            border-radius: 10px;
+            border: none;
+        }
+        #edit-btn{
+            background-color: #ffc107;
+            color: black;
+            width: 50px;
+        }
+        #delete-btn{
+            background-color: red;
+        }
+        #download-btn{
+            background-color: green;
+        }
+
+        /*style for edit form*/
+
+        #mainForm {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+        }
+
+    /* Styles for the form inputs and labels */
+    form input{
+        
+        margin-bottom: 10px;
+        width: 300px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+        background-color: #f2f2f2;
+    }
+
+    /* Styles for the form buttons */
+    form button {
+        display: inline-block;
+        padding: 8px 12px;
+        margin-top: 10px;
+        margin-right: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #4CAF50;
+        color: #fff;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    /* Hover state for buttons */
+    form button:hover {
+        background-color: #45a049;
+    }
+
+    /* Styles for select dropdowns */
+    
+    label {
+        display: inline-block;
+        width: 190px;
+        color: #777777;
+      }
+    </style>
+</head>
+<body>
+    <div id="sidebar"></div>
+    <div id="header"></div>
+
+    <section class="main">
+        <h2>Purchase Orders</h2>
+        <a id="new-btn" href="newpaymentreceived.html">+New</a>
+        <table>
+            <thead>
+                <th width="10%">DATE</th>
+                <th width="20%">PURCHASE ORDER</th>
+                <th width="10%">REFERENCE</th>
+                <th width="20%">VENDOR NAME</th>
+                <th width="20%">AMOUNT</th>
+                <th width="20%">EXPECTED DELIVERY</th>
+                <th width="10%"></th>
+            </thead>
+            <tbody id="tablebody">
+            </tbody>  
+        </table>
+    </section>
+
+    <section class="main2">
+        <h4>Edit Payment Received</h4>
+        <form id="mainForm2">
+            <label class="label">Purchase Order#</label>
+            <input type="text" id="por2"><br><br>
+            
+            <label class="label">Date</label>
+            <input type="date" id="date2"><br><br>
+            
+            <label class="label">Reference</label>
+            <input type="text" id="reference2"><br><br>
+            
+            <label class="label">Amount</label>
+            <input id="amount2"><br><br>
+            
+            <label class="label">Expected Delivery Date</label>
+            <input type="text" id="edd2"><br><br>
+
+            <label class="label">Vendor Name</label>
+            <input type="text" id="vendor2"><br><br>
+            
+            <label class="label">Customer Name</label>
+            <input type="text" id="customer2"><br><br>
+            
+            <button type="submit" type="button">Save Changes</button>
+          </form>
+          
+    </section>
+
+    <!--format For pdf download-->
+    <div id="invoice">
+        <div id="pr">Payment Receipt</div>
+        <div><hr></div>
+        <div id="bluebuck">Blue Buck</div>
+        <div class="a1">Payment Order#-</div><div class="a2" id="por"></div><br>
+        <div class="a1">Date-</div><div class="a2" id="date"></div><br>
+        <div class="a1">Expected Delivery Date-</div><div class="a2" id="edd"></div><br>
+        <div class="a1">Amount-</div><div class="a2" id="amount"></div><br>
+        <div class="a1">Vendor Name-</div><div class="a2" id="vendor"></div><br>
+        <!--<div>Invoice</div><div id="invoice"></div>-->
+        <div class="a1">Customer Name-</div><div class="a2" id="customer"></div><br>
+        <div id="copyright">Blue Buck All Rights Reserved Copyright 2023-24</div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.js" 
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+    </script>
+    <script>
+        $(function () {
+            $("#header").load("../Components/header.html");
+            $("#sidebar").load("../Components/sidebar.html");
+        });
+    </script>
+</body>
+</html>

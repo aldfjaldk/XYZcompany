@@ -9,6 +9,7 @@ import newsalesorderModel from "../models/newsalesorderModel.js";
 import currencysModel from "../models/currencyModel.js";
 import employeesModel from "../models/employeesModel.js";
 import dchallan from "../models/deliverychallanModel.js";
+import paymentreceivedModel from "../models/paymentreceivedModel.js";
 export const registerController = async (req, res) => {
 
   try {
