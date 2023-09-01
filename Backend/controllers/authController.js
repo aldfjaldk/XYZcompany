@@ -10,6 +10,7 @@ import newsalesorderModel from "../models/newsalesorderModel.js";
 import currencysModel from "../models/currencyModel.js";
 import employeesModel from "../models/employeesModel.js";
 import dchallan from "../models/deliverychallanModel.js";
+import invoice from "../models/invoiceModel.js";
 import paymentreceivedModel from "../models/paymentreceivedModel.js";
 export const registerController = async (req, res) => {
 
@@ -910,6 +911,25 @@ export const handleCurrencyData = async (req, res) => {
 export const handleDeliveryChallanData = async (req, res) => {
   try {
     const deliveryChallans = await dchallan.find();
+
+    res.status(200).send({
+      success: true,
+      message: 'DeliveryChallans fetched successfully',
+      deliveryChallans,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
+
+export const handleinvoice = async (req, res) => {
+  try {
+    const deliveryChallans = await invoice.find();
 
     res.status(200).send({
       success: true,
