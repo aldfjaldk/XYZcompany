@@ -13,6 +13,7 @@ import Budget from "./models/budget.js";
 import Payment from "./models/newpayment.js";
 
 import dchallan from "./models/deliverychallanModel.js";
+import invoice from "./models/invoiceModel.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -162,6 +163,20 @@ app.delete("/api/v1/deleteDeliveryChallan/:id", async (req, res) => {
   }
 });
 
+app.delete("/api/v1/deleteinvoice/:id", async (req, res) => {
+  try {
+    const challanId = req.params.id;
+
+    // Delete the budget document from the database
+    await invoice.findByIdAndDelete(challanId);
+
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+});
+
 
 app.get("/api/v1/budgets/:id", async (req, res) => {
   try {
@@ -185,6 +200,21 @@ app.get("/api/v1/dischallan/:id", async (req, res) => {
     const budgets = await dchallan.findById(budgetId);
     
     
+    res.status(200).json(budgets);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+});
+
+app.get("/api/v1/invoice/:id", async (req, res) => {
+  console.log("pepega")
+  try {
+    const budgetId = req.params.id;
+
+    const budgets = await invoice.findById(budgetId);
+
+
     res.status(200).json(budgets);
   } catch (error) {
     console.error(error);
@@ -405,6 +435,61 @@ app.post("/challan-submit-form", async (req, res) => {
       .json({ success: false, error: "Internal server error" });
   }
 });
+
+app.post("/invoice-submit-form", async (req, res) => {
+  console.log(req.body)
+  try {
+    const { customerName, deliveryChallan, referenceNumber, deliveryChallanDate, challanType, warehouseName, items, subTotal, user_email } = req.body;
+
+    if (!customerName || !deliveryChallan || !referenceNumber || !deliveryChallanDate || !challanType || !warehouseName) {
+      const errorMessage = "All fields are required";
+      console.error(errorMessage);
+      return;
+    }
+
+    // Find existing budget document based on name
+    let Challan = await invoice.findOne({ deliveryChallan, user_email });
+
+    if (Challan) {
+      // Check if all required fields are present
+      const biggerArray = items.map(item => Object.values(item));
+      // Update existing budget document
+      Challan.customerName = customerName;
+      Challan.referenceNumber = referenceNumber;
+      Challan.deliveryChallanDate = deliveryChallanDate;
+      Challan.warehouseName = warehouseName;
+      Challan.items = biggerArray;
+      Challan.subTotal = subTotal;
+
+
+
+    } else {
+      // Create new budget document
+      Challan = new invoice({
+        customerName,
+        deliveryChallan,
+        referenceNumber,
+        deliveryChallanDate,
+        challanType,
+        warehouseName,
+        items,
+        subTotal, user_email
+      });
+    }
+
+    // Save the budget document to the database
+    await Challan.save();
+
+  } catch (error) {
+    console.error(error);
+    console.log("Form submission failed");
+    console.log("Internal server error");
+    return res
+      .status(500)
+      .json({ success: false, error: "Internal server error" });
+  }
+});
+
 
 app.post("/api/payrolldashboard", async (req, res) => {
   try {
