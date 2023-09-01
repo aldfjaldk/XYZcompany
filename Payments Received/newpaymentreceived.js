@@ -19,7 +19,7 @@ data = {
 
 async function postJSON(data) {
     try {
-        const response = await fetch("http://localhost:8000/api/v1/auth/addpr", {
+        const response = await fetch("http://localhost:8000/api/v1/auth/addPr", {
             method: "POST",
             headers: {
                 "Content-type": "application/json"

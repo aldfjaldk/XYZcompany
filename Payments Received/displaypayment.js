@@ -27,7 +27,6 @@ async function getpr() {
                     <td>${pr.amount}</td>
                     <td>${pr.edd}</td>
                     <td>${pr.vendor}</td>
-                    <td>${pr.customer}</td>
                     <td><button id="edit-btn" onclick="edit('${pr._id}')">EDIT</button></td>
                     <td><button id="delete-btn" onclick="deleteItem('${pr._id}')">DELETE</button></td>
                     <td><button id="download-btn" onclick="download('${pr._id}')" id="download">DOWNLOAD</button></td>
@@ -143,8 +142,9 @@ async function download(dataid) {
     try {
         const response = await fetch("http://localhost:8000/api/v1/auth/displaypr");
         const data = await response.json();
+        console.log("ello");
         (data.prs).map((pr) => {
-            if(dataid==pr._id){
+            if(dataid===pr._id){
                 document.getElementById('por').innerHTML=pr.por;
                 document.getElementById('date').innerHTML=pr.date;
                 document.getElementById('reference').innerHTML=pr.reference;
@@ -162,7 +162,8 @@ async function download(dataid) {
                     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
                 };
                 document.getElementById('invoice').style.display="block";
-                html2pdf().from(invoice).set(opt).save();    
+                html2pdf().from(invoice).set(opt).save();   
+                console.log("hii"); 
     }}); 
     } catch (error) {}
     setTimeout(() => {document.getElementById('invoice').style.display="none";},0.00001);

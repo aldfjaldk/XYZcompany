@@ -1123,3 +1123,100 @@ export const deletepayment = async (req, res) => {
   }
 };
 
+export const prController = async (req, res) => {
+
+  try {
+    const { useremail, por, date, reference, amount, edd, vendor, customer } = req.body
+    if (!por) {
+      return res.send({ message: 'Eno. is required' })
+    }
+    if (!date) {
+      return res.send({ message: 'Date is required' })
+    }
+    if (!reference) {
+      return res.send({ message: 'Expense Account is required' })
+    }
+    if (!amount) {
+      return res.send({ message: 'Amount is required' })
+    }
+    if (!edd) {
+      return res.send({ message: 'paid through is required' })
+    }
+    if (!vendor) {
+      return res.send({ message: 'Vendor is required' })
+    }
+    if (!customer) {
+      return res.send({ message: 'Customer is required' })
+    }
+
+
+
+    const newPr = {
+      useremail,
+      por,
+      date,
+      reference,
+      amount,
+      edd,
+      vendor,
+      customer,
+    };
+
+    const createdPr = await paymentreceivedModel.create(newPr);
+
+    console.log("Expense added:", createdPr);
+
+    res.status(201).send({
+      success: true,
+      message: "Expense added successfully",
+      expense: createdPr
+    });
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    })
+
+  }
+};
+
+export const handlePrData = async (req, res) => {
+  try {
+    const prs = await paymentreceivedModel.find();
+
+    res.status(200).send({
+      success: true,
+      message: 'Expense fetched successfully',
+      prs,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
+
+export const deletepr = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await paymentreceivedModel.deleteOne({ _id: id });
+
+    res.status(200).send({
+      success: true,
+      message: 'Expense deleted successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};

@@ -29,7 +29,10 @@ import {
     deletecurrency,
     editemployee,
     handleExpenseData,
-    deleteexpense
+    deleteexpense,
+    handlePrData,
+    deletepr,
+    prController
 } from "../controllers/authController.js"
 import { requireSignIn, isAdmin } from "../middlewares/authmiddleware.js"
 
@@ -47,7 +50,7 @@ router.delete("/deletecustomer/:id", deletecustomer);
 router.delete("/deleteemployee/:id", deleteemployee);
 router.delete("/deletecurrency/:id", deletecurrency);
 router.delete("/deleteexpense/:id", deleteexpense);
-
+router.delete("/deletepr/:id", deletepr);
 
 router.get("/editemployee/:id", editemployee);
 
@@ -55,6 +58,7 @@ router.get("/editemployee/:id", editemployee);
 router.post("/login", loginController);
 router.post("/addVendor", vendorController);
 router.post("/addExpense", expenseController);
+router.post("/addPr", prController);
 router.post("/addEmployee", employeeController);
 router.post("/addItem", itemController);
 router.post("/addPayment", paymentController);
@@ -73,6 +77,7 @@ router.delete("/deletesalesorder/:id", deletesalesorder);
 router.get("/displayvendor", handleVendorData);
 router.get("/displayemployee", handleEmployeeData);
 router.get("/displayexpense", handleExpenseData);
+router.get("/displaypr", handlePrData);
 router.get("/displaycustomer", handleCustomerData);
 router.get("/displayitem", handleItemData);
 router.get("/displaypayment", handlePaymentData);
