@@ -15,11 +15,14 @@ import {
     customerController,
     handleCustomerData,
     itemController,
+    paymentController,
     handleItemData,
+    handlePaymentData,
     currencyController,
     handleCurrencyData,
     handleDeliveryChallanData,
     deleteitem,
+    deletepayment,
     deletevendor,
     deletecustomer,
     deleteemployee,
@@ -38,6 +41,7 @@ router.post("/register", registerController);
 
 //DELETE
 router.delete("/deleteitem/:id", deleteitem);
+router.delete("/deletepayment/:id", deletepayment);
 router.delete("/deletevendor/:id", deletevendor);
 router.delete("/deletecustomer/:id", deletecustomer);
 router.delete("/deleteemployee/:id", deleteemployee);
@@ -53,6 +57,7 @@ router.post("/addVendor", vendorController);
 router.post("/addExpense", expenseController);
 router.post("/addEmployee", employeeController);
 router.post("/addItem", itemController);
+router.post("/addPayment", paymentController);
 router.post("/addCustomer", customerController);
 router.post("/addCurrency", currencyController);
 
@@ -70,6 +75,7 @@ router.get("/displayemployee", handleEmployeeData);
 router.get("/displayexpense", handleExpenseData);
 router.get("/displaycustomer", handleCustomerData);
 router.get("/displayitem", handleItemData);
+router.get("/displaypayment", handlePaymentData);
 router.get("/displaycurrency", handleCurrencyData);
 router.get("/displayDeliveryChallan", handleDeliveryChallanData);
 router.get('/test', requireSignIn, isAdmin, testController);
