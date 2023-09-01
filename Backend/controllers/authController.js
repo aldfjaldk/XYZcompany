@@ -4,6 +4,7 @@ import JWT from "jsonwebtoken";
 import vendorsModel from "../models/vendorsModel.js";
 import expensesModel from "../models/expensesModel.js";
 import itemsModel from "../models/itemsModel.js";
+import paymentsModel from "../models/paymentsModel.js";
 import customersModel from "../models/customersModel.js";
 import newsalesorderModel from "../models/newsalesorderModel.js";
 import currencysModel from "../models/currencyModel.js";
@@ -391,6 +392,87 @@ export const handleItemData = async (req, res) => {
   }
 };
 
+
+
+export const paymentController = async (req, res) => {
+
+  try {
+    const { useremail, paymentDate, paymentNumber, reference, vendorname, paymentMode, paymentMade, email, paidThrough} = req.body
+
+    if (!paymentDate) {
+      return res.send({ message: 'Payment Date is required' })
+    }
+    if (!paymentNumber) {
+      return res.send({ message: 'Payment Number is required' })
+    }
+    if (!reference) {
+      return res.send({ message: 'reference is required' })
+    }
+    if (!vendorname) {
+      return res.send({ message: 'vendor name is required' })
+    }
+    if (!paymentMode) {
+      return res.send({ message: 'payment mode is required' })
+    }
+    if (!paymentMade) {
+      return res.send({ message: 'payment amount is required' })
+    }
+    if (!email) {
+      return res.send({ message: 'email is required' })
+    }
+
+    const newPayment = {
+      useremail,
+      paymentDate,
+      paymentNumber,
+      reference,
+      vendorname,
+      paymentMode,
+      paymentMade,
+      email,
+      paidThrough
+    };
+
+    const createdPayment = await Model.create(newPayment); // Save the new payment
+
+    console.log("Payment added:", createdPayment);
+
+    res.status(201).send({
+      success: true,
+      message: "Payment added successfully",
+      payment: createdPayment
+    });
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    })
+
+  }
+
+};
+
+export const handlePaymentData = async (req, res) => {
+  try {
+    const payments = await paymentsModel.find();
+
+    res.status(200).send({
+      success: true,
+      message: 'Payments fetched successfully',
+      payments,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
 
 
 
@@ -1010,6 +1092,26 @@ export const deleteitem = async (req, res) => {
     res.status(200).send({
       success: true,
       message: 'Item deleted successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
+
+
+export const deletepayment = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await paymentsModel.deleteOne({ _id: id });
+
+    res.status(200).send({
+      success: true,
+      message: 'Payment deleted successfully',
     });
   } catch (error) {
     console.log(error);
