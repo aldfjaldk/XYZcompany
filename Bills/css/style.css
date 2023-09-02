@@ -1,0 +1,213 @@
+body {
+    background-image: url(/Users/raja/Desktop/GIT/XYZcompany/img/bgimg.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    background-color: rgb(217, 222, 226);
+    /* height: 2000px; */
+}
+
+.special_font {
+    font-family: 'Libre Caslon Display', serif;
+    font-size: 2rem;
+}
+
+.resume {
+    margin: 25px;
+}
+
+.explore {
+    display: inline-block;
+}
+
+.explore a:hover {
+    text-decoration: rgba(0, 0, 0, 0.3) underline;
+}
+
+.header_content {
+    padding-left: 8%;
+    padding-top: 15px;
+    font-size: 18px;
+    position: fixed;
+}
+
+.explore a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.intro_container {
+    padding-left: 13rem;
+    padding-top: 10rem;
+    text-align: center;
+    display: inline-block;
+    max-width: 30%;
+}
+
+.intro_container .name {
+    font-size: 8rem;
+    /* word-spacing: 2rem; */
+}
+
+.intro_content {
+    color: rgba(0, 0, 0, 0.70);
+    margin-top: 51px;
+    word-spacing: 1px;
+    line-height: 130%;
+    height: 600%;
+}
+
+.qualifications {
+    height: 100px;
+    /* background-color: yellow; */
+}
+
+.intro_container form input,
+button {
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    margin: 4px;
+    padding: 10px;
+    border: none;
+}
+
+.intro_container form button {
+    width: 320px;
+    height: 50px;
+}
+
+.intro_container form button:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+    ;
+    cursor: pointer;
+}
+
+.intro_container form div p {
+    display: inline;
+}
+
+.payment_details {
+    padding-left: 10rem;
+    padding-right: 10rem;
+    padding-top: 7rem;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+.unpaid {
+    margin-bottom: 20px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.options {
+    margin-bottom: 20px;
+}
+
+.refresh {
+    float: right;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.sort {
+    cursor: pointer;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    font-family: 'Libre Caslon Display', serif;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+textarea {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.item-details {
+    margin-bottom: 30px;
+}
+
+.item-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    margin-bottom: 10px;
+}
+
+#subTotal {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.button {
+    background-color: #7e807f;
+    border: none;
+    color: white;
+    padding: 15px 32px 35px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}

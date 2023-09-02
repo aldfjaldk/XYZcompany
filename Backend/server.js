@@ -11,6 +11,7 @@ import Dashboard from "./models/dashboardModel.js";
 import PayrollDashboard from "./models/payrolldashboardModel.js";
 import Budget from "./models/budget.js";
 import Payment from "./models/newpayment.js";
+import Billspage from "./models/billl.js";
 
 import dchallan from "./models/deliverychallanModel.js";
 import invoice from "./models/invoiceModel.js";
@@ -155,6 +156,20 @@ app.delete("/api/v1/deleteDeliveryChallan/:id", async (req, res) => {
     
     // Delete the budget document from the database
     await dchallan.findByIdAndDelete(challanId);
+    
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+});
+
+app.delete("/api/v1/deletebill/:id", async (req, res) => {
+  try {
+    const billId = req.params.id;
+    
+    // Delete the budget document from the database
+    await Billspage.findByIdAndDelete(billId);
     
     res.status(200).json({ success: true });
   } catch (error) {
@@ -522,5 +537,90 @@ app.post("/api/payrolldashboard", async (req, res) => {
   } catch (error) {
     console.error('Error updating or fetching dashboard data:', error);
     res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
+
+
+app.post("/bill-submit-form", async (req, res) => {
+  console.log(req.body)
+  try {
+    const { VendorName, billNumber, order, billDate,duedate, terms, reference ,items, subTotalInput, grandInput,user_email, discountPercentage, taxDropdown} = req.body;
+
+    if (!VendorName || !billNumber || !order || !billDate ||!duedate || !terms || !reference || !items || !subTotalInput || !grandInput) {
+      const errorMessage = "All fields are required";
+      console.error(errorMessage);
+      return;
+    }
+
+    // Find existing budget document based on name
+    let bill = await Billspage.findOne({billNumber,user_email});
+
+    if (bill) {
+          // Check if all required fields are present
+      const biggerArray = items.map(item => Object.values(item));
+      // Update existing budget document
+      bill.VendorName = VendorName;
+      bill.order = order;
+      bill.billDate = billDate;
+      bill.duedate = duedate;
+      bill.terms = terms;
+      bill.reference = reference;
+      bill.subTotalInput = subTotalInput
+      bill.grandInput = grandInput
+      bill.items = biggerArray;
+      bill.discountPercentage = discountPercentage;
+      bill.taxDropdown = taxDropdown;
+      
+
+      
+    } else {
+      // Create new budget document
+     bill = new Billspage({
+        VendorName, billNumber, order, billDate,duedate, terms, reference ,items, subTotalInput, grandInput,user_email,discountPercentage, taxDropdown
+      });
+    }
+
+    // Save the budget document to the database
+    await bill.save();
+
+  } catch (error) {
+    console.error(error);
+    console.log("Form submission failed");
+    console.log("Internal server error");
+    return res
+      .status(500)
+      .json({ success: false, error: "Internal server error" });
+  }
+});
+
+
+app.get('/Bills/bill.html', async (req, res) => {
+  try {
+    const bills = await Billspage.find();
+    console.log(bills);
+    res.status(200).json(bills);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
+
+app.get("/api/v1/dbill/:id", async (req, res) => {
+  console.log("pepega")
+  try {
+    const billId = req.params.id;
+    
+    const bills = await Billspage.findById(billId);
+    
+    
+    res.status(200).json(bills);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: "Internal server error" });
   }
 });
