@@ -12,9 +12,14 @@ import PayrollDashboard from "./models/payrolldashboardModel.js";
 import Budget from "./models/budget.js";
 import Payment from "./models/newpayment.js";
 import Billspage from "./models/billl.js";
-
+import session from 'express-session';
 import dchallan from "./models/deliverychallanModel.js";
+import OAuth2Client from 'google-auth-library';
 import invoice from "./models/invoiceModel.js";
+import mongodb from "mongodb";
+import JWT from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,6 +35,84 @@ app.use(morgan('dev'));
 app.use("/api/v1/auth", authRoute)
 app.use(express.static(join(__dirname, '..', 'Home')));
 app.use(express.static(join(__dirname, '..', 'Budgets')));
+
+app.use(session({
+  secret: process.env.GOOGLE_CLIENT_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+     secure: true, // Cookie sent only over HTTPS
+    sameSite: 'none' // For cross-origin cookies
+  }
+}));
+
+ //'mongodb+srv://adarsh-adarsh:Text1234@cluster0.p7x9hyf.mongodb.net/?retryWrites=true&w=majority';
+var MongoClient = mongodb.MongoClient;
+var mongoUrl='mongodb+srv://adarsh-adarsh:Text1234@cluster0.p7x9hyf.mongodb.net/?retryWrites=true&w=majority';
+var db;
+ var secret =process.env.GOOGLE_CLIENT_SECRET;
+
+
+
+
+
+  
+  async function verify(client ,token){
+    const ticket = await client.verifyIdToken({
+      idToken:token,
+      audience:process.env.GOOGLE_CLIENT_ID,
+
+    });
+    return ticket.getPayload();
+    
+  }
+ 
+
+  app.get('/gauthenticate', async(req,res)=>{
+    var token= req.query.id_token;
+    const client = OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+    var x= await verify(client,token).catch(console.error);
+     res.send(x);
+    if(x.email_verified){
+      db.collection('users').find({email : x.email}).toArray((err,result)=>{
+        if(err) throw(err);
+        if(result.length<1){
+          db.collection('users').insert([{
+            name:x.name,
+            email:x.email,
+            password:bcrypt.hashSync(x.at_hash,8)
+
+          }])
+          db.collection('users').find({email:x.email}).toArray((e,r)=>{
+            if(e) throw e;
+            var tkn = JWT.sign({id:result[0]._id},secret);
+            res.send({
+              auth:true,
+              token:tkn
+            })
+          })
+
+        }else{
+          var token =JWT.sign({id:result[0]._id},secret);
+          res.send({
+            auth:true,
+            token:token
+          })
+
+        }
+      })
+    } else{
+      res.send({
+        auth:false,
+        message: "User unauthorized"
+      })
+    }
+  })
+
+  MongoClient.connect(mongoUrl,(err,client)=>{
+    if(err) console.log("Error while connecting")
+    else db= client.db('pandm');
+  })
 
 
 app.get("/", function (req, res) {
