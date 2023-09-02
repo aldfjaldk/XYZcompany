@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Sliding Bar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>Sidebar</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/60632f752f.js" crossorigin="anonymous"></script>
+
+    <!--google material icon-->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <style>
+        #body {
+            background-color: rgb(255, 255, 255);
+            margin-left: 19%;
+            margin-bottom: 50px;
+        }
+
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        nav {
+            background: #fcfcfc;
+            color: white;
+        }
+
+        .logo img {
+            width: 100px;
+            /* Adjust the width as desired */
+            height: 75px;
+            /* Maintain aspect ratio */
+        }
+
+        .customers {
+            background-color: rgba(200, 200, 200, 0.2);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="sidebar"></div>
+    <div id="header"></div>
+    <div id="body">
+        <div class="container mt-4">
+            <form class="bill-form" id="bill-form" action="http://localhost:8000/bill-submit-form" method="post">
+                <div>
+                    <h3>Bill Form</h3><hr><br>
+                </div>
+                <div class="form-group">
+                    <label for="Vendor">Vendor Name<span class="required-field">*</span></label>
+                    <select class="form-control col-sm-8" id="VendorName" name = "VendorName" required>
+                      <!-- Dropdown options will be populated dynamically by JavaScript -->
+                    </select>
+                </div>
+                  
+                <div class="form-group">
+                    <label for="billNumber">Bill#<span class="required-field">*</span></label>
+                    <input type="text" class="form-control col-sm-8" name="billNumber" id="billNumber" required>
+                </div>
+                <div class="form-group text-danger" hidden>
+                    <label for="user_email">Usermail</label>
+                    <input type="text" id="user_email" name="user_email" class="form-control" required>
+                </div>
+              <div class="form-group">
+                <label for="order">Order Number<span class="required-field">*</span></label>
+                <input type="text" class="form-control col-sm-8" id="order" name="order" required>
+              </div>
+              <div class="form-group">
+                <label for="billDate">Bill Date<span class="required-field">*</span></label>
+                <input type="date" class="form-control col-sm-8" id="billDate" name="billDate" required>
+              </div>
+        
+              <div class="form-group row">
+                <div class="col-sm-4">
+                    <label for="DueDate">Due Date<span class="required-field">*</span></label>
+                    <input type="date" class="form-control" id="duedate" name="duedate">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-md-3">
+                    <label class="form-label">Payment Terms</label>
+                    <select id="terms" class="form-select" name="terms" required>
+                        <option disabled selected value="">Select Payment Terms</option>
+                        <option>Due end of the month</option>
+                        <option selected>Net 15</option>
+                        <option>Net 60</option>
+                        <option>Net 45</option>
+                        <option>Due on receipt</option>
+                    </select>
+                </div>
+                
+              </div>
+        
+              <div class="form-group">
+                <label for="reference">Reference</label>
+                <input type="text" class="form-control" name="reference" id="reference">
+              </div>
+          <div class="item-details">
+            <h3 class="fs-5">Items And Description:</h3>
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-sm-11">
+                        <table class="table table-bordered border-dark">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="col-sm-1">S No.</th>
+                                    <th scope="col" class="col-sm-2">Item Name</th>
+                                    <th scope="col" class="col-sm-2">Quantity</th>
+                                    <th scope="col" class="col-sm-2">Rate</th>
+                                    <th scope="col" class="col-sm-2">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="expenseTableBody">
+                                <!-- Table rows will be dynamically generated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary mt-3 col-sm-3" id="addExpensesBtn">Add Items</button>
+        <div style="padding-top: 20px; margin-top:20px;border: 1px solid #ccc; padding: 10px;" class="col-sm-6">
+            <label>Sub Total (INR):</label>
+            <span id="subTotal" name="subTotal">0.00</span>
+            <input type="hidden" name="subTotalInput" id="subTotalInput" class="form-control">
+            <br>
+        
+            <label>Discount %:</label>
+            <input type="number" id="discountPercentage" name = "discountPercentage" class="form-control" oninput="calculateTotal()">
+            <br>
+        
+            <label>TDS:</label>
+            <select id="taxDropdown" class="form-select" name ="taxDropdown" onchange="calculateTotal()">
+                <option value="0" selected>0%</option>
+                <option value="5">5%</option>
+                <option value="10">10%</option>
+                <option value="15">15%</option>
+            </select>
+            <br>
+        
+            <label>Grand Total (INR):</label>
+            <span id="grandTotal" name="grandTotal">0.00</span>
+            <input type="hidden" name="grandInput" id="grandInput" class="form-control">
+        </div>
+        <div>
+            <!--                     <button type="button" href="#" class="btn btn-primary" aria-current="page">Save as Draft</button> -->
+            <button type="submit" href="#" class="btn btn-success">Save and Send</button>
+            <button type="button" href="#" class="btn btn-danger" onclick="cancelForm()">Cancel</button>
+        </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var email = localStorage.getItem("email");
+        document.getElementById("user_email").value = email;
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.nav-link').click(function (e) {
+                e.preventDefault();
+                $('.nav-link').removeClass('active');
+                $(this).addClass('active');
+                var target = $(this).attr('href');
+                $('.form-section').removeClass('active');
+                $(target).addClass('active');
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $("#header").load("../Components/header.html");
+            $("#footer").load("../Components/footer.html");
+            $("#sidebar").load("../Components/sidebar.html");
+            console.log("email");
+            var billId = localStorage.getItem("billId");
+            console.log(Boolean(billId && billId!== 'undefined'))
+            
+            if (billId && billId!== 'undefined') {
+                console.log("ok")
+                // AJAX request to fetch the budget details
+            $.ajax({
+                    url: "http://localhost:8000/api/v1/dbill/" + billId,
+                    type: "GET",
+                    success: function(response) {
+                    // Populate the form fields with the fetched data
+                    $("#VendorName").val(response.VendorName);
+                    $("#user_email").val(response.user_email);
+                    $("#billNumber").val(response.billNumber).prop("readonly", true);;
+                    $("#order").val(response.order);
+                    $("#billDate").val(response.billDate.slice(0, 10));
+                    $("#duedate").val(response.duedate.slice(0, 10));
+                    $("#terms").val(response.terms);
+                    $("#reference").val(response.reference);
+                    $("#discountPercentage").val(response.discountPercentage);
+                    $("#taxDropdown").val(response.taxDropdown)
+                    console.log("response");
+
+                    // Populate the item details in the table
+                    if (response.items && response.items.length > 0) {
+                    response.items.forEach(function(item, index) {
+                        const tr = $("<tr class='item-row'>");
+                        const serialNumber = $("<td>").text(index + 1);
+                        const itemName = $("<td>").append(
+                        $("<input>").attr({
+                            type: "text",
+                            class: "form-control amount-input",
+                            value: item[0], // Item name
+                            name: "items[" + index + "][name]",
+                            required: true,
+                        })
+                        );
+                        const quantity = $("<td>").append(
+                        $("<input>").attr({
+                            type: "number",
+                            class: "form-control amount-input",
+                            value: item[1], // Quantity
+                            name: "items[" + index + "][quantity]",
+                            required: true,
+                            onchange: "calculateAmount()",
+                        })
+                        );
+                        const rate = $("<td>").append(
+                        $("<input>").attr({
+                            type: "number",
+                            class: "form-control amount-input",
+                            value: item[2], // Rate
+                            name: "items[" + index + "][rate]",
+                            required: true,
+                            onchange: "calculateAmount()",
+                        })
+                        );
+                        const amount = $("<td>").attr("name", "amount").text((parseFloat(item[1]) * parseFloat(item[2]) * (1 + parseFloat(item[3]) / 100)).toFixed(2));
+
+                        tr.append(serialNumber, itemName, quantity, rate, amount);
+                        $("#expenseTableBody").append(tr);
+                    });
+
+                    calculateAmount();
+                    }
+                    },
+                    error: function(error) {
+                    console.log("Error:", error);
+                    }
+                });
+                } else {
+                // Hide or disable elements specific to editing an existing budget
+                $("#deliveryChallan").prop("readonly", false); // Enable editing the name field
+                // Add additional logic here to hide or disable other elements as needed
+                }
+
+            $("#addExpensesBtn").click(function (event) {
+                event.preventDefault();
+                const tr = $("<tr class='item-row'>");
+                const serialNumber = $("<td>").text($("#expenseTableBody tr").length + 1);
+                const item = $("<td>").append(
+                    $("<input>").attr({
+                        type: "text",
+                        class: "form-control amount-input",
+                        name: "items[][" + ($("#expenseTableBody tr").length + 1) + "]",
+                        required: true,
+                    })
+                );
+                const quantity = $("<td>").append(
+                    $("<input>").attr({
+                        type: "number",
+                        class: "form-control amount-input",
+                        onchange: "calculateAmount()",
+                        name: "items[][" + ($("#expenseTableBody tr").length + 1) + "]",
+                        required: true,
+                    })
+                );
+                const rate = $("<td>").append(
+                    $("<input>").attr({
+                        type: "number",
+                        class: "form-control amount-input",
+                        onchange: "calculateAmount()",
+                        name: "items[][" + ($("#expenseTableBody tr").length + 1) + "]",
+                        required: true,
+                    })
+                );
+                const amount = $("<td>").attr("name", "amount").text(0);
+
+                tr.append(serialNumber, item, quantity, rate, amount);
+                $("#expenseTableBody").append(tr);
+            });
+
+            $("button[type='submit']").click(function (event) {
+                event.preventDefault();
+                $("#challan-form").submit();
+                setTimeout(function () {
+                    window.location.href = "./BillPage.html";
+                }, 2000);
+            });
+        });
+
+        $("button[type='submit']").click(function(event) {
+    event.preventDefault();
+
+    // Perform form validation
+    var form = $("#bill-form")[0];
+    if (form.checkValidity()) {
+      // If the form is valid, submit it
+      $("#bill-form").submit();
+      setTimeout(function() {
+        window.location.href = "./BillPage.html";
+      }, 2000);
+    } else {
+      // If the form is invalid, display an error message or handle it accordingly
+      // For example, you can show a message near the form or highlight the missing fields
+      console.log("Required fields are missing.");
+    }
+        });
+    </script>
+
+
+
+
+
+
+<script>
+        async function getVendors() {
+    try {
+        const response = await fetch("http://localhost:8000/api/v1/auth/displayvendor");
+        const data = await response.json();
+        console.log("Vendors data:", data.vendors[0]);
+        console.log("data type of data.vendors", typeof data.vendors);
+        
+        // Display the vendors data in the table
+        let tableData = "";
+
+        // Populate the dropdown options with vendor names
+        const vendorSelect = document.getElementById('VendorName');
+        vendorSelect.innerHTML = ""; // Clear existing options
+
+        (data.vendors).map((vendor) => {
+            var checkemail = localStorage.getItem("email");
+            if (checkemail === vendor.useremail) {
+                // Add vendor name to the dropdown
+                const option = document.createElement('option');
+                option.text = vendor.vendorname;
+                option.value = vendor.vendorname; // Set the value to the vendor name
+                vendorSelect.appendChild(option);
+
+            }
+        });
+
+    } catch (error) {
+        console.log("Error fetching vendors:", error);
+    }
+}
+getVendors();
+
+
+
+
+
+
+function calculateAmount() {
+                var rows = document.querySelectorAll('#expenseTableBody tr');
+                rows.forEach(function (row) {
+                    var quantity = parseFloat(row.querySelector('td:nth-child(3) input').value) || 0;
+                    var rate = parseFloat(row.querySelector('td:nth-child(4) input').value) || 0;
+    
+                    var amount = quantity * rate;
+                    row.querySelector('td:nth-child(5)').innerText = amount.toFixed(2);
+                    row.querySelector('td:nth-child(5)').name = amount.toFixed(2);
+                });
+    
+                calculateSubTotal();
+            }
+    
+            function calculateSubTotal() {
+                var amountCells = document.querySelectorAll('.item-row td[name="amount"]');
+                console.log(amountCells);
+                var subTotal = 0;
+    
+                amountCells.forEach(function (cell) {
+                    subTotal += parseFloat(cell.innerText) || 0;
+                });
+    
+                var subTotalElement = document.getElementById('subTotal');
+                subTotalElement.innerText = subTotal.toFixed(2);
+    
+                var subTotalInput = document.getElementById('subTotalInput');
+                subTotalInput.value = subTotal.toFixed(2);
+            }
+            function calculateTotal() {
+                    const subTotal = parseFloat(document.getElementById('subTotal').textContent);
+                    const discountPercentage = parseFloat(document.getElementById('discountPercentage').value);
+                    const taxPercentage = parseFloat(document.getElementById('taxDropdown').value);
+            
+                    const discountAmount = subTotal * (discountPercentage / 100);
+                    const taxableAmount = subTotal - discountAmount;
+                    const taxAmount = taxableAmount * (taxPercentage / 100);
+                    const grandTotal = taxableAmount - taxAmount;
+            
+                    document.getElementById('grandTotal').innerText = grandTotal.toFixed(2);
+                    var grandInput = document.getElementById('grandInput');
+                    grandInput.value = grandTotal.toFixed(2);
+                }
+            calculateTotal();
+            function cancelForm(){
+            window.location.href = "./BillPage.html";
+        }
+</script>
+</body>
+
+</html>
+
+

@@ -21,6 +21,7 @@ import {
     currencyController,
     handleCurrencyData,
     handleDeliveryChallanData,
+    handleBillData,
     handleinvoice,
     deleteitem,
     deletepayment,
@@ -84,6 +85,7 @@ router.get("/displayitem", handleItemData);
 router.get("/displaypayment", handlePaymentData);
 router.get("/displaycurrency", handleCurrencyData);
 router.get("/displayDeliveryChallan", handleDeliveryChallanData);
+router.get("/displaybill", handleBillData);
 router.get("/displayinvoice", handleinvoice);
 router.get('/test', requireSignIn, isAdmin, testController);
 //protected route user

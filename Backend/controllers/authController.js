@@ -10,6 +10,7 @@ import newsalesorderModel from "../models/newsalesorderModel.js";
 import currencysModel from "../models/currencyModel.js";
 import employeesModel from "../models/employeesModel.js";
 import dchallan from "../models/deliverychallanModel.js";
+import Billspage from "../models/billl.js";
 import invoice from "../models/invoiceModel.js";
 import paymentreceivedModel from "../models/paymentreceivedModel.js";
 export const registerController = async (req, res) => {
@@ -1230,6 +1231,26 @@ export const deletepr = async (req, res) => {
     res.status(200).send({
       success: true,
       message: 'Expense deleted successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error',
+      error,
+    });
+  }
+};
+
+
+export const handleBillData = async (req, res) => {
+  try {
+    const Billss = await Billspage.find();
+
+    res.status(200).send({
+      success: true,
+      message: 'Bills fetched successfully',
+      Billss,
     });
   } catch (error) {
     console.log(error);
