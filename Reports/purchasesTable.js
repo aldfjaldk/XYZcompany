@@ -14,15 +14,17 @@ function getPurchasesData() {
         let totalPurchases = 0;
 
         (purchasesData).map((report) => {
-          const purchasesWithTax = parseInt(report.purchasesWithTax);
+          const purchasesWithTax = parseInt(report.amount);
           totalPurchases += purchasesWithTax;
 
             purchasesTableData += `
                 <tr>
-                    <td>${report.name}</td>
-                    <td>${report.invoiceCount}</td>
-                    <td>${report.purchases}</td>
-                    <td>${report.purchasesWithTax}</td>
+                    <td>${report.date}</td>
+                    <td>${report.invoice}</td>
+                    <td>${report.expenseaccount}</td>
+                    <td>${report.paidthrough}</td>
+                    <td>${report.vendor}</td>
+                    <td>${report.amount}</td>
                 </tr>
             `;
         });
