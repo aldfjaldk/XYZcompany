@@ -8,6 +8,48 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <title>Reset Password</title>
+    <style>
+        /* Styles for the Google Sign-In button */
+.g-signin-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.g-signin-button {
+    background-color: #4285F4;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.g-signin-button:hover {
+    background-color: #3579D8;
+}
+.ip{
+    background-color: #ffffff !important;
+}
+.btn{
+    margin-top: 10px;
+    background-color: rgb(0, 228, 103) !important;
+}
+.btn:hover{
+    background-color: rgb(0, 166, 75) !important;
+
+}
+h2{
+    margin-bottom: 20px !important;
+}
+
+    </style>
 </head>
 <body>
     <main>
@@ -15,12 +57,12 @@
             <form id="mainForm">
                 <h2> Reset password</h2>
                 
-                <input id="inputEmail" placeholder="Business Email"> <br>
-                <input id="inputNickname" placeholder="Nickname"> <br>
+                <input class="ip" id="inputEmail" placeholder="Business Email"> <br>
+                <input class="ip" id="inputNickname" placeholder="Nickname"> <br>
               
-                <input id="inputPassword" type="password" placeholder="New password"> <br>
+                <input class="ip" id="inputPassword" type="password" placeholder="New password"> <br>
                
-                <button type="submit">Reset</button><br>
+                <button class="btn" type="submit">Reset</button><br>
               
             </form>
         </div>
