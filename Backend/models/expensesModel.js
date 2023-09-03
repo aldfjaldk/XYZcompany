@@ -39,4 +39,5 @@ const newexpenseSchema = new mongoose.Schema({
     
 })
 
-export default mongoose.model('newexpenses',newexpenseSchema)
+ const newexpenses = mongoose.model('newexpenses',newexpenseSchema) ;
+ export default newexpenses ; 
