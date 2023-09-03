@@ -43,7 +43,6 @@ function handleSubmission (event) {
     console.log("This is the data collectec: ", data);
     postJSON(data)
 }
-
 function handleName(event) {data.name = event.target.value;}
 function handleEmail(event) {data.email = event.target.value;}
 function handleCountry(event) {data.country = event.target.value;}
@@ -51,7 +50,7 @@ function handleCompany(event) {data.company = event.target.value;}
 function handleJob(event) {data.job = event.target.value;}
 function handleRole(event) {data.role = event.target.value;}
 function handlePassword(event) {data.password = event.target.value;}
-function handleConfirm(event) {data.confirm = event.target.value;}
+function handleAnswer(event) {data.answer = event.target.value;}
 
 document.getElementById("inputName").addEventListener("change", handleName);
 document.getElementById("inputEmail").addEventListener("change", handleEmail);
@@ -60,5 +59,5 @@ document.getElementById("inputCompany").addEventListener("change", handleCompany
 document.getElementById("inputJob").addEventListener("change", handleJob);
 document.getElementById("inputRole").addEventListener("change", handleRole);
 document.getElementById("inputPassword").addEventListener("change", handlePassword);
-document.getElementById("inputConfirm").addEventListener("change", handleConfirm);
+document.getElementById("inputNickname").addEventListener("change", handleAnswer);
 document.getElementById("mainForm").addEventListener("submit", handleSubmission);

@@ -8,14 +8,135 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <title>BlueBuck</title>
+    <style>
+        /* Styles for the Google Sign-In button */
+.g-signin-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.g-signin-button {
+    background-color: #4285F4;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.g-signin-button:hover {
+    background-color: #3579D8;
+}
+.ip{
+    background-color: #ffffff !important;
+}
+.btn{
+    margin-top: 10px;
+    background-color: rgb(0, 228, 103) !important;
+}
+.btn:hover{
+    background-color: rgb(0, 166, 75) !important;
+
+}
+h2{
+    margin-bottom: 20px !important;
+}
+
+    </style>
 </head>
 <body>
     <div class="intro_container">
         <form id="mainForm">
             <h2>Login to Blue Buck</h2>
-            <input id="inputEmail" placeholder="Business Email"> <br>
-            <input id="inputPass" placeholder="password"> <br>
-            <button type="submit">Submit</button><br>
+            <input id="inputEmail" class="ip" placeholder="Business Email"> <br>
+            <input id="inputPass" class="ip" placeholder="Password"> <br>
+            <button type="submit" class="btn">Submit</button><br>
+<!-- 
+            <button onclick="signIn()">sign In with google</button> -->
+            <!-- <div class="g-signin-wrapper"> -->
+                <button  onclick="signIn()"  class="g-signin-button" id="google-signin-button">
+                    Sign in with Google
+                </button>
+            <!-- </div> -->
+            <script>
+                        
+
+
+
+
+                function sendAccessTokenToServer(accessToken) {
+        // Define the URL of your backend API endpoint
+        const backendUrl = 'http://localhost:8000/gautheticate';
+    
+        // Define the data to send to the server
+        const data = {
+            access_token: accessToken,
+        };
+    
+        // Make a POST request to your backend with the access token
+        fetch(backendUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => {
+            if (response.ok) {
+                // The token was sent successfully
+                console.log('Access token sent to the server.');
+            } else {
+                // Handle any errors here
+                console.error('Failed to send access token to the server.');
+            }
+        })
+        .catch(error => {
+            // Handle network or other errors
+            console.error('Error:', error);
+        });
+    }
+    
+    // Usage example after the user signs in (e.g., in your onSignIn function)
+    // function onSignIn(googleUser) {
+    //     var idToken = googleUser.getAuthResponse().id_token;
+    
+    //     // Call the function to send the access token to your server
+    //     sendAccessTokenToServer(idToken);
+    // }
+    
+                            function signIn(){
+                                var oauth2Endpoint ='https://accounts.google.com/o/oauth2/v2/auth';
+                                var form=document.createElement('form');
+                                form.setAttribute('method','GET')
+                                form.setAttribute('action',oauth2Endpoint);
+    
+                                var params ={
+                                    "client_id":"982464317054-60fnuvmc3b7577up1fm5hf110l7h8pru.apps.googleusercontent.com",
+                                    "redirect_uri":"http://localhost:5500/Dashboard/dashboard.html",
+                                    "response_type":"token",
+                                    "scope":"https://www.googleapis.com/auth/userinfo.profile",
+                                    "include_granted_scopes":'true',
+                                    "state":"pass-through-value"
+                                }
+                                for(var p in params){
+                                    var input = document.createElement('input');
+                                    input.setAttribute('type','hidden');
+                                    input.setAttribute('name',p);
+                                    input.setAttribute('value',params[p]);
+                                    form.appendChild(input);
+    
+                                }
+                                document.body.appendChild(form)
+                                form.submit()
+                            }
+                        </script>
             <a href="./forgotpass.html">Reset Password</a><br>
             <a href="./signup.html">Don't have an account? Sign up</a>
         </form>
