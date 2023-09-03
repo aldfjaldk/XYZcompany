@@ -13,6 +13,8 @@ import Budget from "./models/budget.js";
 import Payment from "./models/newpayment.js";
 import Billspage from "./models/billl.js";
 import session from 'express-session';
+import Newprs from "./models/paymentreceivedModel.js" ; 
+import newexpenses from "./models/expensesModel.js";
 import dchallan from "./models/deliverychallanModel.js";
 import OAuth2Client from 'google-auth-library';
 import invoice from "./models/invoiceModel.js";
@@ -321,58 +323,10 @@ app.get("/api/v1/invoice/:id", async (req, res) => {
 });
 
 
-
-
-
 app.post("/api/salesReport" , async(req , res) => {
   try{
-    // const { email } = req.body; 
-
-    const salesData = [] ;
-
-    const obj1 ={
-      name :  "Tiger Nixon",
-      invoiceCount : "System Architect",
-      sales : "Edinburgh",
-      salesWithTax : "61"
-    } ; 
-
-    const obj2 ={
-      name : "Garrett Winters",
-      invoiceCount : "Accountant",
-      sales : "Tokyo",
-      salesWithTax :"63" 
-    } ; 
-
-    const obj3 ={
-      name :  "Ashton Cox",
-      invoiceCount :"Junior Technical Author" ,
-      sales :"San Francisco" ,
-      salesWithTax : "66",
-    } ; 
-
-    const obj4 ={
-      name :  "Colleen Hurst",
-      invoiceCount : "Javascript Developer",
-      sales : "San Francisco",
-      salesWithTax : "39"
-    } ; 
-
-    const obj5 ={
-      name : "Sonya Frost",
-      invoiceCount : "Software Engineer",
-      sales : "Edinburgh",
-      salesWithTax :"23" 
-    } ; 
-
-    const obj6 ={
-      name :  "Yuri Berry",
-      invoiceCount :"Chief Marketing Officer (CMO)" ,
-      sales :"New York" ,
-      salesWithTax : "40",
-    } ; 
-
-    salesData.push(obj1 , obj2 , obj3 , obj4 , obj5 , obj6);
+    const { email } = req.body; 
+    const salesData = await Newprs.find({ useremail: email });
     res.json(salesData);    
   }catch (error) {
     console.error('Error updating or fetching sales data:', error);
@@ -380,57 +334,12 @@ app.post("/api/salesReport" , async(req , res) => {
   }
 });
 
+
 app.post("/api/purchasesReport" , async(req , res) => {
   try{
-    // const { email } = req.body;
-
-    const purchasesData = [] ;
-
-    const obj1 ={
-      name :  "Tiger Nixon",
-      invoiceCount : "System Architect",
-      purchases : "Edinburgh",
-      purchasesWithTax : "61"
-    } ; 
-
-    const obj2 ={
-      name : "Garrett Winters",
-      invoiceCount : "Accountant",
-      purchases : "Tokyo",
-      purchasesWithTax :"63" 
-    } ; 
-
-    const obj3 ={
-      name :  "Ashton Cox",
-      invoiceCount :"Junior Technical Author" ,
-      purchases :"San Francisco" ,
-      purchasesWithTax : "66",
-    } ; 
-
-    const obj4 ={
-      name :  "Colleen Hurst",
-      invoiceCount : "Javascript Developer",
-      purchases : "San Francisco",
-      purchasesWithTax : "39"
-    } ; 
-
-    const obj5 ={
-      name : "Sonya Frost",
-      invoiceCount : "Software Engineer",
-      purchases : "Edinburgh",
-      purchasesWithTax :"23" 
-    } ; 
-
-    const obj6 ={
-      name :  "Yuri Berry",
-      invoiceCount :"Chief Marketing Officer (CMO)" ,
-      purchases :"New York" ,
-      purchasesWithTax : "40",
-    } ; 
-
-    purchasesData.push(obj1 , obj2 , obj3 , obj4 , obj5 , obj6);
+    const { email } = req.body;
+    const purchasesData = await newexpenses.find({ useremail: email });
     res.json(purchasesData);  
-  
   }catch (error) {
     console.error('Error updating or fetching purchases data:', error);
     res.status(500).json({ error: 'Internal server error' });
