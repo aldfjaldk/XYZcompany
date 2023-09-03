@@ -35,4 +35,5 @@ const newprSchema = new mongoose.Schema({
     
 })
 
-export default mongoose.model('newprs',newprSchema)
+const Newprs = mongoose.model('newprs',newprSchema) ;
+export default Newprs;
