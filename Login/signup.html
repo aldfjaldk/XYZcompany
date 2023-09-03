@@ -8,21 +8,64 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <title>Sign Up Page</title>
+
+    <style>
+        /* Styles for the Google Sign-In button */
+.g-signin-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.g-signin-button {
+    background-color: #4285F4;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.g-signin-button:hover {
+    background-color: #3579D8;
+}
+.ip{
+    background-color: #ffffff !important;
+}
+.btn{
+    margin-top: 10px;
+    background-color: rgb(0, 228, 103) !important;
+}
+.btn:hover{
+    background-color: rgb(0, 166, 75) !important;
+
+}
+h2{
+    margin-bottom: 20px !important;
+}
+
+    </style>
 </head>
 <body>
     <main>
         <div class="intro_container">
             <form id="mainForm">
                 <h2> Signup for Blue Buck</h2>
-                <input id="inputName" placeholder="Name"> <br>
-                <input id="inputEmail" placeholder="Business Email"> <br>
-                <input id="inputCountry" placeholder="Country"> <br>
-                <input id="inputCompany" placeholder="Company Name"> <br>
-                <input id="inputJob" placeholder="Job Level"> <br>
-                <input id="inputRole" placeholder="Function Role"> <br>
-                <input id="inputPassword" placeholder="password"> <br>
-                <input id="inputConfirm" placeholder="confirm password"> <br>
-                <button type="submit"> Submit</button><br>
+                <input id="inputName" class="ip" placeholder="Name"> <br>
+                <input id="inputEmail" class="ip" placeholder="Business Email"> <br>
+                <input id="inputCountry" class="ip" placeholder="Country"> <br>
+                <input id="inputCompany" class="ip" placeholder="Company Name"> <br>
+                <input id="inputJob" class="ip" placeholder="Job Level"> <br>
+                <input id="inputRole" class="ip" placeholder="Function Role"> <br>
+                <input id="inputPassword" class="ip" placeholder="password"> <br>
+                <input id="inputNickname" class="ip"   placeholder="Nickname"> <br>
+                <button type="submit"  class="btn"> Submit</button><br>
                 <a href="./login.html">Already have an account? Login</a>
             </form>
         </div>
