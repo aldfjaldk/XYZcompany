@@ -63,7 +63,7 @@
           <div class="tab-content">
             <div class="tab-pane fade show active" id="tab1">
               <div class="form-container">
-                <form>
+                <form id="mainForm">
                   <br>
                   <div class="form-group">
                     <label for="vendorname">Vendor Name<span class="required-field">*</span></label></label>
@@ -113,41 +113,6 @@
                   </div>
               </div>
       
-              <div class="table-container">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Bill#</th>
-                      <th>Bill Amount</th>
-                      <th>Amount Due</th>
-                      <th>Payment</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- Table rows go here -->
-                  </tbody>
-                </table>
-                <p>There are no bills for this vendor</p>
-              </div>
-      
-              <div class="info-box">
-                <p>Amount paid: 0</p>
-                <p>Amount used for Payment: 0</p>
-                <p>Amount Refunded: 0</p>
-                <p>Amount in excess: 0</p>
-              </div>
-      
-              <div class="form-group">
-                  <label for="notes">Notes (Internal use. Not visible to vendor)</label>
-                  <textarea class="form-control" id="notes"></textarea>
-                </div>
-        
-                <div class="form-group">
-                  <label for="files">Attach Files</label>
-                  <input type="file" class="form-control-file" id="files">
-                </div>
-        
                 <div class="button-container">
                   <button type="submit" class="btn btn-primary">Save</button>
                   <button type="button" class="btn btn-secondary">Cancel</button>
@@ -166,7 +131,7 @@
     crossorigin="anonymous">
     </script>
   <script src="./paymentsBack.js"></script>
-  <script src="./displaypayments.js"></script>
+  
   <script>
     $(function () {
       $("#header").load("../Components/header.html");

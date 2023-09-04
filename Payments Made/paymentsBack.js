@@ -60,4 +60,4 @@ document.getElementById("paymentMode").addEventListener("change", handlePaymentM
 document.getElementById("paymentMade").addEventListener("change", handlePaymentMade);
 document.getElementById("paidThrough").addEventListener("change", handlePaidThrough);
 
-document.getElementById("mainForm2").addEventListener("submit", handleSubmission);
+document.getElementById("mainForm").addEventListener("submit", handleSubmission);
