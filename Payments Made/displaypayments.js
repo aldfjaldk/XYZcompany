@@ -21,8 +21,8 @@ async function getPayments() {
         let tableData = "";
 
         (data.payments).map((payment) => {
-            var checkemail=localStorage.getPayment("email");
-            if(checkemail===item.useremail){
+            var checkemail=localStorage.getItem("email");
+            if(checkemail===payment.useremail){
             //console.log(tableData);
             tableData += `
                 <tr>
@@ -40,16 +40,16 @@ async function getPayments() {
             `;
         }});
 
-        document.getElementById('paymentTableBody').innerHTML = tableData;
+        document.getElementById('tablebody').innerHTML = tableData;
     } catch (error) {
-        console.log("Error fetching items:", error);
+        console.log("Error fetching payments:", error);
     }
 }
 
 // Call the getPayments function to fetch and display payments data initially
 getPayments();
 
-async function removePayment(id) {
+async function removeItem(id) {
     try {
         const response = await fetch(`http://localhost:8000/api/v1/auth/deletepayment/${id}`, {
             method: 'DELETE',
@@ -68,7 +68,7 @@ async function removePayment(id) {
     }
 }
 
-async function editPayment(id) {
+async function editItem(id) {
     // You can add your own logic here to handle the edit functionality
     try {
       const response = await fetch("http://localhost:8000/api/v1/auth/displaypayment");

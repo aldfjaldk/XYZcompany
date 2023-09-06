@@ -14,7 +14,7 @@ function fetchAndUpdateDashboardData() {
         console.log('Dashboard data:', dashboardData);
 
         const amountToPayElement = document.getElementById('amountToPay');
-        amountToPayElement.textContent = `$${dashboardData.amountToPay || 0}`;
+        amountToPayElement.textContent = `₹${dashboardData.amountToPay || 0}`;
 
         // const amountToReceiveElement = document.getElementById('amountToReceive');
         // amountToReceiveElement.textContent = `$${dashboardData.amountToReceive || 0}`;
@@ -83,7 +83,7 @@ async function getTotalExpenses() {
   }
 }
 getTotalExpenses().then(() => {
-  yourExpenses = '$' + yourExpenses;
+  yourExpenses = '₹' + yourExpenses;
   document.getElementById('expenses').innerHTML = yourExpenses
 })
 
@@ -122,7 +122,7 @@ async function getpr() {
 }
 getSalesOrders().then(() => {
   getpr().then( ()=> {
-    amountToBeReceived = '$' + Math.floor(amountToBeReceived);
+    amountToBeReceived = '₹' + Math.floor(amountToBeReceived);
     document.getElementById('amountToReceive').innerHTML = amountToBeReceived;
   })
 })

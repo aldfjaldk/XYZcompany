@@ -37,10 +37,11 @@ async function postJSON(data) {
 
 function handleSubmission (event) {
     event.preventDefault();
-    data.useremail=localStorage.getPayment("email");
+    data.useremail=localStorage.getItem("email");
     console.log("This is the data collected: ", data);
     postJSON(data)
 }
+
 
 function handlePaymentDate(event) {data.paymentDate = event.target.value;}
 function handlePaymentNumber(event) {data.paymentNumber = event.target.value;}

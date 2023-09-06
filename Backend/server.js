@@ -9,12 +9,12 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import Dashboard from "./models/dashboardModel.js";
 import PayrollDashboard from "./models/payrolldashboardModel.js";
+import Newprs from "./models/paymentreceivedModel.js" ; 
+import newexpenses from "./models/expensesModel.js";
 import Budget from "./models/budget.js";
 import Payment from "./models/newpayment.js";
 import Billspage from "./models/billl.js";
 import session from 'express-session';
-import Newprs from "./models/paymentreceivedModel.js" ; 
-import newexpenses from "./models/expensesModel.js";
 import dchallan from "./models/deliverychallanModel.js";
 import OAuth2Client from 'google-auth-library';
 import invoice from "./models/invoiceModel.js";
@@ -49,72 +49,72 @@ app.use(session({
 }));
 
  //'mongodb+srv://adarsh-adarsh:Text1234@cluster0.p7x9hyf.mongodb.net/?retryWrites=true&w=majority';
-var MongoClient = mongodb.MongoClient;
-var mongoUrl='mongodb+srv://adarsh-adarsh:Text1234@cluster0.p7x9hyf.mongodb.net/?retryWrites=true&w=majority';
-var db;
- var secret =process.env.GOOGLE_CLIENT_SECRET;
+// var MongoClient = mongodb.MongoClient;
+// var mongoUrl='mongodb+srv://adarsh-adarsh:Text1234@cluster0.p7x9hyf.mongodb.net/?retryWrites=true&w=majority';
+// var db;
+//  var secret =process.env.GOOGLE_CLIENT_SECRET;
 
 
 
 
 
   
-  async function verify(client ,token){
-    const ticket = await client.verifyIdToken({
-      idToken:token,
-      audience:process.env.GOOGLE_CLIENT_ID,
+//   async function verify(client ,token){
+//     const ticket = await client.verifyIdToken({
+//       idToken:token,
+//       audience:process.env.GOOGLE_CLIENT_ID,
 
-    });
-    return ticket.getPayload();
+//     });
+//     return ticket.getPayload();
     
-  }
+//   }
  
 
-  app.get('/gauthenticate', async(req,res)=>{
-    var token= req.query.id_token;
-    const client = OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-    var x= await verify(client,token).catch(console.error);
-     res.send(x);
-    if(x.email_verified){
-      db.collection('users').find({email : x.email}).toArray((err,result)=>{
-        if(err) throw(err);
-        if(result.length<1){
-          db.collection('users').insert([{
-            name:x.name,
-            email:x.email,
-            password:bcrypt.hashSync(x.at_hash,8)
+//   app.get('/gauthenticate', async(req,res)=>{
+//     var token= req.query.id_token;
+//     const client = OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+//     var x= await verify(client,token).catch(console.error);
+//      res.send(x);
+//     if(x.email_verified){
+//       db.collection('users').find({email : x.email}).toArray((err,result)=>{
+//         if(err) throw(err);
+//         if(result.length<1){
+//           db.collection('users').insert([{
+//             name:x.name,
+//             email:x.email,
+//             password:bcrypt.hashSync(x.at_hash,8)
 
-          }])
-          db.collection('users').find({email:x.email}).toArray((e,r)=>{
-            if(e) throw e;
-            var tkn = JWT.sign({id:result[0]._id},secret);
-            res.send({
-              auth:true,
-              token:tkn
-            })
-          })
+//           }])
+//           db.collection('users').find({email:x.email}).toArray((e,r)=>{
+//             if(e) throw e;
+//             var tkn = JWT.sign({id:result[0]._id},secret);
+//             res.send({
+//               auth:true,
+//               token:tkn
+//             })
+//           })
 
-        }else{
-          var token =JWT.sign({id:result[0]._id},secret);
-          res.send({
-            auth:true,
-            token:token
-          })
+//         }else{
+//           var token =JWT.sign({id:result[0]._id},secret);
+//           res.send({
+//             auth:true,
+//             token:token
+//           })
 
-        }
-      })
-    } else{
-      res.send({
-        auth:false,
-        message: "User unauthorized"
-      })
-    }
-  })
+//         }
+//       })
+//     } else{
+//       res.send({
+//         auth:false,
+//         message: "User unauthorized"
+//       })
+//     }
+//   })
 
-  MongoClient.connect(mongoUrl,(err,client)=>{
-    if(err) console.log("Error while connecting")
-    else db= client.db('pandm');
-  })
+//   MongoClient.connect(mongoUrl,(err,client)=>{
+//     if(err) console.log("Error while connecting")
+//     else db= client.db('pandm');
+//   })
 
 
 app.get("/", function (req, res) {

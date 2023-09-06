@@ -435,7 +435,7 @@ export const paymentController = async (req, res) => {
       paidThrough
     };
 
-    const createdPayment = await Model.create(newPayment); // Save the new payment
+    const createdPayment = await paymentsModel.create(newPayment); // Save the new payment
 
     console.log("Payment added:", createdPayment);
 

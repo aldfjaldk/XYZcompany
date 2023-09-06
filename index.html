@@ -65,44 +65,44 @@
                 <div class="col-auto">
                     <a class="btn btn-danger signup-button" href="./Login/signup.html">Sign Up</a>
                     <a class="btn btn-danger signup-button" href="./Login/login.html">Log In</a>
-                    <button onclick="signIn()">sign In with google</button>
-                    <script>
+                    <!-- <button onclick="signIn()">sign In with google</button> -->
+                    <!-- <script> -->
                         
 
 
 
+<!-- 
+//             function sendAccessTokenToServer(accessToken) {
+//     // Define the URL of your backend API endpoint
+//     const backendUrl = 'http://localhost:8000/gautheticate';
 
-            function sendAccessTokenToServer(accessToken) {
-    // Define the URL of your backend API endpoint
-    const backendUrl = 'http://localhost:8000/gautheticate';
+//     // Define the data to send to the server
+//     const data = {
+//         access_token: accessToken,
+//     };
 
-    // Define the data to send to the server
-    const data = {
-        access_token: accessToken,
-    };
-
-    // Make a POST request to your backend with the access token
-    fetch(backendUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-    .then(response => {
-        if (response.ok) {
-            // The token was sent successfully
-            console.log('Access token sent to the server.');
-        } else {
-            // Handle any errors here
-            console.error('Failed to send access token to the server.');
-        }
-    })
-    .catch(error => {
-        // Handle network or other errors
-        console.error('Error:', error);
-    });
-}
+//     // Make a POST request to your backend with the access token
+//     fetch(backendUrl, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(data),
+//     })
+//     .then(response => {
+//         if (response.ok) {
+//             // The token was sent successfully
+//             console.log('Access token sent to the server.');
+//         } else {
+//             // Handle any errors here
+//             console.error('Failed to send access token to the server.');
+//         }
+//     })
+//     .catch(error => {
+//         // Handle network or other errors
+//         console.error('Error:', error);
+//     });
+// }
 
 // Usage example after the user signs in (e.g., in your onSignIn function)
 // function onSignIn(googleUser) {
@@ -112,32 +112,32 @@
 //     sendAccessTokenToServer(idToken);
 // }
 
-                        function signIn(){
-                            var oauth2Endpoint ='https://accounts.google.com/o/oauth2/v2/auth';
-                            var form=document.createElement('form');
-                            form.setAttribute('method','GET')
-                            form.setAttribute('action',oauth2Endpoint);
+                    //     function signIn(){
+                    //         var oauth2Endpoint ='https://accounts.google.com/o/oauth2/v2/auth';
+                    //         var form=document.createElement('form');
+                    //         form.setAttribute('method','GET')
+                    //         form.setAttribute('action',oauth2Endpoint);
 
-                            var params ={
-                                "client_id":"982464317054-60fnuvmc3b7577up1fm5hf110l7h8pru.apps.googleusercontent.com",
-                                "redirect_uri":"http://localhost:5500/Dashboard/dashboard.html",
-                                "response_type":"token",
-                                "scope":"https://www.googleapis.com/auth/userinfo.profile",
-                                "include_granted_scopes":'true',
-                                "state":"pass-through-value"
-                            }
-                            for(var p in params){
-                                var input = document.createElement('input');
-                                input.setAttribute('type','hidden');
-                                input.setAttribute('name',p);
-                                input.setAttribute('value',params[p]);
-                                form.appendChild(input);
+                    //         var params ={
+                    //             "client_id":"982464317054-60fnuvmc3b7577up1fm5hf110l7h8pru.apps.googleusercontent.com",
+                    //             "redirect_uri":"http://localhost:5500/Dashboard/dashboard.html",
+                    //             "response_type":"token",
+                    //             "scope":"https://www.googleapis.com/auth/userinfo.profile",
+                    //             "include_granted_scopes":'true',
+                    //             "state":"pass-through-value"
+                    //         }
+                    //         for(var p in params){
+                    //             var input = document.createElement('input');
+                    //             input.setAttribute('type','hidden');
+                    //             input.setAttribute('name',p);
+                    //             input.setAttribute('value',params[p]);
+                    //             form.appendChild(input);
 
-                            }
-                            document.body.appendChild(form)
-                            form.submit()
-                        }
-                    </script>
+                    //         }
+                    //         document.body.appendChild(form)
+                    //         form.submit()
+                    //     }
+                    // </script> -->
                 </div>
             </div>
         </div>
